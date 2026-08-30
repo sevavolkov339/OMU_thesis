@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"EarthquakeSnd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.5610657,
+  "exportDir":"",
+  "name":"EarthquakeSnd",
+  "parent":{
+    "name":"Bosses_Snds",
+    "path":"folders/Sounds/Levels_Snds/Bosses_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"EarthquakeSnd.mp3",
+  "volume":1.0,
+}

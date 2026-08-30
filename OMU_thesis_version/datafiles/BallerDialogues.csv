@@ -1,0 +1,36 @@
+Text ID,ENG,RUS
+Seller_HelloText1,Hello! :) This is a shop,Привет!)) Это магазин.
+Seller_HelloText2,"Salutations, traveler!!!","Приветствую, путник!!!"
+Seller_HelloText3,Hello pwincess :))),Ну приветик плинцесса мая)) 
+Seller_ThanksText1,"Thank you for purchase, I guess...","Спасибо за покупку, наверное..."
+Seller_ThanksText2,Thanks bald man,Спасиба лысый
+Seller_ThanksText3,I appriciate your purchase :)),Ценю твое вложение))
+Seller_ThanksText4,Ooo thats a good deal!!,Ууу хорошая сделка!!
+Seller_ThanksText5,Glad to have business with you hehe :)),Приятно иметь с тобой дело хех))
+Seller_ThanksText6,Weeell alright I guess...,Нууу ладно пойдет...
+Seller_TalkText1,I have seen things you would not believe|You can't find these things in JAPAN even|imagine that???,Я видел такие вещи!|ты не поверишь|Такого не найдёшь даже в ЯПОНИИ|представляешь???
+Seller_TalkText2,You are so bald lmao XD|like literally an egg omg XD|get it XD like AN EGG XDDDDD|shame not everyone will get it hehehe XD,Ты такой лысый хех)))|типа как мяч хех)))|а я понял))|жаль не все поймут хех))))))))
+Seller_TalkText3,My goods are like Tacos at 3am|XDDD you WILL regret it but you WILL come back|AHAHAH omg im so fani,Мои товары как слойки с вишней хех))0)|от них потом тоже дрищешь|целую неделю хех))0))
+Seller_TalkText4,I am a Level 10 Head seller in 1 293 002 worlds|I am selling goods|The goods are fine|I am also fine|Do not ask.,О приветик))|Я Торговец 10-го уровня в 1 293 002 мирах|Я продаю товары|Товары в порядке|Я тоже в порядке|Не спрашивай.
+Seller_TalkText5,I have been moderating this shop for 2 102 013 years|I sell stuff...| Also you can trade something if you will,"Я модерирую этот магазин уже 2 102 013 лет|и видел такое, что тебе и не снилось|Я продаю всякое...|Также ты можешь че-то обменять|если захочешь "
+Seller_TalkText6,You can buy stuff here|That is why it is called a shop ok|Anyway! What would you like!! :)),Здесь можно покупать вещи|Именно поэтому он называется магазином окда|В общем! Что желаешь))))
+Developer_TalkText1,"END OF DEMO | Hey! | I'm rexent, the developer of this game :) | This is the end of this short early demo! | This world is still work in progress | Thank you for playing this demo!!! | I'm planning to add much more | stuff and more worlds. | If you liked the game, make sure to follow | all my social media to stay tuned for updates! | You can also support me on Boosty :P ","Привет! | Я rexent, разработчик этой игры :) | Вот и подошла к концу эта небольшая ранняя демка! | Этот мир всё ещё в разработке. | Огромное спасибо, что поиграли!!! | Впереди ещё куча нового контента и целая масса новых миров. | Если игра вам понравилась, обязательно подписывайтесь на мои соцсети, чтобы быть в курсе всех обновлений! | И, конечно, можете поддержать меня на Boosty :P | Лан пока"
+Main_Menu_Start_Button_Text,Begin,Погрузиться
+Main_Menu_Settings_Button_Text,Settings,Настройки
+Main_Menu_Diary_Button_Text,Diary,Дневник
+Death_Screen_Exit_Button_Text,Exit,Выйти
+Main_Menu_Save_File_Text,Empty,Пусто
+Main_Menu_Save_File_Text_Exist_1,Save 1,Сохранение 1
+Main_Menu_Save_File_Text_Exist_2,Save 2 ,Сохранение 2
+Main_Menu_Save_File_Text_Exist_3,Save 3,Сохранение 3
+Pause_Menu_Pause_Text,Pause,Пауза
+Pause_Menu_Exit_Text,Save and exit,Сохранить и выйти
+Main_Menu_Delete_Save_File,Delete save,Удалить сохранение
+World_1_Title_1,World 1-1 | Awakening ,Мир 1-1 | Пробуждение
+World_1_Title_2,World 1-2 | Understanding ,Мир 1-2 | Осознание
+World_1_Title_3,World 1-3 | Insight,Мир 1-3 |Озарение
+World_1_Title_4,Boss Room | That's a big fly...,Финальная комната | Какая большая муха...
+World_2_Title_1,World 2-1 | Cold opening,Мир 1-1 | Холодный старт
+World_2_Title_2,World 1-2 | Warm place,Мир 1-2 | Теплое местечко
+World_2_Title_3,World 1-3 | Last minutes,Мир 1-3 |Последние минуты
+World_2_Title_4,Boss Room | World 2 Boss...,Финальная комната | Босс 2 мира...

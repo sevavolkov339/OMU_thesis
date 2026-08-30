@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Apple_Collect_Snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.26122448,
+  "exportDir":"",
+  "name":"Apple_Collect_Snd",
+  "parent":{
+    "name":"UI_Snds",
+    "path":"folders/Sounds/UI_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Apple_Collect_Snd.mp3",
+  "volume":1.0,
+}

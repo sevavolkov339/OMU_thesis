@@ -1,0 +1,1 @@
+var _smoke = instance_create_layer(x, y - 8, "EffectsL", FireSmokeEmitterO);

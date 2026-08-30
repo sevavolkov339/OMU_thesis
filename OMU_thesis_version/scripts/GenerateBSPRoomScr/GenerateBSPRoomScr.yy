@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GenerateBSPRoomScr",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GenerateBSPRoomScr",
+  "parent":{
+    "name":"Thesis",
+    "path":"folders/Scripts/Thesis.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

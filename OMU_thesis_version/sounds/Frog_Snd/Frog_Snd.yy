@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Frog_Snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.28734693,
+  "exportDir":"",
+  "name":"Frog_Snd",
+  "parent":{
+    "name":"ChillRoom_Snds",
+    "path":"folders/Sounds/Levels_Snds/ChillRoom_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Frog_Snd.mp3",
+  "volume":1.0,
+}

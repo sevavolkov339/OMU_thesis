@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"studioonebeatmakers__game_setup",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":45.336464,
+  "exportDir":"",
+  "name":"studioonebeatmakers__game_setup",
+  "parent":{
+    "name":"Music_Snds",
+    "path":"folders/Sounds/Music_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"studioonebeatmakers__game_setup.wav",
+  "volume":1.0,
+}

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"EnemyExplosion_Snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.83591837,
+  "exportDir":"",
+  "name":"EnemyExplosion_Snd",
+  "parent":{
+    "name":"Enemy_Snds",
+    "path":"folders/Sounds/Enemy_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"EnemyExplosion_Snd.mp3",
+  "volume":1.0,
+}

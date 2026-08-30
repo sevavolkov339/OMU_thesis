@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Player_Dead_Snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":3.1608164,
+  "exportDir":"",
+  "name":"Player_Dead_Snd",
+  "parent":{
+    "name":"Player_Snds",
+    "path":"folders/Sounds/Player_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Player_Dead_Snd.mp3",
+  "volume":1.0,
+}

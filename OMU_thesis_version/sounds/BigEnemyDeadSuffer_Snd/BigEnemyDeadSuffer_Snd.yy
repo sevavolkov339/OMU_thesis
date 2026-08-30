@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"BigEnemyDeadSuffer_Snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.365805,
+  "exportDir":"",
+  "name":"BigEnemyDeadSuffer_Snd",
+  "parent":{
+    "name":"Enemy_Snds",
+    "path":"folders/Sounds/Enemy_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"BigEnemyDeadSuffer_Snd.wav",
+  "volume":0.69,
+}

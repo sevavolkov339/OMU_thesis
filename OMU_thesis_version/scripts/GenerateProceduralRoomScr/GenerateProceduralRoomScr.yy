@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GenerateProceduralRoomScr",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GenerateProceduralRoomScr",
+  "parent":{
+    "name":"Thesis",
+    "path":"folders/Scripts/Thesis.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

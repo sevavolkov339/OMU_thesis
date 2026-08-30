@@ -1,0 +1,12 @@
+var _sprites = [ParDitterS, ParDitterVar2S, ParS];
+sprite_index = _sprites[irandom(2)];
+image_index = irandom_range(0, 2);
+image_speed = random_range(0.5, 0.8);
+vsp = random_range(0.4, 0.7);
+hsp = random_range(-0.1, 0.1);
+max_height = random_range(90, 120);
+start_y = y;
+wobble_timer = random(pi * 5);
+wobble_amp = random_range(0.1, 0.3);
+wobble_speed = random_range(0.04, 0.05);
+scale = random_range(0.6, 1.4);

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"StoreMusic_Test",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":210.07674,
+  "exportDir":"",
+  "name":"StoreMusic_Test",
+  "parent":{
+    "name":"Music_Snds",
+    "path":"folders/Sounds/Music_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"StoreMusic_Test.mp3",
+  "volume":1.0,
+}

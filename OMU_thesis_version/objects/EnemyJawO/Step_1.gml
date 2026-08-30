@@ -1,0 +1,1 @@
+if (GameControllerO.game_paused) exit;

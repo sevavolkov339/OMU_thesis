@@ -1,0 +1,11 @@
+vx = random_range(-2.5, 2.5);
+vy = random_range(-3.5, -1.0);
+alpha = 1;
+size = random_range(0.6, 1.2);
+gravity = 0.1;
+lifetime = 0;
+max_lifetime = random_range(25, 45);
+fade_delay = room_speed * 0.4;
+sprite_index = WaterSplashS;
+image_index = irandom(sprite_get_number(WaterSplashS) - 1);
+image_speed = 0;

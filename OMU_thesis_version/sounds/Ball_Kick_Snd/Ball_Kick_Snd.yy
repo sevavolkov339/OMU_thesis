@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Ball_Kick_Snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.37024942,
+  "exportDir":"",
+  "name":"Ball_Kick_Snd",
+  "parent":{
+    "name":"Player_Snds",
+    "path":"folders/Sounds/Player_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Ball_Kick_Snd.wav",
+  "volume":1.0,
+}

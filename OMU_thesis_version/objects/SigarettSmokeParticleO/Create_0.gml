@@ -1,0 +1,12 @@
+var _sprites = [ParDitterS, ParDitterVar2S, ParS];
+sprite_index = _sprites[irandom(2)];
+image_index = irandom_range(0, 2);
+image_speed = random_range(0.3, 0.6);
+vsp = random_range(0.3, 0.5);
+hsp = random_range(-0.15, 0.15);
+max_height = random_range(20, 45); // дым меньше чем у огня
+start_y = y;
+wobble_timer = random(pi * 5);
+wobble_amp = random_range(0.1, 0.25);
+wobble_speed = random_range(0.04, 0.06);
+scale = random_range(0.3, 0.7); // мельче чем у огня

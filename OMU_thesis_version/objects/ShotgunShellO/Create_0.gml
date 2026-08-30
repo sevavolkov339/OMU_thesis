@@ -1,0 +1,10 @@
+speed = 0;
+direction = 0;
+wall = [WallO, WallTriangleO];
+min_speed = 0.05;
+max_speed = 8;
+spin_angle = 0;
+spin_dir = choose(-1, 1);
+spin_rate = 10;
+spin_step = 20;
+image_speed = 0;

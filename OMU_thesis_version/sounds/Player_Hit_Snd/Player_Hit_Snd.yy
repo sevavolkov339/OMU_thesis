@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Player_Hit_Snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.09947846,
+  "exportDir":"",
+  "name":"Player_Hit_Snd",
+  "parent":{
+    "name":"Player_Snds",
+    "path":"folders/Sounds/Player_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Player_Hit_Snd.wav",
+  "volume":1.0,
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GenerateWFCRoomScr",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GenerateWFCRoomScr",
+  "parent":{
+    "name":"Thesis",
+    "path":"folders/Scripts/Thesis.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

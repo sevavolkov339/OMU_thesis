@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"ObjectsCollide_Snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.9926531,
+  "exportDir":"",
+  "name":"ObjectsCollide_Snd",
+  "parent":{
+    "name":"Objects_Snds",
+    "path":"folders/Sounds/Objects_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"ObjectsCollide_Snd.mp3",
+  "volume":1.0,
+}

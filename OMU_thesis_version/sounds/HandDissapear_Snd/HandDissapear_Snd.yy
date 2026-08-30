@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"HandDissapear_Snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.39183673,
+  "exportDir":"",
+  "name":"HandDissapear_Snd",
+  "parent":{
+    "name":"Levels_Snds",
+    "path":"folders/Sounds/Levels_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"HandDissapear_Snd.mp3",
+  "volume":1.0,
+}

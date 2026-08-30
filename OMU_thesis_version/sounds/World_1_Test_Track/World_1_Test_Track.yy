@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"World_1_Test_Track",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":92.003265,
+  "exportDir":"",
+  "name":"World_1_Test_Track",
+  "parent":{
+    "name":"Music_Snds",
+    "path":"folders/Sounds/Music_Snds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"World_1_Test_Track.mp3",
+  "volume":1.0,
+}
