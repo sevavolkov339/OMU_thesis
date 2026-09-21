@@ -1,6 +1,6 @@
 
 
-//pause
+// pause
 
 if (GameControllerO.game_paused) exit;
 
@@ -51,14 +51,14 @@ if (instance_exists(LevelControllerO))
 
 if (allow_doors && instance_exists(PlayerBallerO))
 {
-    // открыть — игрок близко и двери ещё не открывались
+    // открыть, игрок близко и двери ещё не открывались
     if (state == 0 && !opened_once)
     {
         if (point_distance(x, y, PlayerBallerO.x, PlayerBallerO.y) < open_distance)
             door_open();
     }
 
-    // закрыть — игрок ушёл и двери ещё не закрывались
+    // закрыть, игрок ушёл и двери ещё не закрывались
     if (state == 2 && opened_once && !closed_once)
     {
         if (point_distance(x, y, PlayerBallerO.x, PlayerBallerO.y) > close_distance)

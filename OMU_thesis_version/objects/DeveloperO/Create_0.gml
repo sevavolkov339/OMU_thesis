@@ -1,5 +1,4 @@
-// текст берём по id, как и остальные тексты в игре (Text() -> BallerDialogues.csv).
-// "|" теперь означает перенос на следующую строку, а не смену/замену текста
+// текст берём по id, как и остальные тексты в игре
 talk_texts = ["Developer_TalkText1"];
 var _key = talk_texts[irandom(array_length(talk_texts) - 1)];
 var _full = Text(_key);
@@ -14,7 +13,7 @@ visible_chars = 0;
 print_timer = 0;
 print_speed = 2;
 
-// анимация появления букв (падение сверху + затухание в прозрачность) — отдельный набор на каждую строку
+// анимация появления букв, отдельный набор на каждую строку
 line_char_y = [];
 line_char_alpha = [];
 line_char_y_speed = [];

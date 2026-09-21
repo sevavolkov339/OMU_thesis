@@ -16,6 +16,8 @@ function open_box() {
         if (_it.type == "Heart") {
             array_push(all_items, _it);
         } else if (_it.type == "Item") {
+            // beer исключена из пула сундука
+            if (_it.name == "Beer") continue;
             // предметы, которые у игрока уже есть в инвентаре, из сундука не выпадают
             var _already_owned = instance_exists(InventoryControllerO) && InventoryControllerO.has_item(_it.name);
             if (!_already_owned) {
@@ -28,7 +30,7 @@ function open_box() {
     if (array_length(all_items) > 0) {
         won_item = all_items[irandom(array_length(all_items) - 1)];
     } else {
-        // все предметы уже есть в инвентаре — вместо них выпадает заполнитель
+        // все предметы уже есть в инвентаре, вместо них выпадает заполнитель
         var _filler_placeholder = undefined;
         var _filler_heart = undefined;
         for (var _i = 0; _i < array_length(all_items_raw); _i++) {
@@ -42,7 +44,7 @@ function open_box() {
     _bubble.vel_y = 5;
 }
 
-// пинок — лкм или геймпад
+// пинок, лкм или геймпад
 var _gp = instance_exists(PlayerBallerO) ? PlayerBallerO.gamepad_index : 0;
 var _kick_pressed = mouse_check_button_pressed(mb_left) || (gamepad_is_connected(_gp) && gamepad_button_check_pressed(_gp, gp_shoulderr));
 if (_kick_pressed && instance_exists(PlayerBallerO)) {

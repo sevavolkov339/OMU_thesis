@@ -1,8 +1,7 @@
 if (GameControllerO.game_paused) exit;
 
 
-// убираем предложения на предметы, которые игрок успел получить где-то в другом месте
-// уже ПОСЛЕ генерации трейдов (иначе список остаётся "застывшим" на момент создания машины)
+// убираем предложения на предметы
 for (var _i = array_length(trades) - 1; _i >= 0; _i--) {
     if (IsItemMaxedOutScr(trades[_i].receive.name)) {
         array_delete(trades, _i, 1);
@@ -16,7 +15,7 @@ if (array_length(trades) == 0) {
 }
 
 
-//толчок от игрока — переключает трейд
+// толчок от игрока, переключает трейд
 var touching_player = false;
 if (instance_exists(PlayerBallerO)) {
     if (place_meeting(origin_x, origin_y, PlayerBallerO)) {
@@ -77,10 +76,10 @@ if (sprite_frame_timer > 0) {
 image_index = sprite_frame;
 image_speed = 0;
 
-// кулдаун трейда — защита от спама
+// кулдаун трейда, защита от спама
 if (trade_cooldown > 0) trade_cooldown--;
 
-// пинок — лкм рядом
+// пинок, лкм рядом
 var _gp = instance_exists(PlayerBallerO) ? PlayerBallerO.gamepad_index : 0;
 var _kick_pressed = mouse_check_button_pressed(mb_left) || (gamepad_is_connected(_gp) && gamepad_button_check_pressed(_gp, gp_shoulderr));
 if (_kick_pressed && trade_cooldown <= 0) {
@@ -91,7 +90,7 @@ if (_kick_pressed && trade_cooldown <= 0) {
             trade_cooldown = trade_cooldown_duration;
 
             if (array_length(trades) == 0) {
-                // нет трейдов — просто толкаем
+                // нет трейдов, просто толкаем
                 kick_shake_timer = kick_shake_duration;
                 var kick_dir = point_direction(PlayerBallerO.x, PlayerBallerO.y, origin_x, origin_y);
                 vel_x += lengthdir_x(3, kick_dir);
@@ -137,7 +136,7 @@ if (_kick_pressed && trade_cooldown <= 0) {
     }
 }
 
-//change layer based on player position
+// change layer based on player position
 
 if (instance_exists(PlayerBallerO)) {
     if (PlayerBallerO.y < (y - 30)) {

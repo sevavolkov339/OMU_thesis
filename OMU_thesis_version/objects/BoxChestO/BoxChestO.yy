@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"WallS",
-    "path":"sprites/WallS/WallS.yy",
+    "name":"BoxThesisS",
+    "path":"sprites/BoxThesisS/BoxThesisS.yy",
   },
   "spriteMaskId":null,
   "visible":true,

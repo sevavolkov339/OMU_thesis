@@ -8,13 +8,7 @@ if (!instance_exists(owner)) {
 x = owner.x;
 y = owner.y + owner.fly_visual_y; // поднимается вместе с игроком во время полёта на крыльях
 
-// во время удара — кадр по стороне удара (kick_facing_right — отдельная, ничем кроме
-// самого удара не перезаписываемая переменная), а не по facing. Плавание в воде (в том числе
-// сценарное — например заплыв к горячему источнику) двигает игрока напрямую через x/y и меняет
-// sprite_index без участия facing/speed, поэтому для воды проверяем sprite_index напрямую.
-// Во всех остальных случаях, пока игрок реально движется — кадр по направлению взгляда (facing),
-// одинаково и при ходьбе, и в полёте. А как только останавливается (айдл) — facing сам по себе
-// не сбрасывается, поэтому явно возвращаем кадр "вниз" здесь, как у самого игрока
+// во время удара, кадр по стороне удара
 if (owner.sprite_index == PlayerBallerKickS) {
     image_index = owner.kick_facing_right ? 2 : 3;
 } else if (owner.sprite_index == PlayerBallerGoRightInWaterS) {
@@ -33,7 +27,7 @@ if (owner.sprite_index == PlayerBallerKickS) {
         default:      image_index = 0; break; // вниз
     }
 } else {
-    image_index = 0; // айдл — всегда вниз
+    image_index = 0; // айдл, всегда вниз
 }
 image_speed = 0;
 

@@ -58,7 +58,7 @@ if (instance_exists(InventoryControllerO)) {
     var inv2 = InventoryControllerO.items;
     var inv_count = array_length(inv2);
 
-    // новый предмет — запускаем сквош
+    // новый предмет, запускаем сквош
     if (inv_count > prev_inv_count) {
         trigger_inv_squash(inv_count - 1);
     }
@@ -122,7 +122,7 @@ if (GameControllerO.game_paused) {
 if (instance_exists(ComboControllerO)) {
     var cc = ComboControllerO;
 
-    // комбо сброшено — показываем ноль с морганием
+    // комбо сброшено, показываем ноль с морганием
     if (cc.combo == 0 && cc.combo_bar == 0 && prev_combo > 0) {
         combo_show_zero = true;
         combo_zero_timer = combo_zero_duration;
@@ -136,7 +136,7 @@ if (instance_exists(ComboControllerO)) {
         combo_zero_alpha = 0;
     }
 
-    // новое значение комбо — запускаем анимацию
+    // новое значение комбо, запускаем анимацию
     if (cc.combo != prev_combo) {
         var strength = cc.combo;
         combo_scale = 1.0 + strength * 0.6;
@@ -219,7 +219,7 @@ if (pause_eye_squash_timer >= pause_eye_squash_step) {
     pause_prev_hovered = pause_hovered;
 }
 
-// клик по глазу — выход в меню с сохранением
+// клик по глазу, выход в меню с сохранением
 if (pause_hovered && !pause_transitioning && (mouse_check_button_pressed(mb_left) || (pause_gp_active && gamepad_button_check_pressed(_pause_gp, gp_face1)))) {
     pause_transitioning = true;
     if (instance_exists(FadeTransitionO)) {

@@ -9,7 +9,7 @@ for (var i = 0; i < array_length(lines); i++)
 
     draw_set_alpha(l.alpha);
 
-    var thickness = 2; //line width
+    var thickness = 2; // line width
 
     draw_rectangle(
         l.x - thickness * 0.5,
@@ -22,7 +22,7 @@ for (var i = 0; i < array_length(lines); i++)
 
 draw_set_alpha(1);
 
-//white screen overlay
+// white screen overlay
 if (white_alpha > 0)
 {
     draw_set_color(c_white);

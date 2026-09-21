@@ -102,7 +102,7 @@ if (state == "spin") {
             if (array_length(all_items) > 0) {
                 won_item = all_items[irandom(array_length(all_items) - 1)];
             } else {
-                // все предметы уже есть у игрока — вместо них выпадает заполнитель
+                // все предметы уже есть у игрока, вместо них выпадает заполнитель
                 var _filler_placeholder = undefined;
                 var _filler_heart = undefined;
                 for (var _i = 0; _i < array_length(all_items_raw); _i++) {

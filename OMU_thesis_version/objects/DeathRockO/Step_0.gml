@@ -2,13 +2,13 @@ if (GameControllerO.game_paused) exit;
 
 real_angle = (real_angle + spin_speed) mod 360;
 //image_angle = (real_angle div 10) * 10;
-//// обновляем image_angle только каждые 10 градусов
+// обновляем image_angle только каждые 10 градусов
 //var snapped = floor(real_angle / 10) * 10;
 //if (image_angle != snapped) {
 //    image_angle = snapped;
 //}
 
-// движение по углам зоны (по часовой стрелке): разгон -> удар об угол -> тряска (она же пауза) -> следующий угол
+// движение по углам зоны (по часовой стрелке)
 var _target = corners[(corner_index + 1) mod 4];
 var _tx = _target[0];
 var _ty = _target[1];
@@ -18,7 +18,7 @@ if (state == "moving") {
     var _dist = point_distance(x, y, _tx, _ty);
 
     if (_dist <= move_speed) {
-        // доехали — "врезались в стену"
+        // доехали, "врезались в стену"
         x = _tx;
         y = _ty;
         corner_index = (corner_index + 1) mod 4;
@@ -59,7 +59,7 @@ if (instance_exists(PlayerBallerO)) {
 			knockback_spd_y = lengthdir_y(kb, dir);
 			audio_play_sound(Player_Hit_Snd, 0, 0);
 
-			// Мигание
+			// мигание
 			image_alpha = 1;
 			blink_time = room_speed * 1.5;
 			alarm[1] = 1;

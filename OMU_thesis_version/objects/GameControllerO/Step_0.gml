@@ -20,7 +20,7 @@ if (slow_mo_timer > 0) {
     }
 }
 
-// отложенный переход в следующую комнату (после последней двери сегмента уровней — музыка уже остановлена)
+// отложенный переход в следующую комнату
 if (pending_room_change != noone && !game_paused) {
     pending_room_change_timer--;
     if (pending_room_change_timer <= 0) {
@@ -30,7 +30,7 @@ if (pending_room_change != noone && !game_paused) {
     }
 }
 
-// смена музыки при входе/выходе из магазина (room_store — текущий магазин активного мира)
+// смена музыки при входе/выходе из магазина
 if (room == room_store && !in_store) {
     in_store = true;
     // сохраняем текущую музыку
@@ -60,7 +60,7 @@ if (room == room_store && !in_store) {
     }
 }
 
-// смена музыки при входе/выходе из chill room (room_chill — текущая чилл-комната активного мира)
+// смена музыки при входе/выходе из chill room
 if (room == room_chill && !in_chillroom) {
     in_chillroom = true;
     // сохраняем текущую музыку
@@ -98,7 +98,7 @@ if (room == room_chill && !in_chillroom) {
     }
 }
 
-// смена музыки при входе/выходе из chest room (room_chest — текущий сундук активного мира; и World_1_Room_0 — там играет та же музыка)
+// смена музыки при входе/выходе из chest room
 if ((room == room_chest || room == World_1_Room_1) && !in_chestroom) {
     in_chestroom = true;
     // сохраняем текущую музыку
@@ -154,8 +154,7 @@ if (room == World_1_TransitionRoom && !in_transition) {
 }
 
 
-// музыка уровней (World_1_Test_Track) — играет только в боевых комнатах случайных сегментов,
-// не в меню/титрах/якорной комнате/магазине/сундуке/чилле
+// музыка уровней (World_1_Test_Track)
 var _in_levels_segment = (world_stage == "levels1" || world_stage == "levels2" || world_stage == "levels3");
 var _in_special_room = in_store || in_chestroom || in_chillroom;
 if (_in_levels_segment && !_in_special_room && !level_music_suppressed) {

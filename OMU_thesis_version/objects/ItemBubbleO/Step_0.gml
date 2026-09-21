@@ -1,6 +1,6 @@
 if (GameControllerO.game_paused) exit;
 
-// эффект покупки — предмет летит вверх и мигает
+// эффект покупки, предмет летит вверх и мигает
 if (bought_effect) {
     bought_item_y -= 0.8;
     bought_blink_timer++;
@@ -45,7 +45,7 @@ bubble_scale_y_speed += (breath_target_y - bubble_scale_y) * 0.3;
 bubble_scale_y_speed *= 0.6;
 bubble_scale_y += bubble_scale_y_speed;
 
-// левитация — только визуальная
+// левитация, только визуальная
 var base_float_x = sin(float_timer * 0.5) * 1.2;
 var base_float_y = cos(float_timer * 0.4) * 1.8;
 
@@ -55,8 +55,8 @@ vel_y *= friction_spd;
 if (abs(vel_x) < 0.05) vel_x = 0;
 if (abs(vel_y) < 0.05) vel_y = 0;
 
-// отскок от стен — проверяем ДО обновления позиции
-var _wall = [WallO, WallTriangleO];
+// отскок от стен, проверяем ДО обновления позиции
+var _wall = [WallO, WallTriangleO, WallForEnemiesO, WallInteriorO];
 var next_ox = origin_x + vel_x;
 var next_oy = origin_y + vel_y;
 
@@ -69,7 +69,7 @@ if (place_meeting(origin_x, next_oy, _wall)) {
     next_oy = origin_y + vel_y;
 }
 
-// если всё ещё застрял — выталкиваем
+// если всё ещё застрял, выталкиваем
 if (place_meeting(next_ox, next_oy, _wall)) {
     var _normal = collision_normal(next_ox, next_oy, _wall, 4, 1);
     if (_normal != -1) {
@@ -97,7 +97,7 @@ if (cant_afford_shake > 0) {
     shake_x = 0;
 }
 
-// касание игрока — только если бабл остановился
+// касание игрока, только если бабл остановился
 var _is_moving = (abs(vel_x) > 0.05 || abs(vel_y) > 0.05);
 if (!popped && !_is_moving && instance_exists(PlayerBallerO)) {
     if (place_meeting(x, y, PlayerBallerO)) {
@@ -130,7 +130,7 @@ if (!popped && !_is_moving && instance_exists(PlayerBallerO)) {
 if (instance_exists(PlayerBallerO) && item != noone && !popped) {
     var _dist = point_distance(x, y, PlayerBallerO.x, PlayerBallerO.y);
     
-    // игрок вышел из зоны — сбрасываем всё
+    // игрок вышел из зоны, сбрасываем всё
     if (_dist >= desc_bubble_radius) {
         if (desc_bubble_visible) {
             desc_bubble_visible = false;
@@ -182,15 +182,15 @@ if (desc_bubble_visible) {
             array_push(desc_bubble_char_y_speed, 0);
         }
     } else {
-        // текст дописан — ждём потом следующая страница или закрываем
+        // текст дописан, ждём потом следующая страница или закрываем
         desc_bubble_page_timer++;
         if (desc_bubble_page_timer >= desc_bubble_page_delay) {
             desc_bubble_page_timer = 0;
             desc_bubble_page_index++;
 			if (desc_bubble_page_index >= array_length(desc_bubble_pages)) {
-			    // последняя страница — закрываем бабл
+			    // последняя страница, закрываем бабл
 			    desc_bubble_visible = false;
-			    desc_bubble_finished = true;  // <- добавь эту строку
+			    desc_bubble_finished = true; // <- добавь эту строку
 			    desc_bubble_visible_chars = 0;
 			    desc_bubble_char_y = [];
 			    desc_bubble_char_alpha = [];

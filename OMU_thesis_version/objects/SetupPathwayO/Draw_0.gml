@@ -1,3 +1,6 @@
+// это отладочная сетка для тестовых бенчмарк-комнат
+if (room != Testing_Room && room != Testing_LevelGen_Room) exit;
+
 var _cs = cell_size;
 
 draw_set_alpha(0.5);

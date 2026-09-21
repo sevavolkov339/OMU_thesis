@@ -74,13 +74,13 @@ if (teleporting) {
     exit;
 }
 
-// если в idle и получил скорость от удара мяча — переходим в slide
+// если в idle и получил скорость от удара мяча, переходим в slide
 if (boom_state == "idle" && speed > min_speed) {
     boom_state = "slide";
     wall_bounce_enabled = true;
 }
 
-// попытка пнуть — работает в любом состоянии
+// попытка пнуть, работает в любом состоянии
 if (bumerang_try_kick()) {
     bumerang_start_flight();
 }
@@ -98,9 +98,7 @@ if (boom_state == "flying") {
         origin_y = PlayerBallerO.y;
     }
 
-    // поворот — круговой полёт. Стены и толчки тут намеренно не учитываются —
-    // это нужно, чтобы бумеранг всегда чисто описывал полный круг и точно возвращался
-    // в исходную точку броска, независимо от стен и врагов на пути.
+    // поворот, круговой полёт. Стены и толчки тут намеренно не учитываются
     heading = (heading + turn_speed * arc_side + 360) mod 360;
     arc_angle_traveled += abs(turn_speed);
 
@@ -110,7 +108,7 @@ if (boom_state == "flying") {
     direction = heading;
     speed = launch_speed;
 
-    // урон врагам во время полёта (без отталкивания и без изменения дуги — круг должен остаться чистым)
+    // урон врагам во время полёта
     var _ef = instance_place(x, y, EnemyO);
     if (enemy_bounce_immune_timer > 0) {
         enemy_bounce_immune_timer -= 1;
@@ -135,7 +133,7 @@ if (boom_state == "flying") {
         enemy_bounce_immune_timer = 20;
     }
 
-    // ровно один круг — 360 градусов — переходим в slide
+    // ровно один круг, 360 градусов, переходим в slide
     if (arc_angle_traveled >= 360) {
         direction = heading;
         speed = launch_speed;
@@ -161,7 +159,6 @@ if (boom_state == "flying") {
     var old_direction = direction;
 
     // отскок от стен
-    // защита от проскальзывания сквозь стену на высокой скорости — проверяем промежуточные точки пути
     var _wall_hit = place_meeting(next_x, next_y, wall);
     if (!_wall_hit && speed > 4) {
         var _wsteps = ceil(speed / 4);
@@ -237,7 +234,7 @@ if (boom_state == "flying") {
         ShakeScr(_es, 6, 0.6);
         _es.touching_ball = true;
 
-        // расталкиваемся от врага, чтобы не задевать его повторно за тот же проход (и не сквозь стену)
+        // расталкиваемся от врага, чтобы не задевать его повторно за тот же проход
         var _push_dir = point_direction(_es.x, _es.y, x, y);
         var _safe_dist = 0;
         for (var _d = 0; _d <= 12; _d += 1) {
@@ -261,7 +258,7 @@ if (boom_state == "flying") {
         enemy_bounce_immune_timer = 20;
     }
 
-    // столкновение с мячом при скольжении — эффект только в момент начала касания
+    // столкновение с мячом при скольжении, эффект только в момент начала касания
     var _touching_bullet_now = false;
     with (BulletBounceO) {
         if (id != other.id && speed > 1.5 && other.speed > 1.5) {
@@ -274,8 +271,7 @@ if (boom_state == "flying") {
                     direction = _dir;
                     other.touching_bullet = true;
 
-                    // физически расталкиваем оба объекта, чтобы они гарантированно разошлись за этот же кадр
-                    // (но не сквозь стену — проверяем перед тем, как реально сдвинуть)
+                    // физически расталкиваем оба объекта
                     var _overlap = _combined_radius - _dist;
                     if (_overlap > 0) {
                         var _push = _overlap * 0.5 + 1;
@@ -287,8 +283,7 @@ if (boom_state == "flying") {
                         if (!place_meeting(_ponx, _pony, other.wall)) { other.x = _ponx; other.y = _pony; }
                     }
 
-                    // бумеранг при столкновении с другим предметом уходит в новый круговой облёт,
-                    // но в противоположную сторону от предыдущего круга
+                    // бумеранг при столкновении с другим предметом уходит в новый круговой облёт
                     other.boom_state = "flying";
                     other.origin_x = other.x;
                     other.origin_y = other.y;

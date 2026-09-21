@@ -1,10 +1,9 @@
 // tile ids: 0 = floor, 1 = wall edge, 2 = wall interior
-// possibility bitmask per cell: bit0=floor, bit1=edge, bit2=interior
 
 function WfcCompatibleMask(_tile) {
-    if (_tile == 0) return 3; // 011 - floor      -> neighbour must be floor or edge
-    if (_tile == 1) return 7; // 111 - wall edge  -> anything goes
-    return 6;                 // 110 - interior   -> neighbour must be edge or interior
+    if (_tile == 0) return 3; // 011 - floor -> neighbour must be floor or edge
+    if (_tile == 1) return 7; // 111 - wall edge -> anything goes
+    return 6; // 110 - interior -> neighbour must be edge or interior
 }
 
 function WfcEntropy(_mask) {

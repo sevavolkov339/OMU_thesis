@@ -1,4 +1,4 @@
-//create hammer hit area
+// create hammer hit area
 instance_create_layer(x,y,"CodingStuffL",HammerHitAreaO)
 
 //alarm to destroy

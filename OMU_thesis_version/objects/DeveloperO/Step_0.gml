@@ -1,6 +1,6 @@
 if (GameControllerO.game_paused) exit;
 
-// анимация уже напечатанных букв — отдельно для каждой строки
+// анимация уже напечатанных букв, отдельно для каждой строки
 for (var _li = 0; _li < array_length(line_char_y); _li++) {
     var _cy = line_char_y[_li];
     var _cys = line_char_y_speed[_li];
@@ -39,6 +39,12 @@ switch (state) {
         post_done_timer++;
         if (post_done_timer >= post_done_duration) {
             state = "exiting"; // защита от повторного вызова
+            // ран пройден полностью (босс побеждён) - чистим сейв так же, как при смерти в
+            if (GameControllerO.save_slot >= 0) {
+                GameControllerO.delete_save(GameControllerO.save_slot);
+            }
+            GameControllerO.reset_run();
+            GameControllerO.save_slot = -1;
             room_goto(Main_Menu_Room);
         }
     break;

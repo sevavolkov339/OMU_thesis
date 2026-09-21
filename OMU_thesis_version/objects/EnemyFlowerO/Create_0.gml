@@ -23,18 +23,18 @@ shake_offset_y = 0;
 // анимация столкновения
 hit_anim = false;
 
-//sounds
+// sounds
 
 suffer_sound_played = false;
 
 hit_by_shuriken = false;
 
-//bleeding
+// bleeding
 hit_by_shuriken = false;
 bleeding = false;
 bleed_damage_timer = 0;
 bleed_damage_interval = 2 * room_speed;
 bleed_damage = 1
 
-// откинут шипами PuffFishO — своя логика движения на это время отключается
+// откинут шипами PuffFishO, своя логика движения на это время отключается
 puff_stunned = false;

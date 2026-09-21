@@ -2,7 +2,7 @@
 
 
 
-//pause
+// pause
 if (GameControllerO.game_paused) exit;
 
 
@@ -17,7 +17,7 @@ var max_length = 1000;
 var step = 2;
 var line_width = 6;
 
-//first line
+// first line
 var x_start = BulletBounceO.x;
 var y_start = BulletBounceO.y;
 var angle = point_direction(x_start, y_start, mouse_x, mouse_y);
@@ -26,19 +26,18 @@ var hit = false;
 var x_end, y_end;
 var surface_normal = -1;
 
-// Точный поиск столкновения с учетом нормали
+// точный поиск столкновения с учетом нормали
 while (length < max_length) {
     var tx = x_start + lengthdir_x(length, angle);
     var ty = y_start + lengthdir_y(length, angle);
     
-    // Проверяем столкновение и получаем нормаль поверхности
+    // проверяем столкновение и получаем нормаль поверхности
     var normal_check = collision_normal(tx, ty, wall, 8, 2);
     if (normal_check != -1) {
         hit = true;
         surface_normal = normal_check;
         
-        // Точная подгонка к поверхности
-        // Отступаем назад и ищем точное касание
+        // точная подгонка к поверхности
         for (var i = 0; i < 10; i++) {
             length -= 0.5;
             tx = x_start + lengthdir_x(length, angle);
@@ -46,28 +45,28 @@ while (length < max_length) {
             
             var new_normal = collision_normal(tx, ty, wall, 8, 2);
             if (new_normal == -1) {
-                length += 0.5; // Возвращаемся к столкновению
+                length += 0.5; // возвращаемся к столкновению
                 break;
             }
-            surface_normal = new_normal; // Обновляем нормаль
+            surface_normal = new_normal; // обновляем нормаль
         }
         break;
     }
     length += step;
 }
 
-// Если столкновение не найдено, рисуем до конца
+// если столкновение не найдено, рисуем до конца
 if (!hit) {
     length = max_length;
     x_end = x_start + lengthdir_x(length, angle);
     y_end = y_start + lengthdir_y(length, angle);
 } else {
-    // Точка столкновения (точно на поверхности)
+    // точка столкновения (точно на поверхности)
     x_end = x_start + lengthdir_x(length, angle);
     y_end = y_start + lengthdir_y(length, angle);
 }
 
-// Рисуем первую линию
+// рисуем первую линию
 var dx = x_end - x_start;
 var dy = y_end - y_start;
 var dist = point_distance(x_start, y_start, x_end, y_end);
@@ -85,39 +84,37 @@ if (dist > 0) {
     draw_primitive_end();
 }
 
-//reflecting 
+// reflecting
 if (!hit || surface_normal == -1) {
     draw_set_alpha(1);
     exit;
 }
 
-// Используем векторную формулу отражения для большей точности
+// используем векторную формулу отражения для большей точности
 var incident_x = lengthdir_x(1, angle);
 var incident_y = lengthdir_y(1, angle);
 var normal_x = lengthdir_x(1, surface_normal);
 var normal_y = lengthdir_y(1, surface_normal);
 
-// Скалярное произведение
+// скалярное произведение
 var dot = incident_x * normal_x + incident_y * normal_y;
 
-// Вектор отражения: R = I - 2*(I·N)*N
+// вектор отражения: R = I - 2*(I·N)*N
 var reflect_x = incident_x - 2 * dot * normal_x;
 var reflect_y = incident_y - 2 * dot * normal_y;
 
-// Угол отражения
+// угол отражения
 var angle_2 = point_direction(0, 0, reflect_x, reflect_y);
 
-// Отладочное сообщение
+// отладочное сообщение
 show_debug_message("Первая линия: угол=" + string(angle) + ", нормаль=" + string(surface_normal) + 
                   ", отражение=" + string(angle_2));
 
 
 
 
-//second line
-// ВАЖНО: начинаем НЕ внутри стены, а снаружи
-// Смещаемся немного ОТ поверхности по нормали отражения
-var offset_dist = 2; // Маленькое смещение от стены
+// second line
+var offset_dist = 2; // маленькое смещение от стены
 var x_start_2 = x_end + lengthdir_x(offset_dist, angle_2);
 var y_start_2 = y_end + lengthdir_y(offset_dist, angle_2);
 
@@ -126,12 +123,12 @@ var hit_2 = false;
 var x_end_2, y_end_2;
 var surface_normal_2 = -1;
 
-// Поиск второго столкновения
+// поиск второго столкновения
 while (length_2 < max_length) {
     var tx2 = x_start_2 + lengthdir_x(length_2, angle_2);
     var ty2 = y_start_2 + lengthdir_y(length_2, angle_2);
     
-    // Проверяем, не вернулись ли мы к первой точке
+    // проверяем, не вернулись ли мы к первой точке
     if (point_distance(tx2, ty2, x_end, y_end) < 5) {
         length_2 += step;
         continue;
@@ -142,7 +139,7 @@ while (length_2 < max_length) {
         hit_2 = true;
         surface_normal_2 = normal_check_2;
         
-        // Точная подгонка к поверхности
+        // точная подгонка к поверхности
         for (var i = 0; i < 10; i++) {
             length_2 -= 0.5;
             tx2 = x_start_2 + lengthdir_x(length_2, angle_2);
@@ -160,23 +157,23 @@ while (length_2 < max_length) {
     length_2 += step;
 }
 
-// Если второго столкновения нет, рисуем до конца
+// если второго столкновения нет, рисуем до конца
 if (!hit_2) {
     length_2 = max_length;
     x_end_2 = x_start_2 + lengthdir_x(length_2, angle_2);
     y_end_2 = y_start_2 + lengthdir_y(length_2, angle_2);
 } else {
-    // Точка столкновения (точно на поверхности)
+    // точка столкновения (точно на поверхности)
     x_end_2 = x_start_2 + lengthdir_x(length_2, angle_2);
     y_end_2 = y_start_2 + lengthdir_y(length_2, angle_2);
 }
 
-// Отладочное сообщение для второй линии
+// отладочное сообщение для второй линии
 show_debug_message("Вторая линия: начало=(" + string(x_start_2) + "," + string(y_start_2) + 
                   "), конец=(" + string(x_end_2) + "," + string(y_end_2) + 
                   "), длина=" + string(length_2));
 
-// Рисуем вторую линию
+// рисуем вторую линию
 var dx2 = x_end_2 - x_start_2;
 var dy2 = y_end_2 - y_start_2;
 var dist2 = point_distance(x_start_2, y_start_2, x_end_2, y_end_2);
@@ -185,7 +182,7 @@ if (dist2 > 0) {
     var ox2 = (line_width / 2) * -dy2 / dist2;
     var oy2 = (line_width / 2) * dx2 / dist2;
     
-    // Проверяем, не слишком ли короткая линия
+    // проверяем, не слишком ли короткая линия
     if (dist2 > 1) {
 		draw_set_color(c_white);
         draw_primitive_begin(pr_trianglefan);
@@ -196,7 +193,7 @@ if (dist2 > 0) {
         draw_primitive_end();
     }
     
-    // Отладочные маркеры
+    // отладочные маркеры
     //draw_set_color(c_yellow);
     //draw_circle(x_start_2, y_start_2, 3, false); // Начало второй линии
     //draw_set_color(c_green);
@@ -208,25 +205,25 @@ if (dist2 > 0) {
 draw_set_alpha(1);
 
 
-// Визуализация нормалей (для отладки)
+// визуализация нормалей (для отладки)
 //draw_set_color(c_red);
 //draw_line_width(x_end, y_end, 
-//                x_end + lengthdir_x(30, surface_normal), 
+// x_end + lengthdir_x(30, surface_normal)
 //                y_end + lengthdir_y(30, surface_normal), 2);
 //draw_text(x_end + 10, y_end + 10, "N1: " + string(round(surface_normal)));
 
 //if (hit_2 && surface_normal_2 != -1) {
 //    draw_set_color(c_blue);
 //    draw_line_width(x_end_2, y_end_2, 
-//                    x_end_2 + lengthdir_x(30, surface_normal_2), 
+// x_end_2 + lengthdir_x(30, surface_normal_2)
 //                    y_end_2 + lengthdir_y(30, surface_normal_2), 2);
 //    draw_text(x_end_2 + 10, y_end_2 + 10, "N2: " + string(round(surface_normal_2)));
 //}
 
-//// Визуализация направления отражения
+// визуализация направления отражения
 //draw_set_color(c_lime);
 //draw_line_width(x_end, y_end, 
-//                x_end + lengthdir_x(40, angle_2), 
+// x_end + lengthdir_x(40, angle_2)
 //                y_end + lengthdir_y(40, angle_2), 1);
 //draw_text(x_end + 20, y_end + 20, "Ref: " + string(round(angle_2)));
 

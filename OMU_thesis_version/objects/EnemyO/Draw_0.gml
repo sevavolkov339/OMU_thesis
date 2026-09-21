@@ -1,29 +1,21 @@
-//// обводка по позиции без shake
+// обводка по позиции без shake
 //draw_sprite_ext(sprite_index, image_index, x - 1, y, image_xscale, image_yscale, image_angle, c_red, 1);
 //draw_sprite_ext(sprite_index, image_index, x + 1, y, image_xscale, image_yscale, image_angle, c_red, 1);
 //draw_sprite_ext(sprite_index, image_index, x, y - 1, image_xscale, image_yscale, image_angle, c_red, 1);
 //draw_sprite_ext(sprite_index, image_index, x, y + 1, image_xscale, image_yscale, image_angle, c_red, 1);
 
-//// спрайт с shake
+// спрайт с shake
 //draw_sprite_ext(
-//    sprite_index,
-//    image_index,
-//    x + shake_offset_x,
-//    y + shake_offset_y,
-//    image_xscale,
-//    image_yscale,
-//    image_angle,
-//    c_white,
-//    image_alpha
+// sprite_index
 //);
 
 walk_timer += walk_speed;
 
-// тilt меняется по синусу — смена знака = "приземление"
+// тilt меняется по синусу, смена знака = "приземление"
 var _tilt_raw = sin(walk_timer);
 var _tilt = _tilt_raw * walk_tilt_amount;
 
-// прыжок — между сменами угла (abs синуса)
+// прыжок, между сменами угла (abs синуса)
 var _bounce = abs(_tilt_raw);
 var _y_off = -_bounce * walk_bounce_height;
 

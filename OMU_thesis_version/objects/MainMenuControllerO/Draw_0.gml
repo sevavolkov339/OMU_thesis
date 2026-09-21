@@ -53,7 +53,7 @@ if (hovered) {
     draw_wave_text(eye_text, eye_x + _eye_sway_x, eye_y + _eye_sway_y + _eh, 1);
 }
 
-// "нажмите любую кнопку" — пока меню не раскрыто, дышащий волновой текст под глазом
+// "нажмите любую кнопку", пока меню не раскрыто, дышащий волновой текст под глазом
 if (!items_visible) {
     var _breathe_alpha = (sin(breathe_timer) + 1) * 0.5;
     var _prompt_y = eye_y + _eye_sway_y + sprite_get_height(EyeMenuS) * 0.5 + 20;

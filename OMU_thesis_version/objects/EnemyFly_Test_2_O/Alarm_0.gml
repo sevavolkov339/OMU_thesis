@@ -1,4 +1,4 @@
-//pause
+// pause
 if (GameControllerO.game_paused) {
     alarm_set(0, 1);
     exit;
@@ -14,7 +14,6 @@ if instance_exists(PlayerTestO) {
     var _bench_t0 = get_timer();
 
     // a* - same search as dijkstra, plus a distance-to-goal heuristic so it
-    // checks cells roughly on the way to the player first
     var _grid = SetupPathwayO.coarse_grid;
     var _gw = SetupPathwayO.grid_w;
     var _gh = SetupPathwayO.grid_h;

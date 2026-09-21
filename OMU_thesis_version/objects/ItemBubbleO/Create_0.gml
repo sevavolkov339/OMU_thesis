@@ -31,7 +31,7 @@ pop_timer = 0;
 shake_x = 0;
 cant_afford_shake = 0;
 // стены
-wall = [WallO, WallTriangleO];
+wall = [WallO, WallTriangleO, WallForEnemiesO, WallInteriorO];
 // диалоговое окно с описанием предмета
 desc_bubble_scale_x = 0;
 desc_bubble_scale_y = 0;
@@ -59,5 +59,5 @@ desc_bubble_text = "";
 desc_bubble_pages = [];
 desc_bubble_page_index = 0;
 desc_bubble_page_timer = 0;
-desc_bubble_page_delay = 0.3 * room_speed; //пол сек
+desc_bubble_page_delay = 0.3 * room_speed; // пол сек
 desc_bubble_finished = false;

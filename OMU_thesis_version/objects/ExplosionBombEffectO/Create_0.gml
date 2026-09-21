@@ -1,4 +1,4 @@
-//shake cam
+// shake cam
 CameraControllerO.camera_shake(2, 15);
 
 // сохраняем ссылку на конкретную бомбу
@@ -42,7 +42,7 @@ for (var i = 0; i < _count; i++) {
 // список врагов которым уже нанесли урон
 hit_enemies = ds_list_create();
 
-//// наносим урон всем врагам в радиусе сразу при появлении
+// наносим урон всем врагам в радиусе сразу при появлении
 //with (EnemyO) {
 //    var _dist = point_distance(x, y, other.x, other.y);
 //    if (_dist <= other.radius) {
@@ -50,6 +50,6 @@ hit_enemies = ds_list_create();
 //        hp -= 2;
 //        ShakeScr(id, 6, 0.6);
 //        var _dir = point_direction(other.x, other.y, x, y);
-//        // можно добавить knockback если нужно
+// можно добавить knockback если нужно
 //    }
 //}

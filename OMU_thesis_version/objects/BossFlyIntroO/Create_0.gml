@@ -4,7 +4,7 @@ var _cam_y = camera_get_view_y(CameraControllerO.cam);
 x = _cam_x - 80;
 y = _cam_y + CameraControllerO.view_h * 0.5;
 
-// цель — центр комнаты
+// цель, центр комнаты
 intro_target_x = room_width * 0.5;
 intro_target_y = room_height * 0.5;
 

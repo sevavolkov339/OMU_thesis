@@ -7,9 +7,8 @@ if (GameControllerO.game_paused)
 
 game_restart()
 
-//reset everything
+// reset everything
 
-// Обновляем GameControllerO
 if (instance_exists(GameControllerO)) {
 	GameControllerO.player_hp = 3;
 	GameControllerO.player_max_hp = 6;

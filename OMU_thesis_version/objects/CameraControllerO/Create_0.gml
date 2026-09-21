@@ -28,7 +28,7 @@ moving = false;
 follow_target = noone;
 following = false;
 
-//camera shake
+// camera shake
 
 clean_cam_x = 384;
 clean_cam_y = 216;
@@ -72,7 +72,7 @@ function camera_move_to_room_center()
 }
 
 
-//camera follow
+// camera follow
 
 function camera_move_and_follow_object(_obj, _duration)
 {
@@ -93,7 +93,7 @@ function camera_move_and_follow_object(_obj, _duration)
 }
 
 
-//camera shake
+// camera shake
 
 //cam_shake_timer = 0;
 //cam_shake_timer = 0;

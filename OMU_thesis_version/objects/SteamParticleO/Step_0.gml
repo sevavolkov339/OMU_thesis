@@ -6,7 +6,7 @@
 //wobble_timer += wobble_speed;
 //x += hsp + sin(wobble_timer) * wobble_amp * 0.1;
 //y -= vsp;
-//// замедляемся вверху
+// замедляемся вверху
 //vsp *= 0.995;
 //radius = lerp(radius, radius + 0.02, 0.1);
 

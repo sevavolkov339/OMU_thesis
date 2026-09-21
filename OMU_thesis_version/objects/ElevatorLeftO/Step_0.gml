@@ -1,4 +1,4 @@
-//object shake
+// object shake
 
 if (shake_timer > 0) {
     var t = shake_timer / shake_duration;
@@ -13,11 +13,11 @@ if (shake_timer > 0) {
 
 //event_inherited();
 
-//pause
+// pause
 
 if (GameControllerO.game_paused) exit;
 
-/// ================== ARRIVE CUTSCENE ==================
+// / ================== ARRIVE CUTSCENE ==================
 if (arrive_active)
 {
 	image_alpha = 1
@@ -67,7 +67,7 @@ event_inherited();
 
 
 
-///doors anim
+// doors anim
 is_vertical = (image_angle == 90 || image_angle == 270);
 
 switch (state)
@@ -93,7 +93,7 @@ switch (state)
     break;
 }
 
-/// cutscene launch
+// cutscene launch
 if (LevelControllerO.level_completed && !lift_cutscene_active && !lift_cutscene_done)
 {
     if (place_meeting(x, y, PlayerBallerO))
@@ -112,7 +112,7 @@ if (LevelControllerO.level_completed && !lift_cutscene_active && !lift_cutscene_
     }
 }
 
-/// lift cutscene
+// lift cutscene
 if (lift_cutscene_active)
 {
     lift_cutscene_timer++;

@@ -85,7 +85,7 @@ for (var _i = 0; _i < array_length(bubble_char_y); _i++) {
     bubble_char_alpha[_i] = min(bubble_char_alpha[_i] + 0.15, 1);
 }
 
-// пружина ширины — используем SmallFnt чтобы string_width был правильным
+// пружина ширины, используем SmallFnt чтобы string_width был правильным
 draw_set_font(SmallFnt);
 var visible_str = string_copy(bubble_current_text, 1, bubble_visible_chars);
 bubble_target_w = max(string_width(visible_str) + bubble_pad * 2, 10);

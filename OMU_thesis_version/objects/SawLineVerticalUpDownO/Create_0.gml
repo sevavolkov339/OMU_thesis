@@ -9,7 +9,6 @@ move_dir = 1;
 start_y = y;
 
 // три пресета с одним пробелом из двух пропусков
-// пробел не может быть на краях (индексы 0,1 и 6,7 должны быть заняты)
 var presets = [
     [true, true, false, false, true, true, true, true], // пробел посередине ближе к верху
     [true, true, true, false, false, true, true, true], // пробел по центру

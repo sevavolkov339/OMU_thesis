@@ -1,7 +1,7 @@
 // проигрываем звук
 var snd = audio_play_sound(Apple_Collect_Snd, 1, false);
 
-// рандомный pitch (0.9 – 1.1 идеально)
+// рандомный pitch (0.9, 1.1 идеально)
 audio_sound_pitch(snd, random_range(0.9, 1.1));
 
 if (instance_exists(UIControllerO))

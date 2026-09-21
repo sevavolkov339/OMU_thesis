@@ -42,7 +42,6 @@ hovered_settings = _on_settings;
 hovered_stuff    = _on_stuff;
 hovered_exit     = _on_exit;
 
-// геймпад — фокус элемента заменяет ховер мышью, пока открыта главная страница
 if (gp_active && current_page == "none") {
     hovered          = (gp_focus == "eye");
     hovered_settings = items_ready && (gp_focus == "settings");
@@ -101,7 +100,7 @@ if (current_page == "save_files" && prev_page != "save_files") {
 }
 prev_page = current_page;
 
-// файлы сохранения — hover, float, delete
+// файлы сохранения, hover, float, delete
 if (current_page == "save_files") {
     var _center_x = _cw * 0.5;
     var _center_y = _ch * 0.5;
@@ -266,7 +265,7 @@ if (current_page == "save_files" && mouse_check_button_pressed(mb_left) && save_
     }
 }
 
-// геймпад — навигация по меню (крестовина / левый или правый стик)
+// геймпад, навигация по меню (крестовина / левый или правый стик)
 if (gp_active) {
     var _nav = gp_read_nav(_gp);
     var _nav_x = _nav[0];
@@ -314,7 +313,7 @@ if (gp_active) {
         }
     }
 
-    // подтверждение — A
+    // подтверждение, A
     if (gamepad_button_check_pressed(_gp, gp_face1)) {
         if (current_page == "none") {
             switch (gp_focus) {

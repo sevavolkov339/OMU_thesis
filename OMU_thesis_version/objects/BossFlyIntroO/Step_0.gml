@@ -45,7 +45,7 @@ switch (intro_phase) {
         }
 
         if (intro_timer >= intro_shake_duration) {
-            // тряска закончилась — землетрясение стихает вместе с ней
+            // тряска закончилась, землетрясение стихает вместе с ней
             if (audio_is_playing(quake_deep_snd)) audio_stop_sound(quake_deep_snd);
             if (audio_is_playing(quake_snd)) audio_stop_sound(quake_snd);
             // спавним настоящего босса и удаляемся

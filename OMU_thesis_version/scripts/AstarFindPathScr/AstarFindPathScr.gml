@@ -9,7 +9,7 @@ function AstarFindPathScr(sx, sy, ex, ey)
 	var closed = []
 	
 	function heuristic(x1, y1, x2, y2) {
-		return abs(x1 - x2) + abs(y1 - y2) // Manhattan
+		return abs(x1 - x2) + abs(y1 - y2) // manhattan
 	}
 	
 	function node_in_list(list, x, y) {
@@ -19,17 +19,17 @@ function AstarFindPathScr(sx, sy, ex, ey)
 		return -1
 	}
 	
-	// Проверка границ
+	// проверка границ
 	if (sx < 0 || sx >= w || sy < 0 || sy >= h) return []
 	if (ex < 0 || ex >= w || ey < 0 || ey >= h) return []
 	
-	// Проверяем, что начальная и конечная точки не в стенах
-	if (grid[sx][sy] == 1) return [] // Начальная точка в стене
-	if (grid[ex][ey] == 1) return [] // Конечная точка в стене
+	// проверяем, что начальная и конечная точки не в стенах
+	if (grid[sx][sy] == 1) return [] // начальная точка в стене
+	if (grid[ex][ey] == 1) return [] // конечная точка в стене
 	
-	// Если начальная и конечная точки совпадают
+	// если начальная и конечная точки совпадают
 	if (sx == ex && sy == ey) {
-		return [] // Не нужно двигаться
+		return [] // не нужно двигаться
 	}
 	
 	var start = {
@@ -68,7 +68,7 @@ function AstarFindPathScr(sx, sy, ex, ey)
 			var path = []
 			var current_node = node
 			
-			// Восстанавливаем путь от конца к началу
+			// восстанавливаем путь от конца к началу
 			while (current_node.parent != -1) {
 				array_push(path, [current_node.x, current_node.y])
 				var parent_index = current_node.parent
@@ -80,22 +80,21 @@ function AstarFindPathScr(sx, sy, ex, ey)
 			}
 			
 			// НЕ добавляем начальную точку, так как враг уже там
-			// Переворачиваем путь
 			array_reverse(path)
 			
 			return path
 		}
 		
-		// соседи (8 направлений: 4 прямых + 4 диагональных)
+		// соседи
 		var dirs = [
-			[1, 0, 1.0],      // право
-			[-1, 0, 1.0],    // лево
-			[0, 1, 1.0],     // вниз
-			[0, -1, 1.0],    // вверх
-			[1, 1, 1.414],   // право-вниз (диагональ)
-			[-1, 1, 1.414],  // лево-вниз (диагональ)
-			[1, -1, 1.414],  // право-вверх (диагональ)
-			[-1, -1, 1.414]  // лево-вверх (диагональ)
+			[1, 0, 1.0], // право
+			[-1, 0, 1.0], // лево
+			[0, 1, 1.0], // вниз
+			[0, -1, 1.0], // вверх
+			[1, 1, 1.414], // право-вниз (диагональ)
+			[-1, 1, 1.414], // лево-вниз (диагональ)
+			[1, -1, 1.414], // право-вверх (диагональ)
+			[-1, -1, 1.414] // лево-вверх (диагональ)
 		]
 		
 		for (var d = 0; d < array_length(dirs); d++)
@@ -104,13 +103,13 @@ function AstarFindPathScr(sx, sy, ex, ey)
 			var ny = node.y + dirs[d][1]
 			var move_cost = dirs[d][2]
 			
-			// Проверка границ
+			// проверка границ
 			if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue
 			
-			// Проверка препятствий
+			// проверка препятствий
 			if (grid[nx][ny] == 1) continue
 			
-			// Для диагоналей проверяем, что соседние ячейки тоже свободны
+			// для диагоналей проверяем, что соседние ячейки тоже свободны
 			if (move_cost > 1.0) {
 				var check_x1 = node.x
 				var check_y1 = ny
@@ -125,7 +124,7 @@ function AstarFindPathScr(sx, sy, ex, ey)
 				}
 			}
 			
-			// Проверяем, не в закрытом ли списке
+			// проверяем, не в закрытом ли списке
 			if (node_in_list(closed, nx, ny) != -1) continue
 			
 			var g = node.g + move_cost
@@ -134,7 +133,7 @@ function AstarFindPathScr(sx, sy, ex, ey)
 			
 			var index = node_in_list(open, nx, ny)
 			if (index == -1) {
-				// Добавляем новый узел
+				// добавляем новый узел
 				array_push(open, {
 					x : nx, y : ny,
 					g : g, h : h_val, f : f,
@@ -142,7 +141,7 @@ function AstarFindPathScr(sx, sy, ex, ey)
 				})
 			}
 			else if (g < open[index].g) {
-				// Обновляем существующий узел, если нашли лучший путь
+				// обновляем существующий узел, если нашли лучший путь
 				open[index].g = g
 				open[index].f = f
 				open[index].parent = closed_index

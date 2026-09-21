@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"SaveFormatBinaryScr",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"SaveFormatBinaryScr",
+  "parent":{
+    "name":"Thesis",
+    "path":"folders/Scripts/Thesis.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,4 +1,4 @@
-//pause
+// pause
 
 if (GameControllerO.game_paused) exit;
 

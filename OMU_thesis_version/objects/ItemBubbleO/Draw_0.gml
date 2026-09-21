@@ -16,7 +16,7 @@ matrix_set(matrix_world, matrix_multiply(_mx, _prev));
 draw_sprite_ext(ItemBubbleS, bubble_img, 0, 0, 1, 1, 0, c_white, 1);
 matrix_set(matrix_world, _prev);
 
-// эффект покупки — ПОСЛЕ сброса матрицы
+// эффект покупки, ПОСЛЕ сброса матрицы
 if (bought_effect && bought_visible && item != noone) {
     draw_sprite_ext(item.sprite, 0, x, bought_item_y, 1, 1, 0, c_white, 1);
 }

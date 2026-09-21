@@ -5,7 +5,7 @@ if (!instance_exists(door_ref) or instance_exists(PlayerEnterDoorO)) {
 }
 base_x = door_ref.x;
 base_y = door_ref.y;
-// squash пружина — всегда считается
+// squash пружина, всегда считается
 var _dsx = 1 - grab_squash_x;
 grab_squash_x_speed += _dsx * grab_squash_stiffness;
 grab_squash_x_speed *= grab_squash_damping;

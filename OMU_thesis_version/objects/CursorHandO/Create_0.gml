@@ -31,7 +31,7 @@ prev_cant_afford = false;
 cursor_shake_timer = 0;
 cursor_shake_duration = room_speed * 0.5;
 
-// глобальный флаг — переживает смену комнат, чтобы курсор не мигал при заходе на новый уровень
+// глобальный флаг, переживает смену комнат, чтобы курсор не мигал при заходе
 if (!variable_global_exists("using_gamepad")) {
     global.using_gamepad = false;
 }

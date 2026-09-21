@@ -16,7 +16,7 @@ for (var i = 0; i < _count; i++) {
     var _px_start = floor(_pt.x - _half);
     var _py_start = floor(_pt.y - _half);
 
-    // сначала рисуем обводку — чёрные пиксели вокруг каждого белого
+    // сначала рисуем обводку, чёрные пиксели вокруг каждого белого
     draw_set_color(c_black);
     for (var _py = 0; _py < _size; _py++) {
         for (var _px = 0; _px < _size; _px++) {

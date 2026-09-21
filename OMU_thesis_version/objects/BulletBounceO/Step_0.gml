@@ -1,4 +1,4 @@
-//teleporting
+// teleporting
 if (teleporting) {
     teleport_timer++;
     
@@ -87,7 +87,7 @@ if (teleporting) {
     exit;
 }
 
-// если скорость 0 — ничего не делаем
+// если скорость 0, ничего не делаем
 if (speed <= 0) exit;
 
 // трение
@@ -102,57 +102,57 @@ if (spin > 0)
 }
 
 
-//// Применяем трение (замедление)
+// применяем трение (замедление)
 //if (speed > 0) {
-//    speed *= 0.98; // Постепенное замедление
+// speed *= 0.98; // Постепенное замедление
 //    if (speed < 0.1) speed = 0; // Останавливаем если слишком медленно
 //}
 
-////spin
+// spin
 //if (spin > 0) {
 //    image_angle += 14;
 //    spin--;
 //}
 
-// Если мяч не движется - выход
+// если мяч не движется - выход
 if (speed == 0) exit;
 
-//next pos
+// next pos
 var next_x = x + lengthdir_x(speed, direction);
 var next_y = y + lengthdir_y(speed, direction);
 
-// Флаг столкновения
+// флаг столкновения
 var collision_occurred = false;
 var old_direction = direction;
 
-//Wall collision
+// wall collision
 if (place_meeting(next_x, next_y, wall)) {
     collision_occurred = true;
     
-    //нормаль поверхности
+    // нормаль поверхности
     var surface_normal = collision_normal(next_x, next_y, wall, 8, 2);
     
     if (surface_normal != -1) {
-        // Векторная формула отражения
+        // векторная формула отражения
         var incident_x = lengthdir_x(1, direction);
         var incident_y = lengthdir_y(1, direction);
         var normal_x = lengthdir_x(1, surface_normal);
         var normal_y = lengthdir_y(1, surface_normal);
         
-        // Скалярное произведение
+        // скалярное произведение
         var dot = incident_x * normal_x + incident_y * normal_y;
         
-        // Вектор отражения: R = I - 2*(I·N)*N
+        // вектор отражения: R = I - 2*(I·N)*N
         var reflect_x = incident_x - 2 * dot * normal_x;
         var reflect_y = incident_y - 2 * dot * normal_y;
         
-        // Угол отражения
+        // угол отражения
         direction = point_direction(0, 0, reflect_x, reflect_y);
         
-        // Небольшая потеря энергии при отскоке
+        // небольшая потеря энергии при отскоке
         //speed *= 0.85;
     } else {
-        // Fallback: простой отскок если нормаль не найдена
+        // fallback: простой отскок если нормаль не найдена
         if (place_meeting(x + lengthdir_x(speed, direction), y, wall)) {
             direction = 180 - direction;
         }
@@ -162,10 +162,9 @@ if (place_meeting(next_x, next_y, wall)) {
         //speed *= 0.85;
     }
     
-    //Находим точку перед столкновением, а не после
-    // Ищем самую дальнюю безопасную позицию вдоль старого направления
+    // находим точку перед столкновением, а не после
     var safe_distance = 0;
-    var max_check = min(speed, 20); // Проверяем максимум 20 пикселей
+    var max_check = min(speed, 20); // проверяем максимум 20 пикселей
     
     for (var dist = 0; dist <= max_check; dist += 0.5) {
         var check_x = x + lengthdir_x(dist, old_direction);
@@ -178,39 +177,38 @@ if (place_meeting(next_x, next_y, wall)) {
         }
     }
     
-    // Если нашел безопасную дистанцию перемещается туда
+    // если нашел безопасную дистанцию перемещается туда
     if (safe_distance > 0) {
         x = x + lengthdir_x(safe_distance, old_direction);
         y = y + lengthdir_y(safe_distance, old_direction);
     }
     
-    // Проверка застревания в стене после отскока
-    //отталкиваемся от нее по нормали если да
+    // проверка застревания в стене после отскока
     if (place_meeting(x, y, wall)) {
         var push_normal = collision_normal(x, y, wall, 8, 2);
         if (push_normal != -1) {
-            // Отталкивает от стены
+            // отталкивает от стены
             x += lengthdir_x(3, push_normal);
             y += lengthdir_y(3, push_normal);
         } else {
-            // Если нормаль не найдена отталкиваем в случайном направлении
+            // если нормаль не найдена отталкиваем в случайном направлении
             x += lengthdir_x(3, random(360));
             y += lengthdir_y(3, random(360));
         }
     }
     
-    //позиция после отскока
+    // позиция после отскока
     next_x = x + lengthdir_x(speed, direction);
     next_y = y + lengthdir_y(speed, direction);
 }
 
-//столкновение с врагом
+// столкновение с врагом
 var enemy_hit = instance_place(next_x, next_y, EnemyO);
 
 if (enemy_hit != noone && speed > 0) {
     collision_occurred = true;
     
-    //damage once
+    // damage once
 	if (!enemy_hit.touching_ball) {
 	    FreezeScr(100);
 	    audio_play_sound(Enemy_Hit_Snd, 0, false);
@@ -240,7 +238,7 @@ if (enemy_hit != noone && speed > 0) {
         direction = point_direction(0, 0, reflect_x, reflect_y);
         speed *= 0.85;
         
-        //безопасная позицию перед врагом
+        // безопасная позицию перед врагом
         var safe_dist = 0;
         var max_check_enemy = min(speed, 15);
         
@@ -260,10 +258,10 @@ if (enemy_hit != noone && speed > 0) {
             y = y + lengthdir_y(safe_dist, old_dir);
         }
         
-        //check if stuck in enemy
+        // check if stuck in enemy
         var enemy_check = instance_place(x, y, EnemyO);
         if (enemy_check != noone) {
-            // Отталкиваемся от врага
+            // отталкиваемся от врага
             var push_dir = point_direction(enemy_check.x, enemy_check.y, x, y);
             x += lengthdir_x(5, push_dir);
             y += lengthdir_y(5, push_dir);
@@ -272,7 +270,7 @@ if (enemy_hit != noone && speed > 0) {
         next_x = x + lengthdir_x(speed, direction);
         next_y = y + lengthdir_y(speed, direction);
     } else {
-        // Fallback
+        // fallback
         var old_dir = direction;
         
         if (place_meeting(x + lengthdir_x(speed, direction), y, EnemyO)) {
@@ -283,7 +281,7 @@ if (enemy_hit != noone && speed > 0) {
         }
         speed *= 0.85;
         
-        //safe pos
+        // safe pos
         var safe_dist = 0;
         for (var d = 0; d <= speed; d += 0.5) {
             var check_x = x + lengthdir_x(d, old_dir);
@@ -306,16 +304,15 @@ if (enemy_hit != noone && speed > 0) {
     }
 }
 
-// Применяем движение только если не было столкновения в этом кадре
-// Или если после корректировок мы не внутри стены/врага
+// применяем движение только если не было столкновения в этом кадре
 if (!collision_occurred || (!place_meeting(next_x, next_y, wall) && instance_place(next_x, next_y, EnemyO) == noone)) {
     x = next_x;
     y = next_y;
 } else {
-    // Если все еще внутри объекта, пробуем отодвинуться
+    // если все еще внутри объекта, пробуем отодвинуться
     var attempts = 8;
     for (var i = 1; i <= attempts; i++) {
-        var try_x = x + lengthdir_x(i, direction + 180); // Пробуем назад
+        var try_x = x + lengthdir_x(i, direction + 180); // пробуем назад
         var try_y = y + lengthdir_y(i, direction + 180);
         
         if (!place_meeting(try_x, try_y, wall) && instance_place(try_x, try_y, EnemyO) == noone) {

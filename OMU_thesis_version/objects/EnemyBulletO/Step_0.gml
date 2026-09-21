@@ -25,7 +25,7 @@ y = next_y;
 // урон игроку
 if (instance_exists(PlayerBallerO)) {
     if (place_meeting(x, y, PlayerBallerO) && !PlayerBallerO.stunned) {
-		// Если игрок мигает или летит — неуязвим, игнорируем столкновение
+		// если игрок мигает или летит, неуязвим, игнорируем столкновение
 		if (PlayerBallerO.blink_time > 0 || PlayerBallerO.flying || PlayerBallerO.spawn_invuln_timer > 0) exit;
         with (PlayerBallerO) {
             hp -= 1;

@@ -20,7 +20,7 @@ if (speed > max_speed) speed = max_speed;
 //    }
 //}
 
-//teleporting
+// teleporting
 if (teleporting) {
     teleport_timer++;
     
@@ -113,7 +113,6 @@ var collision_occurred = false;
 var old_direction = direction;
 
 // wall collision
-// защита от проскальзывания сквозь стену на высокой скорости — проверяем промежуточные точки пути
 var _wall_hit = place_meeting(next_x, next_y, wall);
 if (!_wall_hit && speed > 4) {
     var _wsteps = ceil(speed / 4);
@@ -172,7 +171,7 @@ if (_wall_hit) {
     next_y = y + lengthdir_y(speed, direction);
 }
 
-// enemy collision — пролетаем сквозь, но наносим урон
+// enemy collision, пролетаем сквозь, но наносим урон
 var enemy_hit = instance_place(next_x, next_y, EnemyO);
 if (enemy_bounce_immune_timer > 0) {
     enemy_bounce_immune_timer -= 1;
@@ -208,7 +207,7 @@ if (enemy_hit != noone && speed > 0) {
     enemy_bounce_immune_timer = 20;
 }
 
-// столкновение с другим мячом — эффект только в момент начала касания
+// столкновение с другим мячом, эффект только в момент начала касания
 var _touching_bullet_now = false;
 with (BulletBounceO) {
     if (id != other.id && speed > 1.5 && other.speed > 1.5) {
@@ -222,8 +221,7 @@ with (BulletBounceO) {
                 other.direction = (_dir + 180) mod 360;
                 other.touching_bullet = true;
 
-                // физически расталкиваем оба объекта, чтобы они гарантированно разошлись за этот же кадр
-                // (но не сквозь стену — проверяем перед тем, как реально сдвинуть)
+                // физически расталкиваем оба объекта
                 var _overlap = _combined_radius - _dist;
                 if (_overlap > 0) {
                     var _push = _overlap * 0.5 + 1;

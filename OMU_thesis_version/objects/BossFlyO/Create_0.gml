@@ -1,11 +1,11 @@
 instance_create_layer(x,y, "BulletsL", BossFlyShadowO);
 
-hp = 50;
+hp = 10;
 apple_base = 40;
 buzz_snd = audio_play_sound(FlyBuzzingSnd, 0, true); // жужжание в лупе, пока босс жив
 quake_deep_snd = -1;
 quake_snd = -1;
-quake_playing = false; // землетрясение во время смерти (запускается один раз, когда начинается dying)
+quake_playing = false; // землетрясение во время смерти
 touching_ball = false;
 shake_x = 0;
 shake_y = 0;
@@ -63,3 +63,21 @@ bleeding = false;
 bleed_damage_timer = 0;
 bleed_damage_interval = 1 * room_speed;
 bleed_damage = 0.5;
+
+// восстановление после загрузки сохранения
+boss_restore_player = undefined;
+if (!is_undefined(global.pending_boss_snapshot)) {
+    var _bs = global.pending_boss_snapshot;
+    x = _bs.x;
+    y = _bs.y;
+    hp = _bs.hp;
+    dying = _bs.dying;
+    phase = _bs.phase;
+    phase_timer = _bs.phase_timer;
+    direction = _bs.direction;
+    bleeding = _bs.bleeding;
+    bleed_damage_timer = _bs.bleed_damage_timer;
+    // игрока переставляем в Step_0 - там гарантированно его Create уже отработал
+    boss_restore_player = _bs.player;
+    global.pending_boss_snapshot = undefined;
+}

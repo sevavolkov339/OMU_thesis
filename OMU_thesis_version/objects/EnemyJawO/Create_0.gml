@@ -23,13 +23,13 @@ shake_offset_y = 0;
 // анимация столкновения
 hit_anim = false;
 
-//sounds
+// sounds
 
 suffer_sound_played = false;
 
 hit_by_shuriken = false;
 
-//bleeding
+// bleeding
 hit_by_shuriken = false;
 bleeding = false;
 bleed_damage_timer = 0;
@@ -37,9 +37,9 @@ bleed_damage_interval = 2 * room_speed;
 bleed_damage = 1
 
 // рывки
-lunge_speed = 5;      // скорость во время рывка
-lunge_timer = 0;      // сколько кадров осталось рывка
-lunge_duration = 8;   // длина рывка в кадрах
+lunge_speed = 5; // скорость во время рывка
+lunge_timer = 0; // сколько кадров осталось рывка
+lunge_duration = 8; // длина рывка в кадрах
 lunge_active = false;
 prev_frame = -1;
 
@@ -47,5 +47,5 @@ prev_frame = -1;
 dir_change_timer = 0;
 dir_change_interval = irandom_range(60, 180);
 
-// откинут шипами PuffFishO — своя логика движения на это время отключается
+// откинут шипами PuffFishO, своя логика движения на это время отключается
 puff_stunned = false;

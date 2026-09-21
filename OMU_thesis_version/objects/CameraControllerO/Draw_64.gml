@@ -1,4 +1,4 @@
-//// Пересоздаём surface если она умерла
+// пересоздаём surface если она умерла
 //if (!surface_exists(surf)) {
 //    surf = surface_create(global.gameWidth, global.gameHeight);
 //}
@@ -20,6 +20,6 @@
 //shader_set_uniform_f(shader_get_uniform(shd_depixel, "u_upscale"), upscale);
 //shader_set_uniform_f(shader_get_uniform(shd_depixel, "u_threshold"), 0.1);
 
-//// Растягиваем на весь экран GUI
+// растягиваем на весь экран GUI
 //draw_surface_stretched(surf, 0, 0, global.gameWidth, global.gameHeight);
 //shader_reset();

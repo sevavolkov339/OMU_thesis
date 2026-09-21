@@ -1,4 +1,4 @@
-//// обводка по позиции без shake
+// обводка по позиции без shake
 //draw_sprite_ext(sprite_index, image_index, x - 1, y, image_xscale, image_yscale, image_angle, c_red, 1);
 //draw_sprite_ext(sprite_index, image_index, x + 1, y, image_xscale, image_yscale, image_angle, c_red, 1);
 //draw_sprite_ext(sprite_index, image_index, x, y - 1, image_xscale, image_yscale, image_angle, c_red, 1);
@@ -24,14 +24,14 @@ if (instance_exists(PlayerTestO)) {
     draw_set_alpha(1);
 }
 
-//// анимация ходьбы
+// анимация ходьбы
 //walk_timer += walk_speed;
 
-//// bounce - синус от 0 до 1 (только вверх)
+// bounce - синус от 0 до 1 (только вверх)
 //var _bounce = abs(sin(walk_timer));
 //var _tilt = sin(walk_timer) * walk_tilt_amount;
 
-//// squash при приземлении (когда bounce близко к 0)
+// squash при приземлении (когда bounce близко к 0)
 //var _grounded = 1 - _bounce;
 //var _sx_walk = 1 + _grounded * 0.25;
 //var _sy_walk = 1 - _grounded * 0.25;

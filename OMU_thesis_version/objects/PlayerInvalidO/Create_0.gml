@@ -3,5 +3,5 @@ vspeed = 0
 hspeed = 0
 vsp_max = 2
 
-//Timers
+// timers
 shootTimer = 0

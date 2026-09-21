@@ -1,4 +1,4 @@
-//creating PlayerGurl
+// creating PlayerGurl
 if instance_exists(PlayerBallerO){
 	instance_create_layer(PlayerBallerO.x,PlayerBallerO.y,"PlayerL",PlayerGurlO)
 	instance_destroy(PlayerBallerO)

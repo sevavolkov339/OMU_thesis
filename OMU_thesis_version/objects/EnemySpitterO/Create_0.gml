@@ -58,5 +58,5 @@ recoil_friction = 0.85;
 spawn_x = x;
 spawn_y = y;
 
-// откинут шипами PuffFishO — своя логика (в т.ч. левитация вокруг origin_x/y) на это время отключается
+// откинут шипами PuffFishO, своя логика (в т.ч. левитация вокруг origin_x/y)
 puff_stunned = false;

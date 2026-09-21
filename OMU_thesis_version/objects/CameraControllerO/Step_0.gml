@@ -29,5 +29,5 @@ if (cam_shake_timer > 0) {
     cam_shake_timer--;
 }
 
-// применяем — clean_cam_x/y никогда не трогаем шейком
+// применяем, clean_cam_x/y никогда не трогаем шейком
 camera_set_view_pos(cam, clean_cam_x + shake_x, clean_cam_y + shake_y);

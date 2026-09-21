@@ -20,7 +20,7 @@ if (hp <= 0) {
         }
         cc.add_kill();
     }
-    // kopilka powerup — шанс 30% на 1.5x яблок
+    // kopilka powerup, шанс 30% на 1.5x яблок
     if (instance_exists(KopilkaPowerUpO)) {
         if (random(1) < 0.3) {
             apple_count = ceil(apple_count * 1.5);
@@ -38,9 +38,7 @@ if (hp <= 0) {
     exit;
 }
 
-// откинута шипами PuffFishO — левитацию вокруг origin_x/y и рикойл на это время отключаем,
-// иначе она каждый кадр силой возвращала бы x/y на место левитации и отброс был бы не виден
-// (тряску при этом не трогаем — она должна продолжаться, пока летит от отброса)
+// откинута шипами PuffFishO
 if (!puff_stunned) {
     // затухание рикойла
     recoil_x *= recoil_friction;
@@ -62,7 +60,7 @@ if (!puff_stunned) {
     if (place_meeting(origin_x, origin_y + recoil_y, _wall)) {
         recoil_y *= -0.8;
     }
-    // если застрял — выталкиваем
+    // если застрял, выталкиваем
     if (place_meeting(origin_x, origin_y, _wall)) {
         var _normal = collision_normal(origin_x, origin_y, _wall, 4, 1);
         if (_normal != -1) {
@@ -101,7 +99,7 @@ if (!puff_stunned) {
     flip_scale_y += flip_scale_y_speed;
 }
 
-// тряска от урона — приоритет (продолжается и во время отброса)
+// тряска от урона, приоритет (продолжается и во время отброса)
 if (shake_timer > 0) {
     var t = shake_timer / shake_duration;
     var cur = shake_strength * t;
@@ -114,7 +112,7 @@ if (shake_timer > 0) {
     shake_offset_y = random_range(-0.8, 0.8);
 }
 
-// откинута шипами — стрельбу, рот и остальной AI ниже пропускаем
+// откинута шипами, стрельбу, рот и остальной AI ниже пропускаем
 if (puff_stunned) exit;
 
 // стрельба
@@ -153,7 +151,7 @@ if (mouth_open) {
         mouth_open = false;
         image_index = 0;
         image_speed = 0;
-		// squash при закрытии — сплющивание по горизонтали
+		// squash при закрытии, сплющивание по горизонтали
 		mouth_scale_x = 1.4;
 		mouth_scale_y = 0.6;
     }

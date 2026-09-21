@@ -7,7 +7,7 @@ var _line_h = 20;
 var _icon_size = 16;
 var _icon_gap = 3;
 
-// TIME — строка 0
+// TIME, строка 0
 var _a0 = row_alphas[0];
 var _off0 = row_offset_y[0];
 var _fl0 = sin(row_float_timer[0] * 0.5) * 1.5;
@@ -16,7 +16,7 @@ if (_a0 > 0) {
 }
 _y += _line_h;
 
-// MONEY — строка 1
+// MONEY, строка 1
 var _a1 = row_alphas[1];
 var _off1 = row_offset_y[1];
 var _fl1 = sin(row_float_timer[1] * 0.5) * 1.5;
@@ -30,7 +30,7 @@ if (_a1 > 0) {
     var _sx = _cx - _total * 0.5;
     var _ty = _y - _off1 + _fl1;
     draw_set_alpha(_a1);
-    // иконка двигается вместе с волной — берём среднюю волну текста
+    // иконка двигается вместе с волной, берём среднюю волну текста
     var _wave_y = sin(wave_text_timer + string_length(_money_str) * 0.25) * 2.5;
     draw_sprite_ext(AppleS, 0,
         _sx + _tw + _gap + _iw * 0.5,
@@ -40,7 +40,7 @@ if (_a1 > 0) {
 }
 _y += _icon_size + 4;
 
-// ITEMS — строка 2
+// ITEMS, строка 2
 var _a2 = row_alphas[2];
 var _off2 = row_offset_y[2];
 var _fl2 = sin(row_float_timer[2] * 0.5) * 1.5;
@@ -59,7 +59,7 @@ if (_a2 > 0 && array_length(items_list) > 0) {
     _y += _icon_size + 8;
 }
 
-// POWER UPS — строка 3
+// POWER UPS, строка 3
 var _a3 = row_alphas[3];
 var _off3 = row_offset_y[3];
 var _fl3 = sin(row_float_timer[3] * 0.5) * 1.5;
@@ -81,7 +81,7 @@ if (_a3 > 0 && array_length(powerups_list) > 0) {
 
 
 _y += 20;
-// ГЛАЗ — строка 4
+// ГЛАЗ, строка 4
 var _a4 = row_alphas[4];
 var _off4 = row_offset_y[4];
 if (_a4 > 0) {

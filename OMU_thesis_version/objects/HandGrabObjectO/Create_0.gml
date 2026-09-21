@@ -37,7 +37,7 @@ grab_squash_y_speed = 0;
 grab_squash_stiffness = 0.3;
 grab_squash_damping = 0.6;
 
-//sounds
+// sounds
 
 sound_appeared = false;
 sound_disappeared = false;

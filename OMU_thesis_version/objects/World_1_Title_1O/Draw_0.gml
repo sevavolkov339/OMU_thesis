@@ -1,4 +1,4 @@
-// первая часть видна, пока не начала печататься вторая — обе части рисуются в одном и том же месте
+// первая часть видна, пока не начала печататься вторая, обе части рисуются
 if (phase == "typing1" || phase == "pause") {
     draw_typed_wave_text(part1, visible_chars1, char1_shake_timer, char1_shake_duration, char1_shake_strength, font1, x, y);
 }

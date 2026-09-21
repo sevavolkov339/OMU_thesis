@@ -1,4 +1,4 @@
-//pause
+// pause
 if (GameControllerO.game_paused) {
     alarm_set(0, 1);
     exit;
@@ -10,7 +10,6 @@ if (puff_stunned) {
 }
 
 // jump point search - jumps in a straight/diagonal line until it either hits
-// the goal, hits a wall, or finds a spot where a shortcut opens up next to it
 function jps_blocked(_grid, _gw, _gh, _gx, _gy) {
     if (_gx < 0 || _gy < 0 || _gx >= _gw || _gy >= _gh) return true;
     return (_grid[_gx][_gy] == 1);
@@ -29,7 +28,6 @@ function jps_jump(_grid, _gw, _gh, _cx, _cy, _dx, _dy, _ex, _ey) {
             return _nx + _ny * _gw;
         }
         // a diagonal jump also counts as a jump point if either straight
-        // direction off of it finds something
         if (jps_jump(_grid, _gw, _gh, _nx, _ny, _dx, 0, _ex, _ey) != -1) return _nx + _ny * _gw;
         if (jps_jump(_grid, _gw, _gh, _nx, _ny, 0, _dy, _ex, _ey) != -1) return _nx + _ny * _gw;
     } else if (_dx != 0) {
@@ -48,7 +46,6 @@ function jps_jump(_grid, _gw, _gh, _cx, _cy, _dx, _dy, _ex, _ey) {
 }
 
 // directions actually worth a jump from here, based on where we came from
-// (0,0) means start node, try all 8. this is the real jps pruning
 function jps_prune_directions(_grid, _gw, _gh, _cx, _cy, _pdx, _pdy) {
     var _dirs = [];
 

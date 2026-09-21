@@ -1,5 +1,4 @@
-// keeps splitting the biggest region until the partition lines add up to
-// roughly wall_target walls, instead of a fixed number of splits
+// keeps splitting the biggest region until the partition lines add up
 function GenerateBSPRoomScr(_gw, _gh, _wall_target, _enemy_target, _chest_target, _item_target, _item_objects, _min_spacing) {
     var _shape_index = irandom(2);
     var _shape = LevelGenShape(_shape_index, _gw, _gh);

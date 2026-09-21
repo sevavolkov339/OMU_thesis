@@ -13,8 +13,7 @@ function shuffle_array_manual(_arr) {
     return _arr;
 }
 
-// нельзя предлагать предмет, который у игрока уже есть — см. IsItemMaxedOutScr
-// (кроме Birdie, можно иметь до 3х, и Placeholder 1 — чистый заполнитель)
+// нельзя предлагать предмет, который у игрока уже есть, см. IsItemMaxedOutScr
 function is_item_maxed_out(_name) {
     return IsItemMaxedOutScr(_name);
 }
@@ -59,7 +58,6 @@ function generate_offers() {
     }
 
     // первая генерация для этой комнаты
-    // предметы, которые у игрока уже есть в инвентаре, повторно в магазине не предлагаем
     var buy_pool = [];
     for (var i = 0; i < array_length(all_items); i++) {
         var _it = all_items[i];
@@ -75,8 +73,7 @@ function generate_offers() {
         array_push(_slot_items, buy_pool[i]);
     }
 
-    // не хватило непроданных предметов на все слоты — добираем сердечками/плейсхолдером,
-    // они не подчиняются правилу "один такой предмет в инвентаре" и всегда доступны как заполнитель
+    // не хватило непроданных предметов на все слоты
     var _missing_slots = 3 - item_count;
     if (_missing_slots > 0) {
         var _filler_placeholder = undefined;
@@ -100,7 +97,7 @@ function generate_offers() {
         }
     }
 
-    // ручной шафл всего набора слотов — гарантированно рандомные позиции
+    // ручной шафл всего набора слотов, гарантированно рандомные позиции
     _slot_items = shuffle_array_manual(_slot_items);
 
     var count = array_length(_slot_items);

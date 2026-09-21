@@ -13,7 +13,7 @@ yscale = lerp(yscale, 0, 0.03);
 alpha = lerp(alpha, 0, 0.06);
 
 //if (alpha < 0.05) {
-//	// меняем комнату когда фейд завершён
+// меняем комнату когда фейд завершён
 //	if (instance_exists(FadeTransitionO) && FadeTransitionO.fade_done) {
 //	    LevelControllerO.change_room();
 //	    instance_destroy();

@@ -19,7 +19,7 @@ shake_duration = 1;
 //image_speed = 0;
 //image_index = irandom(sprite_get_number(BossSnakePartS) - 1);
 
-//bleeding
+// bleeding
 hit_by_shuriken = false;
 bleeding = false;
 bleed_damage_timer = 0;

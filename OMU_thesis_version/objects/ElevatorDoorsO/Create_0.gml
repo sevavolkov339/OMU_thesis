@@ -21,7 +21,7 @@ closed_once = false;
 open_distance = 40;
 close_distance = 40;
 
-// Открыть двери вручную
+// открыть двери вручную
 function door_open()
 {
     if (state == 0 && !opened_once)
@@ -30,7 +30,7 @@ function door_open()
     }
 }
 
-// Закрыть двери вручную
+// закрыть двери вручную
 function door_close()
 {
     if (state == 2 && opened_once && !closed_once)

@@ -6,6 +6,6 @@ if (!is_undefined(global.pending_room_name)) {
     global.pending_room_name = undefined;
     room_goto(_room_id);
 } else {
-    // новая игра всегда начинается с первого титульного экрана мира
-    room_goto(World_1_Title_1_Room);
+    // минуя титульные экраны
+    room_goto(Combat_Room);
 }

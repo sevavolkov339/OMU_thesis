@@ -1,4 +1,4 @@
-//pause
+// pause
 
 if (GameControllerO.game_paused) exit;
 
@@ -53,7 +53,7 @@ if (attracting && instance_exists(PlayerBallerO))
         vy = (vy / spd) * max_speed;
     }
 
-    //// гасим вращение
+    // гасим вращение
     //spin_speed = lerp(spin_speed, 0, 0.15);
 }
 else
@@ -71,7 +71,7 @@ else
 x += vx;
 y += vy;
 
-//update trail
+// update trail
 var t = {
     x: x,
     y: y

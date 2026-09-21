@@ -1,5 +1,5 @@
 
-//pause
+// pause
 
 if (GameControllerO.game_paused) exit;
 
@@ -8,7 +8,7 @@ if (!instance_exists(PlayerBallerO)) exit;
 if (!instance_exists(LevelControllerO)) exit;
 //if (used) exit;
 
-//visibility
+// visibility
 var can_be_visible =
     LevelControllerO.level_completed
     && !used
@@ -23,7 +23,7 @@ else
     image_alpha = max(image_alpha - 0.1, 0);
 }
 
-//enter cutscene
+// enter cutscene
 if (!LevelControllerO.level_completed) exit;
 if (used) exit;
 

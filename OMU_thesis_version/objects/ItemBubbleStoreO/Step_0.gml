@@ -1,6 +1,6 @@
 if (GameControllerO.game_paused) exit;
 
-// эффект покупки — предмет летит вверх и мигает
+// эффект покупки, предмет летит вверх и мигает
 if (bought_effect) {
     bought_item_y -= 0.8;
     bought_blink_timer++;
@@ -35,7 +35,7 @@ bubble_scale_y_speed += (breath_target_y - bubble_scale_y) * 0.3;
 bubble_scale_y_speed *= 0.6;
 bubble_scale_y += bubble_scale_y_speed;
 
-// левитация — только визуальная
+// левитация, только визуальная
 var base_float_x = sin(float_timer * 0.5) * 1.2;
 var base_float_y = cos(float_timer * 0.4) * 1.8;
 
@@ -84,7 +84,7 @@ if (instance_exists(PlayerBallerO) && item != noone && !popped) {
     
     var _should_show = (_nearest_id == id && _dist < desc_bubble_radius);
     
-    // игрок вышел из зоны — сбрасываем finished
+    // игрок вышел из зоны, сбрасываем finished
     if (!_should_show) {
         if (desc_bubble_visible) {
             desc_bubble_visible = false;

@@ -6,7 +6,7 @@ if (spawn_timer >= spawn_interval && array_length(flakes) < max_flakes) {
     spawn_snow_flake();
 }
 
-// ветер (WindEffectO) сносит снег в свою сторону, пока дует — заметно сильнее, чем просто покачивание
+// ветер (WindEffectO) сносит снег в свою сторону
 var _wind_push = 0;
 if (instance_exists(WindEffectO)) {
     _wind_push = WindEffectO.wind_dir * WindEffectO.wind_strength * 3.5;
@@ -19,7 +19,7 @@ for (var i = array_length(flakes) - 1; i >= 0; i--) {
     _f.sway_phase += _f.sway_speed;
     _f.base_x += _wind_push;
 
-    // покачивание — снежинка/снег плавно виляет из стороны в сторону, а не улетает вбок насовсем
+    // покачивание, снежинка/снег плавно виляет из стороны в сторону, а не улетает
     if (_f.is_flake) {
         _f.anim_timer += 0.15;
         _f.frame = floor(_f.anim_timer) mod 6;

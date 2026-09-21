@@ -14,17 +14,9 @@
 //}
 //// ===== ДЕНЬГИ =====
 //var money_y = margin + sprite_get_height(heart_sprite) + space_between;
-//// иконка яблока
+// иконка яблока
 //draw_sprite_ext(
-//    apple_sprite,
-//    0,
-//    margin,
-//    money_y + apple_y_offset,
-//    apple_scale_x,
-//    apple_scale_y,
-//    0,
-//    c_white,
-//    1
+// apple_sprite
 //);
 //// ===== ТЕКСТ ДЕНЕГ =====
 //draw_set_font(MainFnt);
@@ -32,12 +24,11 @@
 //draw_set_halign(fa_left);
 //draw_set_valign(fa_top);
 //draw_text(
-//    margin + sprite_get_width(apple_sprite) + money_spacing,
-//    money_y - 6.1,
+// margin + sprite_get_width(apple_sprite) + money_spacing
 //    string(p.money)
 //);
 //// =======================
-//// PAUSE MENU
+// PAUSE MENU
 //// =======================
 //if (pause_alpha > 0)
 //{
@@ -64,14 +55,14 @@
 //    var bar_h = 8;
 //    var bar_x = combo_bar_x;
 //    var bar_y = combo_bar_y;
-//    // заполненная часть
+// заполненная часть
 //    var filled = bar_w * cc.combo_bar;
 //    if (filled > 0) {
 //        draw_set_alpha(combo_alpha);
 //        draw_set_color(c_white);
 //        draw_rectangle(bar_x - filled, bar_y, bar_x + filled, bar_y + bar_h, false);
 //    }
-//    // число комбо с анимацией + обводка
+// число комбо с анимацией + обводка
 //    var combo_text = "";
 //    if (cc.combo >= 1) {
 //        combo_text = string(cc.combo) + "x";
@@ -84,19 +75,19 @@
 //        draw_set_font(MainFnt);
 //        draw_set_halign(fa_center);
 //        draw_set_valign(fa_middle);
-//        // alpha: для нуля используем combo_zero_alpha, для остального combo_alpha
+// alpha: для нуля используем combo_zero_alpha, для остального combo_alpha
 //        var text_alpha = (combo_show_zero && cc.combo == 0) ? combo_zero_alpha : combo_alpha;
 //        draw_set_alpha(text_alpha);
 //        var _mx = matrix_build(tx, ty, 0, 0, 0, combo_angle, combo_scale, combo_scale, 1);
 //        var _prev = matrix_get(matrix_world);
 //        matrix_set(matrix_world, matrix_multiply(_mx, _prev));
-//        // обводка
+// обводка
 //        draw_set_color(c_black);
 //        draw_text( 1,  0, combo_text);
 //        draw_text(-1,  0, combo_text);
 //        draw_text( 0,  1, combo_text);
 //        draw_text( 0, -1, combo_text);
-//        // основной текст
+// основной текст
 //        draw_set_color(c_white);
 //        draw_text(0, 0, combo_text);
 //        matrix_set(matrix_world, _prev);
@@ -104,7 +95,7 @@
 //        draw_set_valign(fa_top);
 //    }
 //}
-//// сброс
+// сброс
 //draw_set_alpha(1);
 //draw_set_font(-1);
 //draw_set_color(c_white);

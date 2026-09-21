@@ -17,16 +17,11 @@
 //surface_reset_target();
 
 //draw_surface_ext(_surf,
-//    x - sprite_get_xoffset(sprite_index) - 1,
-//    y - sprite_get_yoffset(sprite_index) - 1,
+// x - sprite_get_xoffset(sprite_index) - 1
 //    1, 1, 0, c_white, image_alpha);
 //surface_free(_surf);
 
-// тень под игроком — рисуется здесь (не в Draw GUI), чтобы не отставать от позиции игрока.
-// тень остаётся на земле даже во время полёта — поэтому рисуется по настоящим x,y,
-// а сам игрок ниже рисуется со смещением fly_visual_y (визуальный подъём в воздух).
-// Пропадает, пока игрок в хот-спринг бассейне (под водой тени не видно), и пока он летит
-// над пропастью — над тем местом, где нет пола (там просто не на что её отбрасывать)
+// тень под игроком, рисуется здесь (не в Draw GUI), чтобы не отставать от позиции
 var _shadow_in_water = place_meeting(x, y, ChillTriggerO);
 var _shadow_off_floor = flying && !place_meeting(x, y, floor_objects);
 if (!_shadow_in_water && !_shadow_off_floor) {
@@ -35,7 +30,7 @@ if (!_shadow_in_water && !_shadow_off_floor) {
 
 draw_sprite_ext(sprite_index, image_index, x, y + fly_visual_y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
 
-// стрелка направления удара для геймпада — следует по кругу вокруг игрока за правым стиком
+// стрелка направления удара для геймпада
 var _gp = gamepad_index;
 if (variable_global_exists("using_gamepad") && global.using_gamepad && gamepad_is_connected(_gp)) {
     var _rx = gamepad_axis_value(_gp, gp_axisrh);

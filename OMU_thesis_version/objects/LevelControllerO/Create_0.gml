@@ -1,11 +1,11 @@
 
-//for loading game
+// for loading game
 //GameControllerO.apply_pending_inventory_and_powerups();
 
 inventory_applied = false;
 
 
-///settings
+// settings
 min_enemies = 1;
 max_enemies = 10;
 enemy_types = [
@@ -31,44 +31,22 @@ object_types = [
 enemies_spawned = false;
 level_completed = false;
 boss_objects_spawned = false; // отдельный флаг для спавна предметов в комнате босса (см. Step_0.gml)
-//WORLDS
-world_0 = [
-    World_1_Room_1,
-	World_1_Room_1,
-	World_1_Room_3,
-	World_1_Room_4,
-	World_1_Room_5,
-	World_1_Room_6,
-	World_1_Room_7,
-	World_1_ChestRoom,
-	World_1_TransitionRoom,
-	World_1_Boss_Room_Snake,
-	World_1_ChillRoom
-];
-world_1 = [
-];
-world_2 = [
-];
-worlds = [
-    world_0,
-];
-//current state
+// WORLDS
 current_world_index = -1;
 current_world_rooms = [];
 current_room = room;
-//Level Counter
+// level Counter
 //levels_completed = 0;
 //shop_every_n_levels = 6;
-//other
+// other
 slowing_down = false;
-//Functions
-//function change_world()
+// functions
 //{
 //    current_world_index = irandom(array_length(worlds) - 1);
 //    current_world_rooms = worlds[current_world_index];
 //    show_debug_message("World changed to index: " + string(current_world_index));
 //}
-//function change_room()
+// function change_room()
 //{
 //    if (array_length(current_world_rooms) == 0)
 //    {
@@ -163,7 +141,7 @@ function start_level() {
 level_started = false;
 ball_spawned = false;
 
-// сигарета: если этот уровень должен нанести отложенный урон (ставится в GameControllerO.change_room())
+// сигарета: если этот уровень должен нанести отложенный урон
 cigarette_hit_timer = -1;
 if (instance_exists(GameControllerO)
     && variable_instance_exists(GameControllerO, "cigarette_pending_hit")

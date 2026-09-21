@@ -1,6 +1,6 @@
 
 
-//pause
+// pause
 
 if (GameControllerO.game_paused)
 {
@@ -14,7 +14,7 @@ if (GameControllerO.game_paused)
     exit;
 }
 
-// откинут шипами PuffFishO — на это время своя логика движения/AI отключена
+// откинут шипами PuffFishO, на это время своя логика движения/AI отключена
 if (puff_stunned) exit;
 
 //if (touching_ball && !suffer_sound_played) {
@@ -29,7 +29,7 @@ if (puff_stunned) exit;
 //}
 
 
-//shake
+// shake
 if (shake_timer > 0) {
     var t = shake_timer / shake_duration;
     var cur = shake_strength * t;
@@ -42,6 +42,25 @@ if (shake_timer > 0) {
 }
 
 // AI
+
+if (instance_exists(PipelineValidationO) && PipelineValidationO.cfg_pathfinder == "flow"
+        && instance_exists(PlayerBallerO) && instance_exists(SetupPathwayO)) {
+	var _cs = SetupPathwayO.cell_size;
+	var _gx = clamp(floor(x / _cs), 0, SetupPathwayO.grid_w - 1);
+	var _gy = clamp(floor(y / _cs), 0, SetupPathwayO.grid_h - 1);
+	var _dir = SetupPathwayO.flow_dir[_gx][_gy];
+
+	target_x = PlayerBallerO.x;
+	target_y = PlayerBallerO.y;
+	var _tx = target_x;
+	var _ty = target_y;
+	if (_dir != -1) {
+		_tx = (_gx + round(lengthdir_x(1, _dir))) * _cs + _cs / 2;
+		_ty = (_gy + round(lengthdir_y(1, _dir))) * _cs + _cs / 2;
+	}
+	direction = point_direction(x, y, _tx, _ty);
+	speed = (point_distance(x, y, _tx, _ty) > 0.5) ? 0.5 * path_spd_scale : 0;
+}
 
 if instance_exists(PlayerBallerO){
 
@@ -56,7 +75,7 @@ if instance_exists(PlayerBallerO){
 	        }
 	        cc.add_kill();
 	    }
-	    // kopilka powerup — шанс 30% на 1.5x яблок
+	    // kopilka powerup, шанс 30% на 1.5x яблок
 	    if (instance_exists(KopilkaPowerUpO)) {
 	        if (random(1) < 0.3) {
 	            apple_count = ceil(apple_count * 1.5);
@@ -73,15 +92,15 @@ if instance_exists(PlayerBallerO){
 	}
 
 
-	//collision with ball
+	// collision with ball
 
 	/*
 	if (place_meeting(x,y,BulletBounceO)) {
 		if (!touching_ball) {
 			audio_play_sound(Enemy_Hit_Snd,0,0)
-			shake = 3 //shake
+			shake = 3 // shake
 			shake_timer = 10 
-			hp -= 1.5;             // наносим урон только один раз
+			hp -= 1.5; // наносим урон только один раз
 			touching_ball = true; // помечаем что касание уже началось
 		}
 	}

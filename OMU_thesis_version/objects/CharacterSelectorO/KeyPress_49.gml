@@ -1,4 +1,4 @@
-//creating PlayerInvalid
+// creating PlayerInvalid
 if instance_exists(PlayerGurlO){
 	instance_create_layer(PlayerGurlO.x,PlayerGurlO.y,"PlayerL",PlayerInvalidO)
 	instance_create_layer(PlayerGurlO.x,PlayerGurlO.y,"TaggunL",TaggunO)

@@ -12,7 +12,7 @@ if (popped) {
     exit;
 }
 
-// squash stretch — медленное дыхание
+// squash stretch, медленное дыхание
 float_timer += 0.02;
 var breath_target_x = sin(float_timer) * 0.15 + 1;
 var breath_target_y = cos(float_timer) * 0.15 + 1;

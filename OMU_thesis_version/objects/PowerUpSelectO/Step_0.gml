@@ -46,7 +46,7 @@ for (var i = 0; i < n; i++) {
     item_angle_spd[i] += (angle_target - item_angle[i]) * 0.25;
     item_angle_spd[i] *= 0.6;
     item_angle[i] += item_angle_spd[i];
-    // цвет — выбранный остаётся белым
+    // цвет, выбранный остаётся белым
     if (selection_done && selected_index == i) {
         item_white[i] = 1;
     } else if (selection_done && selected_index != i) {
@@ -60,7 +60,7 @@ for (var i = 0; i < n; i++) {
 	if (!selection_done && hovered && !gp_active && mouse_check_button_pressed(mb_left)) {
 	    select_powerup(i);
 	}
-    // масштаб — выбранный не увеличивается
+    // масштаб, выбранный не увеличивается
     if (!selection_done) {
         var scale_target = hovered ? 1 : 0.5;
         item_scale_spd[i] += (scale_target - item_scale[i]) * 0.3;
@@ -88,15 +88,14 @@ for (var i = 0; i < n; i++) {
 	item_glow_angle[i] += 0.5;
 }
 
-// геймпад — навигация влево/вправо и подтверждение кнопкой A
-// пока павер апы поднимаются снизу — выбирать нельзя вовсе
+// геймпад, навигация влево/вправо и подтверждение кнопкой
 if (gp_active && !selection_done && entry_done) {
     var _nav_x = gp_read_nav(_gp);
     var _nav_edge = (_nav_x != 0) && (gp_prev_nav_x == 0);
     gp_prev_nav_x = _nav_x;
     if (_nav_edge) {
         if (!gp_nav_active) {
-            // первое нажатие влево/вправо просто включает выбор, стартуя с центрального павер апа
+            // первое нажатие влево/вправо просто включает выбор
             gp_nav_active = true;
             gp_focus_index = floor((n - 1) * 0.5);
         } else {
@@ -108,7 +107,7 @@ if (gp_active && !selection_done && entry_done) {
     }
 }
 
-// exit анимация — тряска и подъём одновременно
+// exit анимация, тряска и подъём одновременно
 if (selection_done) {
     // тряска
     if (exit_shake_timer > 0) {

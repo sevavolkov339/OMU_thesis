@@ -1,14 +1,14 @@
 // ===== UI ОТСТУПЫ И СПРАЙТЫ =====
 pause_alpha = 0;
 pause_fade_speed = 0.12;
-ui_margin = 15;           // отступ от края экрана
-heart_spacing = 15;       // расстояние между сердечками
+ui_margin = 15; // отступ от края экрана
+heart_spacing = 15; // расстояние между сердечками
 heart_sprite = HealthS;
-space_between = 5;        // отступ между сердцами и деньгами
+space_between = 5; // отступ между сердцами и деньгами
 apple_sprite = AppleS;
-money_spacing = 0;        // отступ между яблоком и текстом денег
-ui_alpha = 0;             // текущая прозрачность UI
-ui_fade_speed = 0.08;     // скорость появления/исчезновения UI
+money_spacing = 0; // отступ между яблоком и текстом денег
+ui_alpha = 0; // текущая прозрачность UI
+ui_fade_speed = 0.08; // скорость появления/исчезновения UI
 
 // ===== АНИМАЦИЯ ЯБЛОКА =====
 apple_scale_x = 1;
@@ -18,9 +18,9 @@ apple_target_scale_y = 1;
 apple_y_offset = 0;
 apple_target_y_offset = 0;
 apple_anim_speed = 0.5;
-apple_pop_scale_x = 0.7;    // сжатие по x при подпрыгивании
-apple_pop_scale_y = 1.5;    // растяжение по y при подпрыгивании
-apple_pop_y_offset = -10;   // смещение вверх при подпрыгивании
+apple_pop_scale_x = 0.7; // сжатие по x при подпрыгивании
+apple_pop_scale_y = 1.5; // растяжение по y при подпрыгивании
+apple_pop_y_offset = -10; // смещение вверх при подпрыгивании
 apple_pop_active = false;
 
 // ===== КОМБО =====
@@ -42,16 +42,16 @@ combo_bar_x = 0;
 combo_bar_y = 0;
 combo_alpha = 0;
 combo_fade_speed = 0.05;
-combo_show_zero = false;      // показывать ли ноль после сброса комбо
+combo_show_zero = false; // показывать ли ноль после сброса комбо
 combo_zero_timer = 0;
-combo_zero_duration = 60;     // сколько кадров показывать ноль
+combo_zero_duration = 60; // сколько кадров показывать ноль
 combo_zero_alpha = 0;
 
 // ===== ДЫХАНИЕ UI =====
 breath_timer = 0;
 breath_speed = 0.05;
-breath_amplitude = 1.5;       // сила покачивания
-heart_phase_offset = 0.4;     // сдвиг фазы между элементами
+breath_amplitude = 1.5; // сила покачивания
+heart_phase_offset = 0.4; // сдвиг фазы между элементами
 
 // ===== ПОКАЧИВАНИЕ ПОЛОСЫ КОМБО =====
 bar_wobble_angle = 0;
@@ -71,7 +71,7 @@ heart_angle_speed = [];
 prev_hp = -1;
 
 // ===== СЧЁТЧИК ДЕНЕГ =====
-displayed_money = 0;    // отображаемое значение (плавно догоняет реальное)
+displayed_money = 0; // отображаемое значение (плавно догоняет реальное)
 prev_money = 0;
 
 // ===== АНИМАЦИИ ИНВЕНТАРЯ =====
@@ -121,15 +121,15 @@ pause_eye_sx = 1.0;
 pause_eye_sy = 1.0;
 pause_eye_squash_frame = 0;
 pause_eye_squash_timer = 0;
-pause_eye_squash_fps = 6;       // кадров в секунду для сквоша
+pause_eye_squash_fps = 6; // кадров в секунду для сквоша
 pause_eye_squash_step = 1.0 / pause_eye_squash_fps;
 pause_hovered = false;
 pause_prev_hovered = false;
 pause_eye_text = Text("Pause_Menu_Exit_Text");
 pause_title_text = Text("Pause_Menu_Pause_Text");
-pause_sway_timer = random(pi * 2);  // случайный старт покачивания
+pause_sway_timer = random(pi * 2); // случайный старт покачивания
 pause_wave_timer = 0;
-pause_transitioning = false;    // идёт ли переход в меню
+pause_transitioning = false; // идёт ли переход в меню
 pause_gp_active = false;
 
 // ===== ВОЛНОВОЙ ТЕКСТ ДЛЯ ПАУЗЫ =====

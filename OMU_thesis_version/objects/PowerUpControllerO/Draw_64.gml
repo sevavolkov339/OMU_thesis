@@ -9,11 +9,11 @@
 //for (var i = 0; i < n; i++) {
 //    var _ix = _start_x - i * _spacing;
 //    var _iy = _start_y;
-//    // тень/обводка
+// тень/обводка
 //    draw_sprite_ext(powerups[i].sprite, 0, _ix - 1, _iy, 1, 1, 0, c_black, 1);
 //    draw_sprite_ext(powerups[i].sprite, 0, _ix + 1, _iy, 1, 1, 0, c_black, 1);
 //    draw_sprite_ext(powerups[i].sprite, 0, _ix, _iy - 1, 1, 1, 0, c_black, 1);
 //    draw_sprite_ext(powerups[i].sprite, 0, _ix, _iy + 1, 1, 1, 0, c_black, 1);
-//    // иконка
+// иконка
 //    draw_sprite_ext(powerups[i].sprite, 0, _ix, _iy, 1, 1, 0, c_white, 1);
 //}

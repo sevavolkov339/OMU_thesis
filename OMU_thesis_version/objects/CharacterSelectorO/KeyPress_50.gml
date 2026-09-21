@@ -1,4 +1,4 @@
-//creating PlayerBaller
+// creating PlayerBaller
 if instance_exists(PlayerGurlO){
 	instance_create_layer(PlayerGurlO.x,PlayerGurlO.y,"PlayerL",PlayerBallerO)
 	instance_create_layer(PlayerGurlO.x,PlayerGurlO.y,"BulletsL",BulletBounceO)

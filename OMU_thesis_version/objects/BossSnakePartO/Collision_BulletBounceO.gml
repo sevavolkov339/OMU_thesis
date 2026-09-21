@@ -9,7 +9,7 @@
 //    //shake_duration = 15;
 //    //shake_timer = 15;
 
-//    //// отскок мяча
+// отскок мяча
 //    //with (other) {
 //    //    var surface_normal = collision_normal(x, y, other.id, 8, 2);
 //    //    if (surface_normal != -1) {
@@ -19,7 +19,7 @@
 //    //        var normal_y = lengthdir_y(1, surface_normal);
 //    //        var dot = incident_x * normal_x + incident_y * normal_y;
 //    //        direction = point_direction(0, 0,
-//    //            incident_x - 2 * dot * normal_x,
+// incident_x - 2 * dot * normal_x
 //    //            incident_y - 2 * dot * normal_y);
 //    //        speed *= 0.85;
 //    //    } else {

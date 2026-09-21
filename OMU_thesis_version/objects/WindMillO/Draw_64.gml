@@ -1,4 +1,4 @@
-// силуэт игрока (уже обрезанный по маске мельницы в Draw_0.gml) — рисуется в Draw GUI, поэтому виден всегда поверх всего
+// силуэт игрока, рисуется в Draw GUI, поэтому виден всегда поверх всего
 if (player_behind_mill && surface_exists(silhouette_surf)) {
     var _cam = view_camera[0];
     var _cx = camera_get_view_x(_cam);
@@ -11,8 +11,7 @@ if (player_behind_mill && surface_exists(silhouette_surf)) {
     var _gui_x = (silhouette_origin_x - _cx) * _scale_x;
     var _gui_y = (silhouette_origin_y - _cy) * _scale_y;
 
-    // отключаем билинейную фильтрацию на время отрисовки — иначе при масштабировании края силуэта
-    // могут "смазываться" с соседними прозрачными пикселями и давать видимую окантовку
+    // отключаем билинейную фильтрацию на время отрисовки
     var _prev_filter = gpu_get_texfilter();
     gpu_set_texfilter(false);
     draw_surface_ext(silhouette_surf, _gui_x, _gui_y, _scale_x, _scale_y, 0, c_white, 1);

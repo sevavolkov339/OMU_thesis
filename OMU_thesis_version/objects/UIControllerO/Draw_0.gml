@@ -56,6 +56,54 @@ for (var _i = 0; _i < string_length(money_str); _i++) {
     char_x += string_width(string_char_at(money_str, _i + 1)) + 1;
 }
 
+// ===== СЧЁТЧИК УРОВНЕЙ =====
+if (room == Combat_Room && instance_exists(GameControllerO)) {
+    var _cur_level = GameControllerO.levels_completed + 1;
+    var _remaining = 9 - GameControllerO.levels_completed;
+    var _level_text = "Уровень " + string(_cur_level) + "/10 (осталось " + string(_remaining) + ")";
+    var _lx = cx + CameraControllerO.view_w * 0.5;
+    var _ly = cy + margin;
+    draw_set_font(MainFnt);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_top);
+    draw_set_alpha(ui_alpha);
+    draw_set_color(c_black);
+    draw_text(_lx + 1, _ly, _level_text);
+    draw_text(_lx - 1, _ly, _level_text);
+    draw_text(_lx, _ly + 1, _level_text);
+    draw_text(_lx, _ly - 1, _level_text);
+    draw_set_color(c_white);
+    draw_text(_lx, _ly, _level_text);
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+}
+
+// ===== "SAVE THE GAME" - напоминание для ручных чекпоинтов валидационного прогона =====
+if (instance_exists(GameControllerO)) {
+    var _gc = GameControllerO;
+    var _on_checkpoint = (room == Combat_Room && (_gc.levels_completed == 1 || _gc.levels_completed == 4 || _gc.levels_completed == 8))
+        || (array_length(_gc.boss_rooms) > 0 && room == _gc.boss_rooms[0] && _gc.levels_completed == 10);
+    if (_on_checkpoint) {
+        var _save_text = "SAVE THE GAME";
+        var _save_scale = 2;
+        var _sx = cx + CameraControllerO.view_w * 0.5;
+        var _sy = cy + margin + 16;
+        draw_set_font(MainFnt);
+        draw_set_halign(fa_center);
+        draw_set_valign(fa_top);
+        draw_set_alpha(ui_alpha);
+        draw_set_color(c_black);
+        draw_text_transformed(_sx + 2, _sy, _save_text, _save_scale, _save_scale, 0);
+        draw_text_transformed(_sx - 2, _sy, _save_text, _save_scale, _save_scale, 0);
+        draw_text_transformed(_sx, _sy + 2, _save_text, _save_scale, _save_scale, 0);
+        draw_text_transformed(_sx, _sy - 2, _save_text, _save_scale, _save_scale, 0);
+        draw_set_color(c_red);
+        draw_text_transformed(_sx, _sy, _save_text, _save_scale, _save_scale, 0);
+        draw_set_halign(fa_left);
+        draw_set_valign(fa_top);
+    }
+}
+
 // ===== ИНВЕНТАРЬ =====
 var inv_count_draw = 0;
 if (instance_exists(InventoryControllerO)) {
@@ -88,19 +136,16 @@ if (instance_exists(InventoryControllerO)) {
                 _icon_shake_x = random_range(-_shake_amt, _shake_amt);
                 _icon_shake_y = random_range(-_shake_amt, _shake_amt);
             } else if (_w.fly_state == "cooldown") {
-                // жёсткое мигание без полутонов — цвет всегда либо чистый белый, либо чистый
-                // красный, никакого смешивания; меняется только частота (и во второй части — доля
-                // времени в красном), не сама насыщенность цвета
+                // жёсткое мигание без полутонов, цвет всегда либо чистый белый, либо чистый
                 var _ct = _w.cooldown_timer / _w.cooldown_duration;
                 if (_ct < 0.6) {
-                    // первая часть кулдауна — 50/50 мигание чистым красным, всё быстрее
+                    // первая часть кулдауна, 50/50 мигание чистым красным, всё быстрее
                     var _phase = _ct / 0.6;
                     var _blink_spd = lerp(4, 14, _phase);
                     var _blink_on = (sin(current_time * 0.001 * _blink_spd) >= 0);
                     _icon_tint = _blink_on ? c_red : c_white;
                 } else {
-                    // вторая часть — мигает всё быстрее, но красные вспышки всё короче и реже,
-                    // к концу кулдауна остаётся только чистый белый
+                    // вторая часть, мигает всё быстрее, но красные вспышки всё короче и реже
                     var _phase2 = (_ct - 0.6) / 0.4;
                     var _blink_spd2 = lerp(6, 20, _phase2);
                     var _duty = lerp(0.5, 0.05, _phase2);
@@ -188,7 +233,7 @@ if (instance_exists(ComboControllerO) && combo_alpha > 0) {
         var _slot_size = 16;
         var combo_x = cx + CameraControllerO.view_w - _inv_margin - _slot_size * 0.5;
 
-        // если инвентарь пустой — комбо на уровне сердец, иначе — на уровне денег
+        // если инвентарь пустой, комбо на уровне сердец, иначе, на уровне денег
         var combo_y = (inv_count_draw == 0) ? hearts_y : money_y;
 
         draw_set_font(MainFnt);

@@ -2,7 +2,7 @@ if (flash_active) {
     flash_timer++;
     var _progress = flash_timer / flash_duration; // 0..1
     
-    // интервал мигания уменьшается — становится быстрее
+    // интервал мигания уменьшается, становится быстрее
     var _current_interval = max(1, floor(lerp(6, 1, _progress)));
     
     blink_timer++;

@@ -19,8 +19,8 @@ was_touching_player = false;
 
 kick_cooldown = 0;
 
-// проверяем сохранённое состояние сундука
-if (instance_exists(GameControllerO)) {
+// проверяем сохранённое состояние сундука - не в Combat_Room
+if (room != Combat_Room && instance_exists(GameControllerO)) {
     var _chest_state = GameControllerO.get_current_room_state();
     if (_chest_state != undefined && _chest_state.chest_opened) {
         opened = true;

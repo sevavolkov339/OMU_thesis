@@ -6,9 +6,9 @@ else{
 }
 
 
-//normal collision
+// normal collision
 /*
-//horizontal collision
+// horizontal collision
 if (place_meeting(x+hspeed,y,WallO)) {
 	while(!place_meeting(x+sign(hspeed),y,WallO)){
 		x += sign(hspeed)	
@@ -16,7 +16,7 @@ if (place_meeting(x+hspeed,y,WallO)) {
 	hspeed = 0
 }
 
-//vertical collision
+// vertical collision
 if (place_meeting(x,y+vspeed,WallO)) {
 	while(!place_meeting(x,y+sign(vspeed),WallO)){
 		y += sign(vspeed)	
@@ -38,7 +38,7 @@ if shootTimer > 0{
 	shootTimer --	
 }
 
-//sprite controll
+// sprite controll
 if (x < mouse_x)        
 {
 	sprite_index = PlayerInvalidGoRightS; 

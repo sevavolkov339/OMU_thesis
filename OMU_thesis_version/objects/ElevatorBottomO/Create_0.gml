@@ -1,5 +1,5 @@
 
-//object shake
+// object shake
 shake_strength = 0;
 shake_duration = 1; // 1 чтобы не было деления на ноль
 shake_timer = 0;
@@ -7,7 +7,7 @@ shake_offset_x = 0;
 shake_offset_y = 0;
 
 
-//exit enter logic
+// exit enter logic
 
 event_inherited()
 
@@ -16,7 +16,7 @@ enterable = false;
 white_fade_started = false;
 
 
-///elevator doors
+// elevator doors
 door_height = 10;
 door_width  = 45;
 
@@ -33,7 +33,7 @@ close_distance = 40;
 
 is_vertical = false;
 
-///door functions
+// door functions
 function door_open()
 {
     if (state == 0 && !opened_once)
@@ -49,23 +49,23 @@ function door_close()
         state = 3;
 }
 
-/// camera
+// camera
 camera_triggered = false;
 
-/// cutscenes
+// cutscenes
 //enter_cutscene = "ElevatorEnterTop";
 
-/// lift cutscene
+// lift cutscene
 lift_cutscene_active = false;
 lift_cutscene_done   = false; // importnt
 lift_cutscene_step   = 0;
 lift_cutscene_timer  = 0;
 
-/// задержка перед стартом
+// задержка перед стартом
 touch_timer = 0;
 touch_delay = room_speed * 1.5;
 
-///start lift cutscene
+// start lift cutscene
 function start_cutscene_lift()
 {
     lift_cutscene_active = true;
@@ -74,14 +74,14 @@ function start_cutscene_lift()
 	//instance_destroy(WallDeletableBottomO,1)	
 }
 
-//arrive cutscene
+// arrive cutscene
 arrive_active   = false;
 arrive_done     = false;
 arrive_timer    = 0;
 arrive_duration = room_speed * 1.5;
 
 arrive_start_y  = y + 100; // лифт стартует НИЖЕ
-arrive_end_y    = y;       // и приезжает в текущую позицию
+arrive_end_y    = y; // и приезжает в текущую позицию
 
 arrive_effect_stopped = false;
 
@@ -93,7 +93,7 @@ function start_arrive_cutscene()
     arrive_timer  = 0;
     y = arrive_start_y;
 
-    // make screen white 
+    // make screen white
     if (instance_exists(EffectsControllerO))
     {
         with (EffectsControllerO)
@@ -105,14 +105,13 @@ function start_arrive_cutscene()
     }
 }
 
-//other
+// other
 
 
 
-// visibility
 image_alpha = 0;
 fade_speed = 0.05;
 
-/// state flags
+// state flags
 player_inside = false;
 used = false; 

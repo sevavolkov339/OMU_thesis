@@ -5,7 +5,7 @@ function LevelGenShape(_shape_index, _gw, _gh) {
 
     switch (_shape_index) {
         case 1:
-            // L-shape - carve out the top-right quadrant
+            // l-shape - carve out the top-right quadrant
             for (var gx = floor(_gw / 2); gx < _gw; gx++) {
                 for (var gy = 0; gy < floor(_gh / 2); gy++) {
                     _mask[gx][gy] = 0;
@@ -31,7 +31,6 @@ function LevelGenShape(_shape_index, _gw, _gh) {
     return _mask;
 }
 
-// rejection-sampling scatter, matches algorithm 1's SCATTER
 function LevelGenScatter(_shape, _gw, _gh, _occupied, _count, _min_spacing) {
     var _placed = [];
     for (var i = 0; i < _count; i++) {
@@ -60,13 +59,11 @@ function LevelGenScatter(_shape, _gw, _gh, _occupied, _count, _min_spacing) {
             array_push(_placed, [_px, _py]);
             _occupied[_px][_py] = true;
         }
-        // otherwise this slot is just skipped, same as Algorithm 1
     }
     return _placed;
 }
 
-// flood fill to the biggest connected open area, so nothing spawns in a
-// sealed-off pocket
+// flood fill to the biggest connected open area, so nothing spawns
 function LevelGenLargestComponent(_shape, _gw, _gh, _wall_grid) {
     var _visited = array_create(_gw);
     for (var gx = 0; gx < _gw; gx++) _visited[gx] = array_create(_gh, false);

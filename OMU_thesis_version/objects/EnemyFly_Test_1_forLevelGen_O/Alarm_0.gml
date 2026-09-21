@@ -1,4 +1,4 @@
-//pause
+// pause
 if (GameControllerO.game_paused) {
     alarm_set(0, 1);
     exit;
@@ -11,8 +11,7 @@ if (puff_stunned) {
 
 if instance_exists(PlayerTestO) {
 
-    // dijkstra - expand outward from this enemy, cheapest reached cell first,
-    // no sense of which direction the player is actually in
+    // dijkstra - expand outward from this enemy, cheapest reached cell first
     var _grid = SetupPathwayO.coarse_grid;
     var _gw = SetupPathwayO.grid_w;
     var _gh = SetupPathwayO.grid_h;

@@ -1,6 +1,6 @@
 
 
-//pause
+// pause
 
 if (GameControllerO.game_paused)
 {
@@ -14,10 +14,10 @@ if (GameControllerO.game_paused)
     exit;
 }
 
-// откинут шипами PuffFishO — на это время своя логика движения/AI отключена
+// откинут шипами PuffFishO, на это время своя логика движения/AI отключена
 if (puff_stunned) exit;
 
-//shake
+// shake
 if (shake_timer > 0) {
     var t = shake_timer / shake_duration;
     var cur = shake_strength * t;
@@ -31,7 +31,6 @@ if (shake_timer > 0) {
 
 // AI
 
-// just read the stored direction for this cell, no per-enemy search
 if (instance_exists(PlayerTestO)) {
 	var _cs = SetupPathwayO.cell_size;
 	var _gx = clamp(floor(x / _cs), 0, SetupPathwayO.grid_w - 1);
@@ -59,7 +58,7 @@ if instance_exists(PlayerBallerO){
 	        }
 	        cc.add_kill();
 	    }
-	    // kopilka powerup — шанс 30% на 1.5x яблок
+	    // kopilka powerup, шанс 30% на 1.5x яблок
 	    if (instance_exists(KopilkaPowerUpO)) {
 	        if (random(1) < 0.3) {
 	            apple_count = ceil(apple_count * 1.5);

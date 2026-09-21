@@ -7,7 +7,7 @@ _mx[4] = _sway;
 
 matrix_set(matrix_world, matrix_multiply(_mx, _prev));
 
-// чёрная обводка в 1 пиксель — рисуем со смещением в 4 стороны с тем же xscale, что и сам спрайт
+// чёрная обводка в 1 пиксель
 var _offsets = [[-1,0],[1,0],[0,-1],[0,1]];
 for (var i = 0; i < 4; i++) {
     draw_sprite_ext(sprite_index, image_index,

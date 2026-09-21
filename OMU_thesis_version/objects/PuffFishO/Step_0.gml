@@ -1,5 +1,4 @@
 // враги, которых кинули шипами: сами двигаем/отражаем их от стен и гасим скорость
-// (собственная логика движения врага в это время отключена флагом puff_stunned)
 if (!GameControllerO.game_paused) {
     for (var _kbi = array_length(puff_kb_list) - 1; _kbi >= 0; _kbi--) {
         var _kb = puff_kb_list[_kbi];
@@ -40,8 +39,7 @@ if (!GameControllerO.game_paused) {
                 y = _ny;
             }
             speed *= other.puff_kb_decay;
-            // трясём всё время, пока летит от отброса — сами поддерживаем таймер тряски,
-            // чтобы не зависеть от того, когда именно каждый враг его сбрасывает
+            // трясём всё время, пока летит от отброса, сами поддерживаем таймер тряски
             shake_strength = 3;
             shake_timer = 6;
         }
@@ -50,8 +48,7 @@ if (!GameControllerO.game_paused) {
         if (_kb.timer <= 0) {
             with (_kb.eid) {
                 puff_stunned = false;
-                // если враг "плавает" вокруг своей точки (например EnemySpitterO) —
-                // переносим эту точку туда, где он оказался, чтобы не было рывка обратно
+                // если враг "плавает" вокруг своей точки (например EnemySpitterO)
                 if (variable_instance_exists(id, "origin_x")) origin_x = x;
                 if (variable_instance_exists(id, "origin_y")) origin_y = y;
             }
@@ -79,7 +76,7 @@ if (squash_wait >= 0) {
 squash_x = ApproachScr(squash_x, 1, 0.05);
 squash_y = ApproachScr(squash_y, 1, 0.05);
 
-// если долго (3 сек) не касалась врагов — сдувается сама
+// если долго (3 сек) не касалась врагов, сдувается сама
 if (puff_inflated && !GameControllerO.game_paused) {
     puff_no_touch_timer++;
     if (puff_no_touch_timer >= puff_deflate_delay) {
@@ -100,7 +97,7 @@ if (puff_inflated && !GameControllerO.game_paused) {
 //    }
 //}
 
-//teleporting
+// teleporting
 if (teleporting) {
     teleport_timer++;
     
@@ -205,7 +202,6 @@ var collision_occurred = false;
 var old_direction = direction;
 
 // wall collision
-// защита от проскальзывания сквозь стену на высокой скорости — проверяем промежуточные точки пути
 var _wall_hit = place_meeting(next_x, next_y, wall);
 if (!_wall_hit && speed > 4) {
     var _wsteps = ceil(speed / 4);
@@ -294,12 +290,12 @@ if (enemy_hit != noone && speed > 0) {
         ShakeScr(enemy_hit, 6, 0.6);
         enemy_hit.touching_ball = true;
 
-        // любое касание врага сбрасывает таймер "давно не касалась" и раздувает ежа, если он ещё сдут
+        // любое касание врага сбрасывает таймер "давно не касалась" и раздувает ежа
         puff_no_touch_timer = 0;
         if (!puff_inflated) {
             puff_on();
         } else {
-            // уже раздута — каждое новое касание тоже откидывает, но слабее, чем самый первый раскрыв
+            // уже раздута, каждое новое касание тоже откидывает, но слабее, чем самый первый
             puff_knock(enemy_hit, puff_kb_force * 0.4);
         }
     }
@@ -357,8 +353,7 @@ if (enemy_hit != noone && speed > 0) {
             x = x + lengthdir_x(safe_dist, old_dir);
             y = y + lengthdir_y(safe_dist, old_dir);
         }
-        // если всё ещё застряли в враге — принудительно выталкиваемся от его центра,
-        // иначе коллизия будет повторяться каждый кадр и скорость угаснет до нуля вместо отскока
+        // если всё ещё застряли в враге, принудительно выталкиваемся от его центра
         var enemy_check2 = instance_place(x, y, EnemyO);
         if (enemy_check2 != noone) {
             var push_dir2 = point_direction(enemy_check2.x, enemy_check2.y, x, y);
@@ -375,7 +370,7 @@ if (enemy_hit != noone) {
     enemy_bounce_immune_timer = 20;
 }
 
-// столкновение с другим мячом — эффект только в момент начала касания
+// столкновение с другим мячом, эффект только в момент начала касания
 var _touching_bullet_now = false;
 with (BulletBounceO) {
     if (id != other.id && speed > 1.5 && other.speed > 1.5) {
@@ -389,8 +384,7 @@ with (BulletBounceO) {
                 other.direction = (_dir + 180) mod 360;
                 other.touching_bullet = true;
 
-                // физически расталкиваем оба объекта, чтобы они гарантированно разошлись за этот же кадр
-                // (но не сквозь стену — проверяем перед тем, как реально сдвинуть)
+                // физически расталкиваем оба объекта
                 var _overlap = _combined_radius - _dist;
                 if (_overlap > 0) {
                     var _push = _overlap * 0.5 + 1;

@@ -15,7 +15,7 @@ if (!instance_exists(owner)) {
     exit;
 }
 
-// вектор от йойо к игроку (игрок поднимается на fly_visual_y во время полёта — верёвка следует за ним)
+// вектор от йойо к игроку
 var _owner_y = owner.y + owner.fly_visual_y;
 var dx = owner.x - x;
 var dy = _owner_y - y;

@@ -3,7 +3,7 @@
 //speed = 1
 hp = 3
 
-path_spd_scale = 1; // множитель скорости path_start — BossFlyO ставит его выше для своих мух
+path_spd_scale = 1; // множитель скорости path_start, BossFlyO ставит его выше для своих мух
 path = path_add();
 
 target_x = PlayerBallerO.x
@@ -22,21 +22,21 @@ shake_timer = 0;
 shake_offset_x = 0;
 shake_offset_y = 0;
 
-//collision logic
+// collision logic
 touching_ball = false;
 
-// откинут шипами PuffFishO — своя логика движения на это время отключается
+// откинут шипами PuffFishO, своя логика движения на это время отключается
 puff_stunned = false;
 
-//for effects
+// for effects
 draw_ox = 0;
 draw_oy = 0;
 
-//how many apples drops by default
+// how many apples drops by default
 apple_base = 3; 
 
 
-//walk
+// walk
 
 walk_timer = 0;
 walk_speed = 0.08;
@@ -55,7 +55,7 @@ walk_angle = 0;
 walk_y_offset = 0;
 
 
-//bleeding
+// bleeding
 hit_by_shuriken = false;
 bleeding = false;
 bleed_damage_timer = 0;

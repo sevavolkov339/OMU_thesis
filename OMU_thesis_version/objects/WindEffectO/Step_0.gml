@@ -24,7 +24,7 @@ switch (state) {
 var _target_strength = (state == "blowing") ? 1 : 0;
 wind_strength = ApproachScr(wind_strength, _target_strength, 0.04);
 
-// полосы ветра — появляются, пока хоть немного дует
+// полосы ветра, появляются, пока хоть немного дует
 if (wind_strength > 0.05 && array_length(lines) < max_lines) {
     line_spawn_timer++;
     if (line_spawn_timer >= line_spawn_interval) {
@@ -41,7 +41,7 @@ for (var i = array_length(lines) - 1; i >= 0; i--) {
     _l.y += lengthdir_y(_l.spd, _l.dir);
     _l.life--;
 
-    // вытягивается (растёт до полной длины) в первой половине жизни, дальше держит полную длину
+    // вытягивается (растёт до полной длины) в первой половине жизни
     if (_l.stretch) {
         var _grow_t = clamp(1 - (_l.life / (_l.life_max * 0.5)), 0, 1);
         _l.len = lerp(_l.len_max * 0.2, _l.len_max, _grow_t);
@@ -52,13 +52,13 @@ for (var i = array_length(lines) - 1; i >= 0; i--) {
     }
 }
 
-// сдувает игрока и кикаемые предметы, пока дует ветер; идти по ветру — быстрее, против ветра — медленнее
+// сдувает игрока и кикаемые предметы
 if (wind_strength > 0.01) {
     var _push = wind_dir * wind_strength;
 
     if (instance_exists(PlayerBallerO)) {
         var _p = PlayerBallerO;
-        // ускорение/торможение — только когда игрок САМ реально движется (это часть управления)
+        // ускорение/торможение, только когда игрок САМ реально движется
         if (_p.hspeed != 0) {
             if (sign(_p.hspeed) == -wind_dir) {
                 _p.hspeed *= (1 - player_headwind_brake * wind_strength);
@@ -66,15 +66,14 @@ if (wind_strength > 0.01) {
                 _p.hspeed *= (1 + player_tailwind_boost * wind_strength);
             }
         }
-        // а сам пассивный "сдув" — чисто позиционный сдвиг, а не через hspeed/speed,
-        // иначе это лишний раз щекочет анимацию игрока (и, например, разворот сигареты)
+        // а сам пассивный "сдув", чисто позиционный сдвиг, а не через hspeed/speed
         var _pnx = _p.x + _push * player_push;
         if (!place_meeting(_pnx, _p.y, _p.wall)) {
             _p.x = _pnx;
         }
     }
 
-    // предметы — только пока лежат на месте (не летят после удара); летящий предмет ветер не трогает
+    // предметы, только пока лежат на месте (не летят после удара); летящий предмет
     with (BulletBounceO) {
         if (!held && speed <= min_speed) {
             var _nx = x + _push * other.item_push;

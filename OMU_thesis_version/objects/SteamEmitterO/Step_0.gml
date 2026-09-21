@@ -2,10 +2,7 @@
 //if (emit_timer >= emit_interval) {
 //    emit_timer = 0;
 //    var _p = instance_create_layer(
-//        x + random_range(-emit_width, emit_width),
-//        y,
-//        "HandsL",
-//        SteamParticleO
+// x + random_range(-emit_width, emit_width)
 //    );
 //}
 

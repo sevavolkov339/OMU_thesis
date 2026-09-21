@@ -4,7 +4,7 @@ if (GameControllerO.carried_object == noone) {
 }
 carried_obj_type = GameControllerO.carried_object;
 GameControllerO.carried_object = noone;
-// целевая позиция — где спавним объект
+// целевая позиция, где спавним объект
 target_x = x;
 target_y = y;
 // определяем ближайший край экрана и стартовую позицию руки

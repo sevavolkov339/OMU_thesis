@@ -1,10 +1,10 @@
-//pause
+// pause
 
 if (GameControllerO.game_paused) exit;
 
 
 
-//camera shake
+// camera shake
 if (cam_shake_time > 0)
 {
     cam_shake_time--;
@@ -17,7 +17,7 @@ else
     cam_shake_oy = 0;
 }
 
-//obj shake
+// obj shake
 var key = ds_map_find_first(obj_shakes);
 while (key != undefined)
 {
@@ -50,7 +50,7 @@ while (key != undefined)
     key = ds_map_find_next(obj_shakes, key);
 }
 
-//elevator effect
+// elevator effect
 if (elevator_effect)
 {
     if (random(1) < spawn_chance && array_length(lines) < max_lines)
@@ -89,7 +89,7 @@ for (var i = array_length(lines) - 1; i >= 0; i--)
 
 
 
-//white screen update
+// white screen update
 if (white_alpha != white_target)
 {
     if (white_alpha < white_target)

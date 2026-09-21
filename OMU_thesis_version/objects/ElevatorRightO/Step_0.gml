@@ -1,4 +1,4 @@
-//object shake
+// object shake
 
 if (shake_timer > 0) {
     var t = shake_timer / shake_duration;
@@ -14,11 +14,11 @@ if (shake_timer > 0) {
 
 //event_inherited();
 
-//pause
+// pause
 
 if (GameControllerO.game_paused) exit;
 
-//arrive cutscene
+// arrive cutscene
 if (arrive_active)
 {
 	image_alpha = 1
@@ -36,7 +36,7 @@ if (arrive_active)
         //ShakeScr(self, 10, 0.3);
     }
 
-    //turn effect off 
+    // turn effect off
     if (!arrive_effect_stopped && t >= 0.5)
     {
         arrive_effect_stopped = true;
@@ -68,7 +68,7 @@ event_inherited();
 
 
 
-///doors anim
+// doors anim
 is_vertical = (image_angle == 90 || image_angle == 270);
 
 switch (state)
@@ -94,7 +94,7 @@ switch (state)
     break;
 }
 
-/// cutscene launch
+// cutscene launch
 if (LevelControllerO.level_completed && !lift_cutscene_active && !lift_cutscene_done)
 {
     if (place_meeting(x, y, PlayerBallerO))
@@ -104,7 +104,7 @@ if (LevelControllerO.level_completed && !lift_cutscene_active && !lift_cutscene_
         if (touch_timer >= touch_delay)
         {
             start_cutscene_lift();
-            lift_cutscene_done = true; //dont repeat
+            lift_cutscene_done = true; // dont repeat
         }
     }
     else
@@ -113,7 +113,7 @@ if (LevelControllerO.level_completed && !lift_cutscene_active && !lift_cutscene_
     }
 }
 
-/// lift cutscene
+// lift cutscene
 if (lift_cutscene_active)
 {
     lift_cutscene_timer++;

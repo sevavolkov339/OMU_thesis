@@ -1,4 +1,4 @@
-//// Create
+// create
 r = random_range(2, 6);
 
 

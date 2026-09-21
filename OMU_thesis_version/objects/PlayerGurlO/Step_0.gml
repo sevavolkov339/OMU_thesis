@@ -1,10 +1,10 @@
-//input
+// input
 rightKey = keyboard_check(vk_right) or keyboard_check(ord("D"))
 leftKey = keyboard_check(vk_left) or keyboard_check(ord("A"))
 upKey = keyboard_check(vk_up) or keyboard_check(ord("W"))
 downKey = keyboard_check(vk_down) or keyboard_check(ord("S"))
 
-//movement 
+// movement
 hspeed = (rightKey - leftKey) * moveSpd
 vspeed = (downKey - upKey) * moveSpd
 
@@ -19,7 +19,7 @@ else{
 	speed = 0	
 }
 
-//horizontal collision
+// horizontal collision
 if (place_meeting(x+hspeed,y,WallO)) {
 	while(!place_meeting(x+sign(hspeed),y,WallO)){
 		x += sign(hspeed)	
@@ -27,7 +27,7 @@ if (place_meeting(x+hspeed,y,WallO)) {
 	hspeed = 0
 }
 
-//vertical collision
+// vertical collision
 if (place_meeting(x,y+vspeed,WallO)) {
 	while(!place_meeting(x,y+sign(vspeed),WallO)){
 		y += sign(vspeed)	
@@ -35,7 +35,7 @@ if (place_meeting(x,y+vspeed,WallO)) {
 	vspeed = 0
 }
 
-//hammer 
+// hammer
 
 if mouse_check_button_pressed(mb_left) and stunAfterHammerTimer == 0{
 	if sprite_index == PlayerGurlGoRightS and image_xscale == 1{
@@ -64,7 +64,7 @@ if stunAfterHammerTimer > 0{
 	speed = 0
 }
 
-//sprite controll
+// sprite controll
 
 if stunAfterHammerTimer == 0{
 

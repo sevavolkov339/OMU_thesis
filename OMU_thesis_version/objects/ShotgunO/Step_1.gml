@@ -20,7 +20,7 @@ if (GameControllerO.game_paused)
 {
     if (!paused)
     {
-        // сохранить состояние один раз 
+        // сохранить состояние один раз
         saved_speed = speed;
         saved_direction = direction;
         paused = true;

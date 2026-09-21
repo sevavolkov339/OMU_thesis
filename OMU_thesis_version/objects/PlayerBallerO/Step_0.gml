@@ -1,7 +1,7 @@
 
 
 
-//pause
+// pause
 
 
 if (GameControllerO.game_paused)
@@ -46,7 +46,7 @@ if (state == PlayerState.CUTSCENE)
 {
 	if (GameControllerO.game_paused) exit;
     step_cutscene();
-    exit; //
+    exit;
 }
 
 
@@ -65,7 +65,7 @@ image_xscale = sign(image_xscale) * kick_squash_x;
 image_yscale = kick_squash_y;
 
 
-//water splah control
+// water splah control
 var _now_in_water = place_meeting(x, y, ChillTriggerO);
 if (_now_in_water != was_in_water) {
     instance_create_layer(x, y + 4, "UIL", WaterSplashEffectO);
@@ -78,10 +78,7 @@ was_in_water = _now_in_water;
 
 step_play();
 
-// полёт на крыльях только что закончился — если под ногами больше нет пола, красиво
-// исчезаем и возвращаемся туда, где в последний раз стояли на земле.
-// падать за пределы уровня можно только в обычных боевых комнатах — в магазине,
-// чилл-комнате, сундуке и любых других (титры, боссы, меню и т.д.) это отключено
+// полёт на крыльях только что закончился, если под ногами больше нет пола, красиво
 if (was_flying && !flying) {
     var _in_level_room = instance_exists(GameControllerO) && (
         GameControllerO.world_stage == "levels1" || GameControllerO.world_stage == "levels2" || GameControllerO.world_stage == "levels3"
@@ -97,7 +94,7 @@ if (was_flying && !flying) {
 }
 was_flying = flying;
 
-// удар геймпадом — RB / R1
+// удар геймпадом, RB / R1
 var _gp = gamepad_index;
 if (gamepad_is_connected(_gp) && gamepad_button_check_pressed(_gp, gp_shoulderr) && !place_meeting(x, y, ChillTriggerO) && !flying && kick_cooldown <= 0) {
     kick_cooldown = room_speed * 0.3;
@@ -121,7 +118,7 @@ if (gamepad_is_connected(_gp) && gamepad_button_check_pressed(_gp, gp_shoulderr)
             var sndd = audio_play_sound(Ball_Kick_Snd, 0, 0);
             audio_sound_pitch(sndd, random_range(0.8, 1.3));
             speed = 4;
-            // pills powerup — удар на 10% сильнее
+            // pills powerup, удар на 10% сильнее
             if (instance_exists(PillsPowerUpO)) {
                 speed *= 1.1;
             }
@@ -152,7 +149,7 @@ if (keyboard_check_pressed(ord("N"))) {
     GameControllerO.change_room();
 }
 
-//boss
+// boss
 
 if (keyboard_check_pressed(ord("B"))) {
     room_goto(World_1_Boss_Room_Fly);

@@ -1,4 +1,4 @@
-//shake
+// shake
 if (shake_timer > 0) {
     var t = shake_timer / shake_duration;
     var cur = shake_strength * t;
@@ -10,7 +10,7 @@ if (shake_timer > 0) {
     shake_offset_y = 0;
 }
 
-//pause
+// pause
 
 if (GameControllerO.game_paused)
 {
@@ -24,7 +24,7 @@ if (GameControllerO.game_paused)
     exit;
 }
 
-// откинут шипами PuffFishO — на это время своя логика движения/AI отключена
+// откинут шипами PuffFishO, на это время своя логика движения/AI отключена
 if (puff_stunned) exit;
 
 // AI
@@ -53,15 +53,15 @@ if instance_exists(PlayerBallerO){
 	}
 
 
-	//collision with ball
+	// collision with ball
 
 	/*
 	if (place_meeting(x,y,BulletBounceO)) {
 		if (!touching_ball) {
 			audio_play_sound(Enemy_Hit_Snd,0,0)
-			shake = 3 //shake
+			shake = 3 // shake
 			shake_timer = 10 
-			hp -= 1.5;             // наносим урон только один раз
+			hp -= 1.5; // наносим урон только один раз
 			touching_ball = true; // помечаем что касание уже началось
 		}
 	}

@@ -35,7 +35,7 @@ if (hp <= 0) {
         }
         cc.add_kill();
     }
-    // kopilka powerup — шанс 30% на 1.5x яблок
+    // kopilka powerup, шанс 30% на 1.5x яблок
     if (instance_exists(KopilkaPowerUpO)) {
         if (random(1) < 0.3) {
             apple_count = ceil(apple_count * 1.5);
@@ -53,12 +53,12 @@ if (hp <= 0) {
     exit;
 }
 
-// откинут шипами PuffFishO — на это время своя логика движения отключена
+// откинут шипами PuffFishO, на это время своя логика движения отключена
 if (puff_stunned) exit;
 
 
 
-//// тряска постоянная
+// тряска постоянная
 //shake_timer++;
 //shake_x = sin(shake_timer * 0.8) * shake_amt + random_range(-0.5, 0.5);
 //shake_y = cos(shake_timer * 1.1) * shake_amt + random_range(-0.5, 0.5);

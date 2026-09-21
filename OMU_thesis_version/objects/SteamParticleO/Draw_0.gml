@@ -1,5 +1,5 @@
 //var _t = lifetime / max_lifetime; // 0 = только появился, 1 = исчезает
-//// плотность dithering: появляется и исчезает
+// плотность dithering: появляется и исчезает
 //var _density;
 //if (_t < 0.2) {
 //    _density = _t / 0.2; // нарастает
@@ -7,19 +7,16 @@
 //    _density = 1 - ((_t - 0.2) / 0.8); // убывает
 //}
 
-//// байер матрица 4x4
+// байер матрица 4x4
 //var _bayer = [
-//     0,  8,  2, 10,
-//    12,  4, 14,  6,
-//     3, 11,  1,  9,
-//    15,  7, 13,  5
+// 0, 8, 2, 10
 //];
 
 //var _r = radius;
 //draw_set_color(c_white);
 //draw_set_alpha(1);
 
-//// сначала собираем какие пиксели белые
+// сначала собираем какие пиксели белые
 //var _white_pixels = ds_grid_create(ceil(_r * 2) + 4, ceil(_r * 2) + 4);
 //ds_grid_clear(_white_pixels, false);
 //var _ox = floor(x - _r) - 1;
@@ -44,7 +41,7 @@
 //    }
 //}
 
-//// рисуем чёрную обводку — соседи белых пикселей которые сами не белые
+// рисуем чёрную обводку, соседи белых пикселей которые сами не белые
 //draw_set_color(c_black);
 //var _dirs = [[-1,0],[1,0],[0,-1],[0,1]];
 //for (var _py = y - _r - 1; _py <= y + _r + 1; _py++) {
@@ -56,7 +53,7 @@
 //            _is_white = ds_grid_get(_white_pixels, _gx, _gy);
 //        }
 //        if (!_is_white) {
-//            // проверяем соседей
+// проверяем соседей
 //            var _has_white_neighbor = false;
 //            for (var _d = 0; _d < 4; _d++) {
 //                var _nx = _gx + _dirs[_d][0];
@@ -75,7 +72,7 @@
 //    }
 //}
 
-//// рисуем белые пиксели
+// рисуем белые пиксели
 //draw_set_color(c_white);
 //for (var _py = y - _r; _py <= y + _r; _py++) {
 //    for (var _px = x - _r; _px <= x + _r; _px++) {
@@ -94,7 +91,7 @@
 //draw_set_alpha(1);
 //draw_set_color(c_white);
 
-// прозрачность — исчезает чем выше
+// прозрачность, исчезает чем выше
 var _t = clamp((start_y - y) / max_height, 0, 1);
 var _alpha = 1 - _t;
 draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, 0, c_white, _alpha);

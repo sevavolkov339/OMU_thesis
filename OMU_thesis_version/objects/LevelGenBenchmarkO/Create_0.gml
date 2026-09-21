@@ -5,7 +5,6 @@ methods = [
 ];
 
 // fine steps up to the actual cap for this room, plus 50/100 to see
-// what happens once you ask for more than physically fits
 wall_targets = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 50, 100];
 trials_per_config = 30;
 

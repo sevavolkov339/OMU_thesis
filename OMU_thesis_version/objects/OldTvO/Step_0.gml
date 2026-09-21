@@ -19,7 +19,7 @@ if (speed > max_speed) speed = max_speed;
 //    }
 //}
 
-//teleporting
+// teleporting
 if (teleporting) {
     teleport_timer++;
     
@@ -112,7 +112,6 @@ var collision_occurred = false;
 var old_direction = direction;
 
 // wall collision
-// защита от проскальзывания сквозь стену на высокой скорости — проверяем промежуточные точки пути
 var _wall_hit = place_meeting(next_x, next_y, wall);
 if (!_wall_hit && speed > 4) {
     var _wsteps = ceil(speed / 4);
@@ -253,8 +252,7 @@ if (enemy_hit != noone && speed > 0) {
             x = x + lengthdir_x(safe_dist, old_dir);
             y = y + lengthdir_y(safe_dist, old_dir);
         }
-        // если всё ещё застряли в враге — принудительно выталкиваемся от его центра,
-        // иначе коллизия будет повторяться каждый кадр и скорость угаснет до нуля вместо отскока
+        // если всё ещё застряли в враге, принудительно выталкиваемся от его центра
         var enemy_check2 = instance_place(x, y, EnemyO);
         if (enemy_check2 != noone) {
             var push_dir2 = point_direction(enemy_check2.x, enemy_check2.y, x, y);
@@ -271,7 +269,7 @@ if (enemy_hit != noone) {
     enemy_bounce_immune_timer = 20;
 }
 
-// столкновение с другим мячом — эффект только в момент начала касания
+// столкновение с другим мячом, эффект только в момент начала касания
 var _touching_bullet_now = false;
 with (BulletBounceO) {
     if (id != other.id && speed > 1.5 && other.speed > 1.5) {
@@ -285,8 +283,7 @@ with (BulletBounceO) {
                 other.direction = (_dir + 180) mod 360;
                 other.touching_bullet = true;
 
-                // физически расталкиваем оба объекта, чтобы они гарантированно разошлись за этот же кадр
-                // (но не сквозь стену — проверяем перед тем, как реально сдвинуть)
+                // физически расталкиваем оба объекта
                 var _overlap = _combined_radius - _dist;
                 if (_overlap > 0) {
                     var _push = _overlap * 0.5 + 1;

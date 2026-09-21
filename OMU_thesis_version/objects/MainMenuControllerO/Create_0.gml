@@ -92,11 +92,11 @@ settings_text = Text("Main_Menu_Settings_Button_Text");
 stuff_text    = Text("Main_Menu_Diary_Button_Text");
 exit_text     = Text("Death_Screen_Exit_Button_Text");
 
-// "нажмите любую кнопку" — дышащий текст под глазом, пока меню не раскрыто
+// "нажмите любую кнопку", дышащий текст под глазом, пока меню не раскрыто
 press_any_button_text = Text("Main_Menu_Press_Any_Button_Text");
 breathe_timer = 0;
 
-// геймпад — навигация по меню
+// геймпад, навигация по меню
 gp_active        = false;
 gp_focus         = "eye"; // eye / settings / stuff / exit
 gp_save_focus    = 0;
@@ -149,9 +149,12 @@ function select_save_file(_i) {
     GameControllerO.run_active = true;
     if (GameControllerO.save_exists(_i)) {
         GameControllerO.load_game(_i);
+        // LevelControllerO обычно разбирает pending_inventory_names/pending_powerup_names
+        GameControllerO.apply_pending_inventory_and_powerups();
     } else {
         GameControllerO.save_slot = _i;
         GameControllerO.reset_run();
+        if (instance_exists(PipelineValidationO) && variable_instance_exists(PipelineValidationO, "start_new_run")) PipelineValidationO.start_new_run();
     }
     if (instance_exists(FadeTransitionO)) {
         FadeTransitionO.fade_in(0.03);

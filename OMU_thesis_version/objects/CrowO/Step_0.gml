@@ -5,19 +5,18 @@ if (!instance_exists(owner)) {
     exit;
 }
 
-// если игрок обогнал ворону и оказался по другую сторону от неё — она перелетает на
-// противоположную сторону от игрока (гистерезис, чтобы не дёргалась на границе)
+// если игрок обогнал ворону и оказался по другую сторону от неё, она перелетает
 var _dx_player_crow = owner.x - x;
 if (_dx_player_crow < -perch_switch_margin) {
-    perch_side = 1; // игрок левее вороны — ворона летает справа от игрока
+    perch_side = 1; // игрок левее вороны, ворона летает справа от игрока
 } else if (_dx_player_crow > perch_switch_margin) {
-    perch_side = -1; // игрок правее вороны — ворона летает слева от игрока
+    perch_side = -1; // игрок правее вороны, ворона летает слева от игрока
 }
 var _perch_angle = (perch_side > 0 ? 0 : 180) + perch_angle_jitter;
 perch_offset_x = lengthdir_x(perch_dist, _perch_angle);
 perch_offset_y = lengthdir_y(perch_dist, _perch_angle);
 
-// "домашняя" точка — рядом с игроком, с лёгким покачиванием в стороны, а не полёт по кругу
+// "домашняя" точка, рядом с игроком, с лёгким покачиванием в стороны, а не полёт
 wander_phase_x += wander_speed_x;
 wander_phase_y += wander_speed_y;
 var _home_x = owner.x + perch_offset_x + sin(wander_phase_x) * wander_amp;
@@ -25,7 +24,7 @@ var _home_y = owner.y + owner.fly_visual_y + perch_offset_y + cos(wander_phase_y
 
 switch (state) {
     case "hover":
-        // подтягивается к своей точке с небольшой задержкой, а не мгновенно телепортируется за игроком
+        // подтягивается к своей точке с небольшой задержкой
         x = lerp(x, _home_x, follow_lerp);
         y = lerp(y, _home_y, follow_lerp);
 
@@ -46,7 +45,7 @@ switch (state) {
     break;
 
     case "charging":
-        // враг пропал или убежал слишком далеко — прекращаем погоню и летим домой
+        // враг пропал или убежал слишком далеко, прекращаем погоню и летим домой
         if (!instance_exists(target_enemy) || point_distance(x, y, target_enemy.x, target_enemy.y) > vision_radius * 5) {
             target_enemy = noone;
             state = "returning";
@@ -58,11 +57,9 @@ switch (state) {
         y += lengthdir_y(charge_speed, _dir);
         image_xscale = (lengthdir_x(1, _dir) >= 0) ? 1 : -1;
 
-        // урон наносится только здесь, в момент реального касания цели во время самого рывка —
-        // в состояниях hover/returning никакой проверки на урон нет вообще, так что простое
-        // "соприкосновение" с враг вне удара никогда не наносит урон
+        // урон наносится только здесь
         if (point_distance(x, y, target_enemy.x, target_enemy.y) <= arrive_dist || place_meeting(x, y, target_enemy)) {
-            // долетела — один удар и обратно на исходную точку
+            // долетела, один удар и обратно на исходную точку
             audio_play_sound(Enemy_Hit_Snd, 0, 0);
             var _dmg = damage;
             if (instance_exists(InventoryControllerO) && InventoryControllerO.has_item("Beer")) _dmg *= 2;
@@ -82,7 +79,7 @@ switch (state) {
         y += lengthdir_y(return_speed, _dir2);
         image_xscale = (lengthdir_x(1, _dir2) >= 0) ? 1 : -1;
 
-        // вернулась — можно снова искать врагов и бить в них, пока они в радиусе
+        // вернулась, можно снова искать врагов и бить в них, пока они в радиусе
         if (point_distance(x, y, _home_x, _home_y) <= arrive_dist) {
             state = "hover";
         }

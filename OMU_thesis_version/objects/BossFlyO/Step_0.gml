@@ -1,11 +1,20 @@
+// восстановление позиции игрока после загрузки сохранения - отложено сюда из Create_0
+if (!is_undefined(boss_restore_player)) {
+    if (instance_exists(PlayerBallerO)) {
+        PlayerBallerO.x = boss_restore_player.x;
+        PlayerBallerO.y = boss_restore_player.y;
+    }
+    boss_restore_player = undefined;
+}
+
 if (GameControllerO.game_paused) exit;
 
-// смерть — катсцена
+// смерть, катсцена
 if (hp <= 0 && !dying) {
     layer = layer_get_id("DeadL");
     dying = true;
     if (audio_is_playing(buzz_snd)) audio_stop_sound(buzz_snd); // жужжание прекращается, как только начинается смерть
-    // она снова трясётся, пока умирает — землетрясение опять играет на фоне
+    // она снова трясётся, пока умирает, землетрясение опять играет на фоне
     quake_deep_snd = audio_play_sound(EarthquakeDeepSnd, 0, true);
     quake_snd = audio_play_sound(EarthquakeSnd, 0, true);
     quake_playing = true;
@@ -33,7 +42,7 @@ if (dying) {
     die_white = min(die_white + 0.004, 1);
     if (image_index >= image_number - 1) {
         die_white = 1;
-        room_goto(World_1_TransitionRoom);
+        room_goto(World_1_WIPRoom);
     }
     exit;
 }
@@ -49,15 +58,7 @@ if (shake_timer > 0) {
     shake_y = 0;
 }
 
-// сбрасываем touching_ball только когда предмет ПОЛНОСТЬЮ разошёлся с боссом — специально
-// без фильтра по скорости движения предмета. Муха сама постоянно летает, поэтому предмет
-// (камень/бумеранг/сюрикен) может "застрять" внутри неё и без конца отскакивать на месте —
-// с каждым отскоком его скорость гаснет (*0.85) и в какой-то момент падает ниже порога
-// "движется", но физически он всё ещё касается босса. Если сбрасывать touching_ball по
-// скорости — это читалось бы как "касание прекратилось и началось заново" на каждом таком
-// кадре и наносило урон бесконечно, пока предмет не выпадет из босса. Проверка по чистому
-// перекрытию (без скорости) от этого не страдает — сама муха почти никогда не стоит на месте,
-// поэтому реального "вечно лежащего на боссе предмета" сценария тут не бывает
+// сбрасываем touching_ball только когда предмет ПОЛНОСТЬЮ разошёлся с боссом
 if (!place_meeting(x, y, BulletBounceO) && !place_meeting(x, y, YoYoO)) {
     touching_ball = false;
 }

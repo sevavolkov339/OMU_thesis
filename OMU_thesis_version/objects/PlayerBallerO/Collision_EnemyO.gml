@@ -1,6 +1,6 @@
 //if (GameControllerO.game_paused) exit;
 
-//// Если игрок мигает — неуязвим, игнорируем столкновение
+// если игрок мигает, неуязвим, игнорируем столкновение
 //if (blink_time > 0) exit;
 
 //GameControllerO.slow_mo(0.6, 0.3);
@@ -14,7 +14,7 @@
 //knockback_spd_y = lengthdir_y(kb, dir);
 //audio_play_sound(Player_Hit_Snd, 0, 0);
 
-//// Мигание
+// мигание
 //image_alpha = 1;
 //blink_time = room_speed * 1.5;
 //alarm[1] = 1;

@@ -16,7 +16,7 @@ for (var i = 0; i < n; i++) {
         draw_alpha = max(item_scale[i], 0);
     }
     var col = merge_colour(c_black, c_white, item_white[i]);
-	//глоу
+	// глоу
 	if (item_glow_alpha[i] > 0.01) {
 	    var _gmx = matrix_build(ix + draw_float_x, iy + draw_float_y, 0, 0, 0, item_glow_angle[i], draw_scale, draw_scale, 1);
 	    var _gprev = matrix_get(matrix_world);
@@ -37,12 +37,12 @@ for (var i = 0; i < n; i++) {
     draw_sprite_ext(items[i].sprite, 0, 0, 0, 1, 1, 0, col, draw_alpha);
     matrix_set(matrix_world, _prev);
 
-    // описание под наведённым павер апом — позиция фиксированная, не зависит от левитации/масштаба
+    // описание под наведённым павер апом
     if (!selection_done && was_hovered[i]) {
         draw_item_description(items[i].description, ix, iy + 18);
     }
 
-    // стрелка геймпада над выбранным павер апом — тоже фиксированная позиция, намного ниже/ближе к нему
+    // стрелка геймпада над выбранным павер апом
     if (gp_active && gp_nav_active && !selection_done && i == gp_focus_index) {
         draw_gp_arrow(ix, iy - 20);
     }

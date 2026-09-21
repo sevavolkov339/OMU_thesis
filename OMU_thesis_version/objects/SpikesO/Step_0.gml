@@ -34,7 +34,7 @@ if (instance_exists(PlayerBallerO)) {
 			knockback_spd_y = lengthdir_y(kb, dir);
 			audio_play_sound(Player_Hit_Snd, 0, 0);
 
-			// Мигание
+			// мигание
 			image_alpha = 1;
 			blink_time = room_speed * 1.5;
 			alarm[1] = 1;			

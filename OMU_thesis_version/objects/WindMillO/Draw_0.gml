@@ -1,4 +1,4 @@
-// чёрная обводка в 1 пиксель — рисуем со смещением в 4 стороны (image_index уже учитывает текущий кадр анимации)
+// чёрная обводка в 1 пиксель, рисуем со смещением в 4 стороны
 var _offset = 1;
 var _offsets = [[-_offset,0],[_offset,0],[0,-_offset],[0,_offset]];
 for (var i = 0; i < 4; i++) {
@@ -10,7 +10,7 @@ for (var i = 0; i < 4; i++) {
 // оригинал
 draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white, 1);
 
-// лопасти мельницы поверх башни — тоже с чёрной обводкой в 1 пиксель, вращаются со ступенчатым эффектом
+// лопасти мельницы поверх башни
 var _mill_y = y - 60;
 for (var i = 0; i < 4; i++) {
     draw_sprite_ext(BigMill_MillS, 0,
@@ -19,13 +19,10 @@ for (var i = 0; i < 4; i++) {
 }
 draw_sprite_ext(BigMill_MillS, 0, x, _mill_y, 1, 1, mill_visual_angle, c_white, 1);
 
-// подготовка силуэта игрока — обрезаем его по маске самой мельницы (перекрытие альфа-каналов), без диттеринга.
-// сам вывод происходит в Draw GUI (Draw_64.gml), чтобы силуэт был виден всегда поверх всего.
-// сама мельница (башня + лопасти) при этом продолжает рисоваться как обычно выше, на слое HandsL — тут её видимый рендер не трогаем.
+// подготовка силуэта игрока
 if (player_behind_mill && instance_exists(PlayerBallerO)) {
     var _p = PlayerBallerO;
-    // surface размером точно под квад спрайта игрока (с учётом масштаба) — второй проход блендинга
-    // покрывает тогда весь surface целиком, и от маски мельницы нигде не остаётся "хвостов" за пределами силуэта игрока
+    // surface размером точно под квад спрайта игрока (с учётом масштаба)
     var _sw = max(1, ceil(sprite_get_width(_p.sprite_index) * abs(_p.image_xscale)));
     var _sh = max(1, ceil(sprite_get_height(_p.sprite_index) * abs(_p.image_yscale)));
 
@@ -41,14 +38,12 @@ if (player_behind_mill && instance_exists(PlayerBallerO)) {
     surface_set_target(silhouette_surf);
     draw_clear_alpha(c_black, 0);
 
-    // 1) сначала рисуем чёрный силуэт игрока обычным alpha-блендингом — так прозрачные пиксели
-    // спрайта корректно остаются (0,0,0,0), без "мусорного" цвета в альфа-канале (это и давало странный квадрат по краям)
+    // 1) сначала рисуем чёрный силуэт игрока обычным alpha-блендингом
     draw_sprite_ext(_p.sprite_index, _p.image_index,
         _local_cx, _local_cy,
         _p.image_xscale, _p.image_yscale, 0, c_black, 1);
 
-    // 2) затем накладываем маску мельницы как множитель: результат = силуэт_игрока * альфа_мельницы,
-    // цвет самой мельницы при этом отбрасывается (src=bm_zero)
+    // 2) затем накладываем маску мельницы как множитель
     gpu_set_blendmode_ext(bm_zero, bm_src_alpha);
     draw_sprite_ext(sprite_index, image_index,
         _local_cx + (x - _p.x), _local_cy + (y - _p.y),

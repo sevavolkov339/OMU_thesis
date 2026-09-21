@@ -79,8 +79,7 @@ if (!locked && instance_exists(PlayerBallerO) && place_meeting(x, y, PlayerBalle
     _enter.enter_sprite = PlayerBallerO.sprite_index;
     _enter.enter_subimage = PlayerBallerO.image_index;
     _enter.spin_speed = (PlayerBallerO.sprite_index == PlayerBallerGoLeftS) ? -15 : 15;
-    // последняя дверь сегмента — сама анимация игрока обычная, но без чёрного fade-перехода,
-    // а по её окончании запускается отложенный переход на титульный экран вместо обычной смены комнаты
+    // последняя дверь сегмента, сама анимация игрока обычная, но без чёрного
     _enter.is_segment_final = GameControllerO.is_segment_final_door();
     instance_destroy(PlayerBallerO);
 }

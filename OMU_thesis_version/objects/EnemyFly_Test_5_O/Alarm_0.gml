@@ -1,4 +1,4 @@
-//pause
+// pause
 if (GameControllerO.game_paused) {
     alarm_set(0, 1);
     exit;
@@ -48,7 +48,6 @@ if instance_exists(PlayerTestO) {
             // некуда идти - точка старта уже в пути, просто стоим
         } else {
             // small a* over the waypoint graph - a handful of nodes, not
-            // the whole room cell by cell
             var _gscore = ds_map_create();
             var _from = ds_map_create();
             var _closed = ds_map_create();

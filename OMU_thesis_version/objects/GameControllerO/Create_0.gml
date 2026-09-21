@@ -1,19 +1,19 @@
-//important global variables
+// important global variables
 
 if (!variable_global_exists("pending_inventory_names")) global.pending_inventory_names = undefined;
 if (!variable_global_exists("pending_powerup_names")) global.pending_powerup_names = undefined;
 if (!variable_global_exists("pending_room_name")) global.pending_room_name = undefined;
+if (!variable_global_exists("pending_combat_snapshot")) global.pending_combat_snapshot = undefined;
+if (!variable_global_exists("pending_boss_snapshot")) global.pending_boss_snapshot = undefined;
 
 
 randomise();
 
 
 // обрезает прохождение мира 2 сразу после сегмента w2_levels1 и переключает
-// на комнату World_1_WIPRoom (там текст от разработчика и благодарность за игру).
-// чтобы вернуть обычную структуру мира — просто поставь false.
 demo_cut_after_world_2_1 = true;
 
-//game pause
+// game pause
 game_paused = false;
 function toggle_pause()
 {
@@ -32,17 +32,29 @@ function toggle_pause()
     }
 }
 
-//game saving system
+// game saving system
 
 
 save_slot = -1; // -1 = новая игра без слота, 0/1/2 = выбранный слот
 
+// формат сохранения, "json" остался переключателем для отладки
+save_format = "binary";
+
 function get_save_path(_slot) {
-    return "save_" + string(_slot) + ".json";
+    var _ext = (save_format == "binary") ? "bin" : "json";
+    return "save_" + string(_slot) + "." + _ext;
 }
 
 function save_exists(_slot) {
     return file_exists(get_save_path(_slot));
+}
+
+function save_file_size(_path) {
+    if (!file_exists(_path)) return 0;
+    var _f = file_bin_open(_path, 0);
+    var _size = file_bin_size(_f);
+    file_bin_close(_f);
+    return _size;
 }
 
 //function save_game() {
@@ -65,17 +77,7 @@ function save_exists(_slot) {
 //    }
 
 //    var _save_struct = {
-//        player_hp: player_hp,
-//        player_max_hp: player_max_hp,
-//        player_money: player_money,
-//        levels_completed: levels_completed,
-//        run_time: run_time,
-//        current_world_index: current_world_index,
-//        route: route,
-//        route_index: route_index,
-//        inventory_names: _inv_data,
-//        powerup_names: _powerup_data,
-//        current_room_name: room_get_name(room)
+// player_hp: player_hp
 //    };
 
 //    var _json = json_stringify(_save_struct);
@@ -86,12 +88,38 @@ function save_exists(_slot) {
 //    show_debug_message("Game saved to slot " + string(save_slot));
 //}
 
+// снимок Combat_Room - сохранение теперь ловит уровень на его НАЧАЛЬНОМ состоянии
+function capture_combat_room_snapshot() {
+    if (room != Combat_Room) return undefined;
+    if (!instance_exists(CombatRoomControllerO)) return undefined;
+    return CombatRoomControllerO.level_start_snapshot;
+}
+
+// для босса "начало уровня" - это просто его дефолтное состояние
+// BossFlyO.Create_0 и так ставит без всякого снимка - комната босса не процедурная, пересоздавать
+// тут нечего, так что снимок ей больше не нужен вообще
+function capture_boss_snapshot() {
+    return undefined;
+}
+
+// тот же путь, что и обычная пауза -> выход в меню
+function save_and_exit_to_menu() {
+    save_game();
+    toggle_pause();
+    level_music_suppressed = true;
+    music_stop();
+    room_goto(Main_Menu_Room);
+}
+
 function save_game(_dest_room_asset) {
     if (save_slot < 0) return;
 
     if (is_undefined(_dest_room_asset)) {
         capture_current_room_state();
     }
+
+    var _combat_snapshot = capture_combat_room_snapshot();
+    var _boss_snapshot = capture_boss_snapshot();
 
     var _inv_data = [];
     if (instance_exists(InventoryControllerO)) {
@@ -131,13 +159,27 @@ function save_game(_dest_room_asset) {
         saved_balloon_hits:  saved_balloon_hits,
         world_stage:         world_stage,
         cigarette_rooms_since_pickup: cigarette_rooms_since_pickup,
-        beer_rooms_since_pickup: beer_rooms_since_pickup
+        beer_rooms_since_pickup: beer_rooms_since_pickup,
+        combat_room_snapshot: _combat_snapshot,
+        boss_snapshot: _boss_snapshot
     };
 
-    var _json = json_stringify(_save_struct);
-    var _file = file_text_open_write(get_save_path(save_slot));
-    file_text_write_string(_file, _json);
-    file_text_close(_file);
+    var _path = get_save_path(save_slot);
+    var _t0 = get_timer();
+    if (save_format == "binary") {
+        SaveGameStateAsBinary(_save_struct, _path);
+    } else {
+        var _json = json_stringify(_save_struct);
+        var _file = file_text_open_write(_path);
+        file_text_write_string(_file, _json);
+        file_text_close(_file);
+    }
+    var _dt = get_timer() - _t0;
+
+    if (instance_exists(PipelineValidationO) && variable_instance_exists(PipelineValidationO, "log_save")) {
+        PipelineValidationO.log_save(levels_completed, _dt, save_file_size(_path));
+    }
+
     show_debug_message("Game saved to slot " + string(save_slot));
 }
 
@@ -165,7 +207,7 @@ function save_game(_dest_room_asset) {
 //    route = _data.route;
 //    route_index = _data.route_index;
 
-//    // сохраняем для применения после смены комнаты (инвентарь/повер-апы создаются позже)
+// сохраняем для применения после смены комнаты (инвентарь/повер-апы создаются позже)
 //    global.pending_inventory_names = _data.inventory_names;
 //    global.pending_powerup_names = _data.powerup_names;
 //    global.pending_room_name = _data.current_room_name;
@@ -177,15 +219,22 @@ function save_game(_dest_room_asset) {
 function load_game(_slot) {
     if (!save_exists(_slot)) return false;
 
-    var _file = file_text_open_read(get_save_path(_slot));
-    var _json = "";
-    while (!file_text_eof(_file)) {
-        _json += file_text_read_string(_file);
-        file_text_readln(_file);
+    var _path = get_save_path(_slot);
+    var _t0 = get_timer();
+    var _data;
+    if (save_format == "binary") {
+        _data = LoadGameStateFromBinary(_path);
+    } else {
+        var _file = file_text_open_read(_path);
+        var _json = "";
+        while (!file_text_eof(_file)) {
+            _json += file_text_read_string(_file);
+            file_text_readln(_file);
+        }
+        file_text_close(_file);
+        _data = json_parse(_json);
     }
-    file_text_close(_file);
-
-    var _data = json_parse(_json);
+    var _dt = get_timer() - _t0;
 
     save_slot            = _slot;
     player_hp            = _data.player_hp;
@@ -223,6 +272,14 @@ function load_game(_slot) {
     global.pending_inventory_names = variable_struct_exists(_data, "inventory_names") ? _data.inventory_names : [];
     global.pending_powerup_names   = variable_struct_exists(_data, "powerup_names") ? _data.powerup_names : [];
     global.pending_room_name       = _data.current_room_name;
+
+    // Combat_Room/боссу нужны свои снимки - применяются на месте
+    global.pending_combat_snapshot = variable_struct_exists(_data, "combat_room_snapshot") ? _data.combat_room_snapshot : undefined;
+    global.pending_boss_snapshot   = variable_struct_exists(_data, "boss_snapshot") ? _data.boss_snapshot : undefined;
+
+    if (instance_exists(PipelineValidationO) && variable_instance_exists(PipelineValidationO, "log_load")) {
+        PipelineValidationO.log_load(levels_completed, _dt, save_file_size(_path));
+    }
 
     return true;
 }
@@ -282,50 +339,48 @@ function apply_pending_inventory_and_powerups() {
     }
 }
 
-// Player stats
+// player stats
 
 
-player_hp = 6;
+player_hp = 8;
 player_max_hp = 10;
 player_money = 1000;
 
-//for close friends test:
+// for close friends test
 
 //player_hp = 4;
 //player_max_hp = 10;
 //player_money = 0;
 
-//combo
+// combo
 saved_combo = 0;
 saved_combo_bar = 0;
 
-//levels
+// levels
 levels_completed = 0;
 shop_every_n_levels = 4;
 
-//balloon item — сколько ударов уже поглощено, сохраняется между комнатами
+// balloon item, сколько ударов уже поглощено, сохраняется между комнатами
 saved_balloon_hits = 0;
 
-//сигарета — на следующем реально начавшемся уровне нужно нанести отложенный урон
-//(флаг разбирается LevelControllerO той самой комнаты, поэтому урон не может "утечь" в другую комнату)
+// сигарета, на следующем реально начавшемся уровне нужно нанести отложенный урон
 cigarette_pending_hit = false;
-//сигарета — считает уровни с момента получения предмета (а не глобальный levels_completed),
-//иначе урон срабатывает в случайный момент относительно подбора предмета
+// сигарета, считает уровни с момента получения предмета
 cigarette_rooms_since_pickup = 0;
 
-//пиво — держится 3 реальных уровня с момента получения предмета, потом пропадает из инвентаря
+// пиво, держится 3 реальных уровня с момента получения предмета, потом пропадает
 beer_rooms_since_pickup = 0;
 
-//time of walkthrough
+// time of walkthrough
 run_time = 0;
 
-//transitions
+// transitions
 coming_from_transition = false;
 
-//text
+// text
 TranslationScr()
 
-//slow mo
+// slow mo
 time_scale = 1.0;
 slow_mo_timer = 0;
 original_speed = game_get_speed(gamespeed_fps);
@@ -335,7 +390,7 @@ function slow_mo(_scale, _seconds) {
     game_set_speed(original_speed * _scale, gamespeed_fps);
 }
 
-//music controller
+// music controller
 pause_lowpass_filter = -1;
 store_music = -1;
 prev_music = -1;
@@ -348,17 +403,17 @@ current_music_asset = -1;
 current_music_pitch = 1.0;
 music_pitch_override = false;
 
-//chill room music
+// chill room music
 in_chillroom = false;
 chillroom_bells = -1;
 chillroom_ambient = -1;
 chillroom_water = -1;
 
-//white transition room sound
+// white transition room sound
 in_transition = false;
 transition_music = -1;
 
-//carrying obj
+// carrying obj
 carried_object = noone;
 
 function music_play(_track) {
@@ -378,12 +433,10 @@ function music_stop() {
     current_music_asset = -1;
     current_music_pitch = 1.0;
 }
-// World_1_Test_Track запускается только во время реальных боевых уровней — см. Step_0.gml
+// World_1_Test_Track запускается только во время реальных боевых уровней
 
-// маршрут
 store_bubble_desc_owner = noone;
-// старые пулы комнат (мир 0/1/2) — оставлены для совместимости со старыми сохранениями,
-// но новая система прогрессии (world_stage) их больше не использует напрямую
+// старые пулы комнат (мир 0/1/2)
 world_0_rooms = [
     World_1_Room_1
 ];
@@ -440,27 +493,22 @@ world_2_boss_rooms = [
     World_2_Boss_Room_Snow
 ];
 
-// текущий этап прогрессии мира:
-// "title1" -> "intro" (World_1_Room_0) -> "levels1" -> "title2" -> "levels2" -> "title3" -> "levels3" -> "title4" -> "boss"
-// -> "w2_title1" -> "w2_levels1" -> "w2_title2" -> "w2_levels2" -> "w2_title3" -> "w2_levels3" -> "w2_title4" -> "w2_boss"
+// текущий этап прогрессии мира
 world_stage = "title1";
 
-// отложенный переход в комнату (используется после последней двери сегмента уровней —
-// музыка обрывается сразу, а сама смена комнаты происходит через pending_room_change_timer шагов)
+// отложенный переход в комнату
 pending_room_change = noone;
 pending_room_change_timer = 0;
 
-// true с момента входа в последнюю дверь сегмента и до старта следующего сегмента —
-// не даёт авто-логике музыки уровней (в Step_0) тут же перезапустить трек обратно после music_stop()
+// true с момента входа в последнюю дверь сегмента и до старта следующего сегмента
 level_music_suppressed = false;
 
 function generate_segment_route(_pool) {
-    // ровно 10 комнат: 7 боевых + 1 магазин + 1 сундук + 1 чилл, магазин/сундук/чилл на случайных позициях
+    // ровно 10 комнат: 7 боевых + 1 магазин + 1 сундук + 1 чилл, магазин/сундук/чилл
     var _total = 10;
     var _slot_types = array_create(_total, "combat");
 
-    // позиции магазина/сундука/чилла: никогда не первая комната (позиция 0),
-    // и минимум 1 обычный уровень между любыми двумя из них
+    // позиции магазина/сундука/чилла: никогда не первая комната (позиция 0)
     var _special_positions = [];
     var _sp_attempts = 0;
     while (array_length(_special_positions) < 3 && _sp_attempts < 1000) {
@@ -520,8 +568,7 @@ function generate_segment_route(_pool) {
     return _final;
 }
 
-// генерирует маршрут сегмента из указанного пула и сразу переходит в первую комнату.
-// _other_rooms — список [магазин, чилл, сундук] для текущего мира
+// генерирует маршрут сегмента из указанного пула и сразу переходит в первую комнату
 function start_levels_segment(_pool, _other_rooms) {
     level_music_suppressed = false;
     if (array_length(_other_rooms) >= 3) {
@@ -562,15 +609,13 @@ function start_levels_segment(_pool, _other_rooms) {
 }
 
 // true, если игрок сейчас стоит в последней комнате текущего сегмента уровней
-// (используется DoorO, чтобы пропустить обычную анимацию входа в дверь для этого случая)
 function is_segment_final_door() {
     var _in_any_levels = (world_stage == "levels1" || world_stage == "levels2" || world_stage == "levels3"
         || world_stage == "w2_levels1" || world_stage == "w2_levels2" || world_stage == "w2_levels3");
     return _in_any_levels && route_index >= array_length(route);
 }
 
-// последняя дверь сегмента уровней пройдена — музыка обрывается сразу,
-// а сама смена комнаты (на следующий титульный экран) происходит через 2 секунды
+// последняя дверь сегмента уровней пройдена, музыка обрывается сразу
 function advance_to_next_title() {
     music_stop();
 
@@ -589,8 +634,7 @@ function advance_to_next_title() {
             _dest_room = World_1_Title_4_Room;
         break;
         case "w2_levels1":
-            // ВРЕМЕННО (демо): обрубаем мир 2 здесь и уводим на WIP-экран вместо обычного продолжения.
-            // чтобы откатить — см. demo_cut_after_world_2_1 в начале Create_0.
+            // ВРЕМЕННО (демо): обрубаем мир 2 здесь и уводим на WIP-экран вместо обычного
             if (demo_cut_after_world_2_1) {
                 world_stage = "demo_end";
                 _dest_room = World_1_WIPRoom;
@@ -617,7 +661,7 @@ function advance_to_next_title() {
     pending_room_change_timer = round(room_speed * 2);
 }
 
-// вызывается объектом титульного экрана (World_1_Title_N_O), когда текст дописан и прошли ещё 3 секунды
+// вызывается объектом титульного экрана (World_1_Title_N_O)
 function title_finished() {
     switch (world_stage) {
         case "title1":
@@ -659,32 +703,41 @@ function title_finished() {
 }
 
 function change_room() {
+    // старой route/world_stage системы, которую использует всё остальное ниже
+    if (room == Combat_Room) {
+        levels_completed++;
+        if (levels_completed >= 10) {
+            room_goto(boss_rooms[0]);
+        } else {
+            room_restart();
+        }
+        return;
+    }
+
     // сохраняем состояние текущей комнаты перед уходом
     capture_current_room_state();
 
-    // вышли из фиксированной комнаты-якоря (World_1_Room_0) — стартуем первый сегмент уровней
+    // вышли из фиксированной комнаты-якоря (World_1_Room_0)
     if (world_stage == "intro") {
         world_stage = "levels1";
         start_levels_segment(world_1_1_rooms, world_1_other_rooms);
         return;
     }
 
-    // мир 1 пройден (босс побеждён, игрок выбрал power-up в TransitionRoom) — начинаем мир 2
+    // мир 1 пройден, начинаем мир 2
     if (world_stage == "boss") {
         world_stage = "w2_title1";
         room_goto(World_2_Title_1_Room);
         return;
     }
 
-    // ВРЕМЕННО (демо): дошли до обрубленного конца — route уже закончился, дальше по нему
-    // идти нельзя (обращение за границу массива). Просто остаёмся в WIP-комнате.
+    // ВРЕМЕННО (демо): дошли до обрубленного конца, route уже закончился, дальше
     if (world_stage == "demo_end") {
         room_goto(World_1_WIPRoom);
         return;
     }
 
-    // пройдена последняя дверь текущего сегмента уровней — переходим к следующему титульному экрану
-    // (обычно DoorO перехватывает этот случай раньше и сюда даже не доходит — см. is_segment_final_door())
+    // пройдена последняя дверь текущего сегмента уровней
     if (is_segment_final_door()) {
         advance_to_next_title();
         return;
@@ -698,7 +751,6 @@ function change_room() {
         show_debug_message("Levels completed: " + string(levels_completed));
 
         // сигарета: каждые 5 пройденных уровней с момента получения предмета -1 хп
-        // (наносится через 1.5 сек после старта этого уровня)
         if (instance_exists(InventoryControllerO) && InventoryControllerO.has_item("Cigarette")) {
             cigarette_rooms_since_pickup++;
             if (cigarette_rooms_since_pickup >= 5) {
@@ -744,9 +796,9 @@ function reset_run() {
     //player_max_hp = 10;
 	//player_money = 1000;
 	
-	//for close friends test:
+	// for close friends test
 	
-	player_hp = 3;
+	player_hp = 8;
     player_max_hp = 100;
 	player_money = 0;
 	
@@ -770,6 +822,8 @@ function reset_run() {
     global.pending_inventory_names = undefined;
     global.pending_powerup_names = undefined;
     global.pending_room_name = undefined;
+    global.pending_combat_snapshot = undefined;
+    global.pending_boss_snapshot = undefined;
 
     // очищаем инвентарь и повер-апы старого рана
     clear_loaded_run_controllers();
@@ -781,12 +835,11 @@ function go_to_death_screen() {
 
 
 
-// room state tracking (ключ по позиции в маршруте, не по имени комнаты)
+// room state tracking
 room_states = {};
 
 function get_current_route_key() {
-    // world_stage в ключе — иначе комнаты разных сегментов уровней (у каждого своя нумерация 0..9)
-    // делили бы один и тот же room_states-ключ ("r_0", "r_1"...)
+    // world_stage в ключе, иначе комнаты разных сегментов уровней
     return world_stage + "_r_" + string(route_index - 1);
 }
 

@@ -238,8 +238,8 @@
   ],
   "name":"World_1_WIPRoom",
   "parent":{
-    "name":"World_1",
-    "path":"folders/Rooms/World_1.yy",
+    "name":"Thesis",
+    "path":"folders/Rooms/Thesis.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

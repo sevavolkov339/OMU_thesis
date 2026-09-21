@@ -43,7 +43,7 @@ if (instance_exists(held_item)) {
     }
 }
 
-// пробел — бросок
+// пробел, бросок
 if (keyboard_check_pressed(vk_space) && instance_exists(held_item) && throw_state == "idle") {
     throw_state = "windup";
     image_index = 1;

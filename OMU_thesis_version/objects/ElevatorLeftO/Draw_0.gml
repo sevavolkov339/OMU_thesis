@@ -13,7 +13,7 @@ draw_sprite_ext(
 );
 
 
-//vertical doors right
+// vertical doors right
 
 draw_set_color(c_white);
 

@@ -1,4 +1,4 @@
-// обводка верёвки — без дабл пикселей
+// обводка верёвки, без дабл пикселей
 draw_set_color(c_black);
 draw_set_alpha(1);
 draw_line_width(x, y, owner.x, owner.y + owner.fly_visual_y, 3);

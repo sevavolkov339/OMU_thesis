@@ -17,14 +17,13 @@ shake_duration = 20;
 shake_strength = 10;
 hand_create = false;
 
-// если дверь появилась прямо под игроком — она "закрыта" (2й кадр), чтобы он не проваливался
-// в неё сразу; открывается (1й кадр), как только игрок сам отойдёт с этого места
+// если дверь появилась прямо под игроком
 locked = instance_exists(PlayerBallerO) && place_meeting(x, y, PlayerBallerO);
 image_index = locked ? 1 : 0;
 
 
 if (!skip_intro){
-	if (room != GameControllerO.room_chest && room != GameControllerO.room_store && room != GameControllerO.room_chill && room != World_1_Room_0) {
+	if (room != GameControllerO.room_chest && room != GameControllerO.room_store && room != GameControllerO.room_chill) {
 	    CameraControllerO.camera_shake(2, 15);
 	    GameControllerO.slow_mo(0.6, 0.3);
 	    repeat (13) {
@@ -41,7 +40,7 @@ if (!skip_intro){
 	}
 
 
-	//// отбрасываем все предметы вокруг
+	// отбрасываем все предметы вокруг
 	//var _push_radius = 80;
 	//var _push_force = 100;
 	//with (BulletBounceO) {

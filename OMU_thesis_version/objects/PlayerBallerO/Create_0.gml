@@ -37,10 +37,7 @@ function step_play() {
 		    var _swap_v = upKey; upKey = downKey; downKey = _swap_v;
 		}
 
-		// направление взгляда — нужно для крыльев, спрайтов полёта и предметов вроде сигареты.
-		// Последовательные перезаписи (без else), с тем же приоритетом (вверх > вниз > влево > вправо),
-		// что и при выборе спрайта ходьбы ниже — иначе при диагональном вводе (например вверх+вправо)
-		// facing и реальный спрайт игрока расходятся, и следующие за игроком предметы "рассинхронизируются"
+		// направление взгляда, нужно для крыльев, спрайтов полёта и предметов вроде
 		if (rightKey) facing = "right";
 		if (leftKey) facing = "left";
 		if (downKey) facing = "down";
@@ -78,8 +75,7 @@ function step_play() {
 		var moveX = (rightKey - leftKey) * cur_move_spd;
 		var moveY = (downKey - upKey) * cur_move_spd;
 		if (flying) {
-		    // в полёте — плавный разгон к целевой скорости и такое же плавное торможение,
-		    // а не мгновенный щелчок скорости, как при обычной ходьбе
+		    // в полёте, плавный разгон к целевой скорости и такое же плавное торможение
 		    var _fly_accel = 0.1;
 		    hspeed = lerp(hspeed, moveX, _fly_accel);
 		    vspeed = lerp(vspeed, moveY, _fly_accel);
@@ -100,7 +96,7 @@ function step_play() {
 		}
 	}
 
-	//// подбор/бросок по E
+	// подбор/бросок по E
 	//if (keyboard_check_pressed(ord("E"))) {
 	//    if (!holding_obj && !throw_windup) {
 	//        var _nearest = instance_nearest(x, y, BulletBounceO);
@@ -133,13 +129,13 @@ function step_play() {
 	//	}
 	//}
 	
-	////// предмет следует за игроком
+	// предмет следует за игроком
 	////if (holding_obj && instance_exists(held_ref)) {
 	////    held_ref.x = x;
 	////    held_ref.y = y;
 	////}	
 
-	//// пробел — замах и бросок
+	// пробел, замах и бросок
 	//if (holding_obj) {
 	//    if (keyboard_check(vk_space) && !throw_windup) {
 	//        sprite_index = PlayerBallerGoRightHandsWindS;
@@ -147,16 +143,16 @@ function step_play() {
 	//        image_xscale = (mouse_x >= x) ? 1 : -1;
 	//        image_speed = 1;
 
-	//        // заряд
+	// заряд
 	//        throw_charge = min(throw_charge + 1, throw_charge_max);
 	//        var _charge_t = throw_charge / throw_charge_max;
 
-	//        // тряска объекта — усиливается с зарядом
+	// тряска объекта, усиливается с зарядом
 	//        var _shake_amt = _charge_t * 3;
 	//        throw_shake_x = random_range(-_shake_amt, _shake_amt);
 	//        throw_shake_y = random_range(-_shake_amt, _shake_amt);
 
-	//        // объект уходит за спину
+	// объект уходит за спину
 	//        if (instance_exists(held_ref)) {
 	//            var _back = image_xscale * -8;
 	//            held_ref.x = x + _back + throw_shake_x;
@@ -177,7 +173,7 @@ function step_play() {
 	//        allowanim = false;
 	//        throw_timer = room_speed * 0.5;
 
-	//        // скорость броска зависит от заряда
+	// скорость броска зависит от заряда
 	//        var _charge_t = throw_charge / throw_charge_max;
 	//        var _throw_speed = lerp(3, 10, _charge_t);
 	//        throw_charge = 0;
@@ -195,7 +191,7 @@ function step_play() {
 	//    }
 	//}
 
-	//// таймер после броска
+	// таймер после броска
 	//if (throw_windup) {
 	//    sprite_index = PlayerBallerGoRightHandsThrowS;
 	//    image_xscale = throw_locked_xscale;
@@ -211,12 +207,12 @@ function step_play() {
 
 	// animation
 	var cur_frame = floor(image_index);
-	// в мире 2 вместо пыли под ногами остаются вмятины в снегу; в остальных мирах — обычная пыль
+	// в мире 2 вместо пыли под ногами остаются вмятины в снегу
 	var _in_world_2 = instance_exists(GameControllerO) && string_pos("w2_", GameControllerO.world_stage) == 1;
 	if (speed > minSpd) {
 	    if (!throw_windup) image_speed = 1;
 	    if (cur_frame != prev_frame && cur_frame == 1) {
-	        // в мире 2 вместо пыли под ногами остаются следы; в остальных мирах — обычная пыль
+	        // в мире 2 вместо пыли под ногами остаются следы; в остальных мирах, обычная пыль
 	        var _step_fx = noone;
 
 	        switch (sprite_index) {
@@ -284,7 +280,7 @@ function step_play() {
 	}
 	prev_frame = cur_frame;
 
-	// wall collision — в полёте крылья игнорируют стены полностью
+	// wall collision, в полёте крылья игнорируют стены полностью
 	if (!flying) {
 	    var max_iterations = 4;
 	    var iteration = 0;
@@ -375,7 +371,7 @@ function step_play() {
 	    }
 	}
 
-	// визуальный подъём/пружина и дыхание альфой во время полёта (тень при этом остаётся на месте)
+	// визуальный подъём/пружина и дыхание альфой во время полёта
 	if (flying) {
 	    fly_bob_timer += 0.2;
 	    fly_visual_y = lerp(fly_visual_y, -16 + sin(fly_bob_timer) * 3, 0.2);
@@ -387,19 +383,19 @@ function step_play() {
 	    if (blink_time <= 0 && state != PlayerState.CUTSCENE) image_alpha = 1;
 	}
 
-	// запоминаем последнюю позицию на полу, чтобы вернуть сюда игрока, если он улетит за пределы уровня
+	// запоминаем последнюю позицию на полу
 	if (!flying && place_meeting(x, y, floor_objects)) {
 	    last_floor_x = x;
 	    last_floor_y = y;
 	}
 
-	// первое касание воды — запускаем катсцену
+	// первое касание воды, запускаем катсцену
 	if (place_meeting(x, y, ChillTriggerO) && !chill_triggered) {
 	    chill_triggered = true;
 	    start_cutscene("ChillScene");
 	}
 
-	//// dying
+	// dying
 	//if (hp <= 0) {
 	//    instance_create_layer(x, y, "DeadL", PlayerBallerDeadO);
 	//    with (PlayerBallerDeadO) {
@@ -419,11 +415,11 @@ function step_play() {
 	//    instance_destroy();
 	//}
 }
-//gamepad support
+// gamepad support
 gamepad_index = 0; // слот геймпада
 
 
-//holding and lifting objects
+// holding and lifting objects
 
 holding_obj = false;
 held_ref = noone;
@@ -437,12 +433,10 @@ throw_charge_max = room_speed * 1.5;
 throw_shake_x = 0;
 throw_shake_y = 0;
 
-// сторона последнего удара — отдельная переменная специально для таких вещей как сигарета,
-// потому что image_xscale во время удара в некоторых случаях перезаписывается другим кодом
-// (сквош-пружина, полёт и т.д.) и не годится как надёжный источник направления удара
+// сторона последнего удара, отдельная переменная специально для таких вещей
 kick_facing_right = true;
 
-//squash and stretch
+// squash and stretch
 
 kick_squash_x = 1;
 kick_squash_y = 1;
@@ -452,79 +446,77 @@ kick_squash_stiffness = 0.3;
 kick_squash_damping = 0.6;
 
 
-//movement
+// movement
 moveSpd = 2;
 vspeed = 0;
 hspeed = 0;
-frict = 0.85; // Higher values mean more friction (slows down faster)
-minSpd = 0.1; // Minimum speed before stopping completely
+frict = 0.85; // higher values mean more friction (slows down faster)
+minSpd = 0.1; // minimum speed before stopping completely
 instance_create_layer(x,y,"CodingStuffL",BallerHitAreaO);
 allowanim = true;
 _in_water_spd = place_meeting(x, y, ChillTriggerO);
 
 
-//stats
-// Забираем данные из GameControllerO
+// stats
 if (instance_exists(GameControllerO)) {
     hp = GameControllerO.player_hp;
     max_hp = GameControllerO.player_max_hp;
     money = GameControllerO.player_money;
 }
 
-// Оглушение
+// оглушение
 stunned = false;
 stun_time = 0;
 
-// Отталкивание
+// отталкивание
 knockback_spd_x = 0;
 knockback_spd_y = 0;
 
 blink_time = 0;
 
-// маленький кулдаун между пинками — иначе при очень быстром спаме кликов пинок фактически
-// постоянно "зажат" и все предметы разлетаются от игрока разом
+// маленький кулдаун между пинками
 kick_cooldown = 0;
 
-// неуязвимость в первые 1.5 секунды после старта уровня — без мигания (просто тихо игнорируем урон)
+// неуязвимость в первые 1.5 секунды после старта уровня
 spawn_invuln_timer = 0;
-var _in_level_room_on_spawn = instance_exists(GameControllerO) && (
+var _in_level_room_on_spawn = room == Combat_Room || (instance_exists(GameControllerO) && (
     GameControllerO.world_stage == "levels1" || GameControllerO.world_stage == "levels2" || GameControllerO.world_stage == "levels3"
     || GameControllerO.world_stage == "w2_levels1" || GameControllerO.world_stage == "w2_levels2" || GameControllerO.world_stage == "w2_levels3"
-) && room != GameControllerO.room_store && room != GameControllerO.room_chill && room != GameControllerO.room_chest;
+) && room != GameControllerO.room_store && room != GameControllerO.room_chill && room != GameControllerO.room_chest);
 if (_in_level_room_on_spawn) {
     spawn_invuln_timer = room_speed * 1.5;
 }
 
-//for anim
+// for anim
 
 prev_frame = -1;
 
-// следы от шагов (только в мире 2) — чередуем кадр спрайта следа на каждый шаг
+// следы от шагов (только в мире 2), чередуем кадр спрайта следа на каждый шаг
 step_effect_frame = 0;
 
 //wall = WallO
 
-wall = [WallO, WallTriangleO, WallFollowMachineO]
+wall = [WallO, WallTriangleO, WallFollowMachineO, WallForEnemiesO, WallInteriorO]
 
 // ===== крылья (WingsO) и полёт =====
-facing = "down"; // текущее направление взгляда — для крыльев и спрайтов полёта
+facing = "down"; // текущее направление взгляда, для крыльев и спрайтов полёта
 
 flying = false;
 was_flying = false;
 
-fly_visual_y = 0;  // визуальный подъём над землёй во время полёта (тень остаётся на месте)
+fly_visual_y = 0; // визуальный подъём над землёй во время полёта (тень остаётся на месте)
 fly_bob_timer = 0; // лёгкая пружина вверх-вниз во время полёта
 fly_alpha_timer = 0; // дыхание альфой во время полёта
 
-// все объекты пола в комнате — по ним определяем, вылетел ли игрок за пределы уровня
+// все объекты пола в комнате
 floor_objects = [FloorLevel1O, FloorLevel2O, FloorLevel3O, FloorLevel4O, FloorLevel5O, FloorLevel6O, FloorLevel2_World_2_O, FloorStoreO];
 last_floor_x = x;
 last_floor_y = y;
 
-//player states
+// player states
 
 chill_triggered = false;
-// при загрузке в чилл комнату — проверяем уже ли лечились
+// при загрузке в чилл комнату, проверяем уже ли лечились
 if (instance_exists(GameControllerO)) {
     var _chill_state = GameControllerO.get_current_room_state();
     if (_chill_state != undefined && _chill_state.chill_healed) {
@@ -539,7 +531,7 @@ enum PlayerState {
 
 state = PlayerState.PLAY;
 
-//cutscenes and functions
+// cutscenes and functions
 bubble1 = noone;
 bubble2 = noone;
 bubble1_spread = 15;
@@ -626,8 +618,7 @@ function cutscene_update() {
 	}
 }
 
-// игрок улетел за пределы уровня на крыльях — исчезаем на месте, потом появляемся
-// там, где в последний раз стояли на полу (аналог анимации PlayerEnterDoorO, но без смены комнаты)
+// игрок улетел за пределы уровня на крыльях, исчезаем на месте, потом появляемся
 function cutscene_wings_fall() {
     cutscene_timer++;
 
@@ -770,7 +761,7 @@ function cutscene_enter_elevator() {
 
     switch (cutscene_step) {
 
-        // Шаг 0 — go straight
+        // шаг 0, go straight
         case 0:
             sprite_index = PlayerBallerGoUpS;
             vspeed = -1.5;
@@ -782,7 +773,7 @@ function cutscene_enter_elevator() {
             }
         break;
 
-        // Шаг 1 — пауза
+        // шаг 1, пауза
         case 1:
             sprite_index = PlayerBallerIdleS;
 
@@ -792,7 +783,7 @@ function cutscene_enter_elevator() {
             }
         break;
 
-        // Шаг 2 — конец катсцены
+        // шаг 2, конец катсцены
         case 2:
             end_cutscene();
         break;
@@ -807,7 +798,7 @@ function cutscene_exit_elevator() {
 
     switch (cutscene_step) {
 
-        // Шаг 0 — go straight
+        // шаг 0, go straight
         case 0:
             sprite_index = PlayerBallerGoUpS;
             vspeed = -1.5;
@@ -819,7 +810,7 @@ function cutscene_exit_elevator() {
             }
         break;
 
-        // Шаг 1 — пауза
+        // шаг 1, пауза
         case 1:
             sprite_index = PlayerBallerIdleS;
 
@@ -829,7 +820,7 @@ function cutscene_exit_elevator() {
             }
         break;
 
-        // Шаг 2 — конец катсцены
+        // шаг 2, конец катсцены
         case 2:
             end_cutscene();
         break;
@@ -847,7 +838,7 @@ function cutscene_enter_top()
     var lift = instance_nearest(x, y, ElevatorTopO); // или передавайте enter_lift как переменную
     if (lift == noone) return;
 
-    // цель — центр лифта
+    // цель, центр лифта
     var target_x = lift.x;
     var target_y = lift.y; // можно сместить на дверь, если нужно
 
@@ -883,7 +874,7 @@ function cutscene_enter_top()
                 image_speed = 0;
             }
 
-            // Если достигли позиции — переходим к следующему шагу
+            // если достигли позиции, переходим к следующему шагу
             if (abs(x - target_x) <= 1 && abs(y - target_y) <= 1)
             {
                 cutscene_step++;
@@ -922,7 +913,7 @@ function cutscene_enter_left()
     var lift = instance_nearest(x, y, ElevatorLeftO); // или передавайте enter_lift как переменную
     if (lift == noone) return;
 
-    // цель — центр лифта
+    // цель, центр лифта
     var target_x = lift.x;
     var target_y = lift.y; // можно сместить на дверь, если нужно
 
@@ -958,7 +949,7 @@ function cutscene_enter_left()
                 image_speed = 0;
             }
 
-            // Если достигли позиции — переходим к следующему шагу
+            // если достигли позиции, переходим к следующему шагу
             if (abs(x - target_x) <= 1 && abs(y - target_y) <= 1)
             {
                 cutscene_step++;
@@ -995,7 +986,7 @@ function cutscene_enter_right()
     var lift = instance_nearest(x, y, ElevatorRightO); // или передавайте enter_lift как переменную
     if (lift == noone) return;
 
-    // цель — центр лифта
+    // цель, центр лифта
     var target_x = lift.x;
     var target_y = lift.y; // можно сместить на дверь, если нужно
 
@@ -1031,7 +1022,7 @@ function cutscene_enter_right()
                 image_speed = 0;
             }
 
-            // Если достигли позиции — переходим к следующему шагу
+            // если достигли позиции, переходим к следующему шагу
             if (abs(x - target_x) <= 1 && abs(y - target_y) <= 1)
             {
                 cutscene_step++;
@@ -1072,7 +1063,7 @@ function cutscene_arrive_left()
 
     switch (cutscene_step)
     {
-        /// STEP 0 — ждём и открываем двери
+        // STEP 0, ждём и открываем двери
         case 0:
 			x = lift.x
 			y = lift.y
@@ -1094,7 +1085,7 @@ function cutscene_arrive_left()
             }			
         break;
 
-        /// STEP 1 — игрок выходит из лифта влево
+        // STEP 1, игрок выходит из лифта влево
         case 1:
 			with (CameraControllerO){
 				camera_move_to_room_center()	
@@ -1112,7 +1103,7 @@ function cutscene_arrive_left()
             }
         break;
 
-        /// STEP 2 — закрываем двери
+        // STEP 2, закрываем двери
         case 2:
             sprite_index = PlayerBallerIdleS;
             image_speed = 0;
@@ -1139,7 +1130,7 @@ function cutscene_arrive_right()
 
     switch (cutscene_step)
     {
-        /// STEP 0 — ждём и открываем двери
+        // STEP 0, ждём и открываем двери
         case 0:
 			x = lift.x
 			y = lift.y
@@ -1161,7 +1152,7 @@ function cutscene_arrive_right()
             }			
         break;
 
-        /// STEP 1 — игрок выходит из лифта влево
+        // STEP 1, игрок выходит из лифта влево
         case 1:
 			with (CameraControllerO){
 				camera_move_to_room_center()	
@@ -1179,7 +1170,7 @@ function cutscene_arrive_right()
             }
         break;
 
-        /// STEP 2 — закрываем двери
+        // STEP 2, закрываем двери
         case 2:
             sprite_index = PlayerBallerIdleS;
             image_speed = 0;
@@ -1208,7 +1199,7 @@ function cutscene_arrive_bottom()
 
     switch (cutscene_step)
     {
-        /// STEP 0 — ждём и открываем двери
+        // STEP 0, ждём и открываем двери
         case 0:
 			x = lift.x
 			y = lift.y
@@ -1230,7 +1221,7 @@ function cutscene_arrive_bottom()
             }			
         break;
 
-        /// STEP 1 — игрок выходит из лифта вниз
+        // STEP 1, игрок выходит из лифта вниз
         case 1:
 			with (CameraControllerO){
 				camera_move_to_room_center()	
@@ -1248,7 +1239,7 @@ function cutscene_arrive_bottom()
             }
         break;
 
-        /// STEP 2 — закрываем двери
+        // STEP 2, закрываем двери
         case 2:
             sprite_index = PlayerBallerIdleS;
             image_speed = 0;

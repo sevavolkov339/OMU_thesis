@@ -1,9 +1,8 @@
-//pause
+// pause
 if (GameControllerO.game_paused) exit;
 
 
-// сигарета: отложенный урон в начале уровня — таймер живёт на этом (непостоянном) контроллере уровня,
-// поэтому не может сработать уже в другой комнате
+// сигарета: отложенный урон в начале уровня, таймер живёт на этом (непостоянном)
 if (cigarette_hit_timer > 0) {
     cigarette_hit_timer -= delta_time / 1000000;
     if (cigarette_hit_timer <= 0) {
@@ -45,7 +44,7 @@ if (cigarette_hit_timer > 0) {
 }
 
 
-//for saves
+// for saves
 if (!inventory_applied && instance_exists(GameControllerO)) {
     GameControllerO.apply_pending_inventory_and_powerups();
     inventory_applied = true;
@@ -84,9 +83,7 @@ if (!enemies_spawned && instance_exists(PlayerBallerO))
     }
 }
 
-// отдельная, независимая от spawn_enemies() логика для комнаты босса: в ней нет ни одной
-// (или специально отключена) точки спавна врагов, но предметы на ObjectSpawnPointO должны
-// генерироваться рандомно так же, как на обычных уровнях
+// отдельная, независимая от spawn_enemies() логика для комнаты босса: в ней нет
 var _is_boss_room = instance_exists(GameControllerO)
     && (GameControllerO.world_stage == "boss" || GameControllerO.world_stage == "w2_boss");
 if (_is_boss_room && !boss_objects_spawned && instance_exists(PlayerBallerO) && PlayerBallerO.state == PlayerState.PLAY)
@@ -106,9 +103,7 @@ if (_is_boss_room && !boss_objects_spawned && instance_exists(PlayerBallerO) && 
         }
     }
 }
-// проверка прохождения уровня (в комнате босса не применяется — там нет обычных врагов
-// вообще, так что счётчик тут же обнулился бы и уровень считался бы пройденным сразу же
-// после старта; сама комната босса завершается по-другому — room_goto() при его смерти)
+// проверка прохождения уровня
 if (enemies_spawned && !level_completed && !_is_boss_room)
 {
     if (instance_number(EnemyO) == 0 && instance_number(EnemyFlyO) == 0)
@@ -139,7 +134,7 @@ if (enemies_spawned && !level_completed && !_is_boss_room)
         show_debug_message("УРОВЕНЬ ПРОЙДЕН");
     }
 }
-//function spawn_enemies()
+// function spawn_enemies()
 //{
 //    var spawn_points = array_create(0);
 //    with (EnemySpawnPointO)
@@ -157,11 +152,10 @@ if (enemies_spawned && !level_completed && !_is_boss_room)
 //        instance_create_layer(
 //            spawn.x,
 //            spawn.y,
-//            "EnemiesL",
-//            enemy_obj
+// "EnemiesL"
 //        );
 //    }
-//    // спавн объектов на ObjectSpawnPointO
+// спавн объектов на ObjectSpawnPointO
 //    var obj_spawn_points = [];
 //    with (ObjectSpawnPointO) {
 //        array_push(obj_spawn_points, id);
@@ -178,13 +172,13 @@ if (enemies_spawned && !level_completed && !_is_boss_room)
 //    }
 //    GameControllerO.slow_mo(0.3, 0.4);
 	
-//    // спавним принесённый объект если есть
+// спавним принесённый объект если есть
 	
 //	if (GameControllerO.carried_object != noone && instance_exists(PlayerBallerO)) {
 //	    var _angle = irandom(360);
 //	    var _sx = PlayerBallerO.x + lengthdir_x(30, _angle);
 //	    var _sy = PlayerBallerO.y + lengthdir_y(30, _angle);
-//	    // спавним руку, она сама подхватит carried_object
+// спавним руку, она сама подхватит carried_object
 //	    instance_create_layer(_sx, _sy, "BulletsL", HandPutObjectO);
 //	    // GameControllerO.carried_object сбрасывается внутри HandPutObjectO create
 //	}	
@@ -300,9 +294,7 @@ function spawn_enemies() {
         return;
     }
 
-    // первый визит — обычный рандомный спавн
-    // (точек спавна врагов может не быть вовсе — например в комнате босса она специально
-    // отключена, но это не должно мешать спавну предметов на ObjectSpawnPointO ниже)
+    // первый визит, обычный рандомный спавн
     var spawn_points = [];
     with (EnemySpawnPointO) { array_push(spawn_points, id); }
     if (array_length(spawn_points) > 0) {
@@ -316,7 +308,7 @@ function spawn_enemies() {
         }
     }
 
-    // в комнате босса предметы на ObjectSpawnPointO спавнит отдельная выделенная логика ниже в Step_0.gml
+    // в комнате босса предметы на ObjectSpawnPointO спавнит отдельная выделенная
     var _is_boss_room_here = instance_exists(GameControllerO)
         && (GameControllerO.world_stage == "boss" || GameControllerO.world_stage == "w2_boss");
     if (!_is_boss_room_here) {
@@ -334,9 +326,7 @@ function spawn_enemies() {
         }
     }
 
-    // принесённый объект с прошлого уровня — переносим ТОЛЬКО в настоящий уровень; если эта
-    // комната — магазин, чилл или сундук, откладываем перенос до следующего полноценного уровня
-    // (carried_object остаётся выставленным и просто ждёт там, где он реально нужен)
+    // принесённый объект с прошлого уровня
     var _in_level_room_here = instance_exists(GameControllerO) && (
         GameControllerO.world_stage == "levels1" || GameControllerO.world_stage == "levels2" || GameControllerO.world_stage == "levels3"
         || GameControllerO.world_stage == "w2_levels1" || GameControllerO.world_stage == "w2_levels2" || GameControllerO.world_stage == "w2_levels3"
@@ -373,7 +363,7 @@ function spawn_inventory_items()
         instance_create_layer(_sx, _sy, "BulletsL", _item.obj);
     }
 }
-//// debug: смена комнаты по N
+// debug: смена комнаты по N
 //if (keyboard_check_pressed(ord("N"))) {
 //    LevelControllerO.change_room();
 //}

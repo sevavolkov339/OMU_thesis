@@ -20,12 +20,10 @@ combo_1_bonus = 1;
 combo_2_bonus = 2;
 combo_3_bonus = 3;
 
-// сигарета — доп. заполнение шкалы комбо за убийство
+// сигарета, доп. заполнение шкалы комбо за убийство
 cigarette_bar_bonus = 3;
 
-// объявлена в Create, а не в Step — Step здесь может завершиться досрочно (exit) на первых
-// кадрах комнаты (например пока враги ещё не заспавнились), и тогда функция, объявленная
-// внутри Step, вообще не успела бы определиться к моменту, когда враг попытается её вызвать
+// объявлена в Create, а не в Step, Step здесь может завершиться досрочно (exit)
 function add_kill() {
     var _fill = bar_fill;
     if (instance_exists(InventoryControllerO) && InventoryControllerO.has_item("Cigarette")) {
